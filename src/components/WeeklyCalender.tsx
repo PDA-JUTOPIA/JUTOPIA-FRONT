@@ -23,18 +23,22 @@ const WeeklyCalendar: React.FC = () => {
       <h2 className="mb-3 border-b-2 border-white pb-2 text-xl font-semibold sm:text-2xl">
         This Week
       </h2>
-      <div className="grid w-full grid-cols-4 gap-3 sm:flex sm:justify-evenly sm:gap-6">
+      <div className="grid w-full grid-cols-4 gap-3 min-[850px]:flex min-[850px]:justify-evenly min-[850px]:gap-6">
         {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
           <div
             key={day}
             className="flex transform cursor-pointer flex-col items-center transition-transform duration-200 ease-in-out hover:scale-105"
             onClick={() => toggleSticker(day)}
           >
-            <span className="mb-1 text-sm sm:text-base">{day}</span>
             <span
-              className={`relative flex h-16 w-16 items-center justify-center rounded-full bg-gray-200 text-xl sm:h-20 sm:w-20 sm:text-2xl ${
+              className={`mb-1 text-sm sm:text-base ${["Thu", "Fri", "Sat"].includes(day) ? "max-[850px]:ml-[20vw]" : ""}`}
+            >
+              {day}
+            </span>
+            <span
+              className={`relative flex h-[7vw] max-h-20 min-h-16 w-[7vw] min-w-16 max-w-20 items-center justify-center rounded-full bg-gray-200 ${
                 stickers[day] ? "animate-bounce bg-yellow-300" : ""
-              }`}
+              } ${["Thu", "Fri", "Sat"].includes(day) ? "max-[850px]:ml-[20vw]" : ""}`}
             >
               👍
               {stickers[day] && (
