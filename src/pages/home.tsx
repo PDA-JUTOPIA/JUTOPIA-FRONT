@@ -25,8 +25,8 @@ const Home: NextPage = () => {
     <div className="font-ttlaundrygothicb">
       <TopBar menuName="Home" />
 
-      <LeftBar selectedTab="홈" className="hidden lg:block" />
-      <div className="flex flex-col sm:p-6 sm:pt-10 lg:ml-64 lg:flex-row lg:justify-center lg:gap-12">
+      <LeftBar selectedTab="홈" />
+      <div className="flex flex-col sm:p-6 sm:pt-10 md:ml-24 lg:ml-64 lg:flex-row lg:justify-center lg:gap-12">
         <div className="flex max-w-[65rem] grow flex-col">
           <Profile />
           <WeeklyCalendar />

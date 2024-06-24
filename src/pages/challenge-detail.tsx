@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import type { NextPage } from "next";
 import TopBar from "~/components/TopBar";
 import { LeftBar } from "~/components/LeftBar";
