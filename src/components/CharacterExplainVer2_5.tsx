@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 import TextTypingAni from "./TextTypingAni";
-import Image from "next/image";
 
 interface DataItem {
   제목: string;
@@ -116,7 +115,7 @@ const CharacterExplainVer2_5 = ({
         style={{ maxWidth: "70vw" }}
       >
         <div className="flex items-center">
-          <Image
+          <img
             src="character_finger.webp"
             alt="Character pointing"
             width="100"

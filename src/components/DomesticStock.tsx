@@ -1,5 +1,6 @@
-import type { ListItem } from "@mui/material";
+import { ListItem } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { fetchDomesticStockApi } from "~/apis/domesticStockApi";
 import { GoTriangleUp, GoTriangleDown } from "react-icons/go";
 
 //const URL = "52.78.236.23";
@@ -28,7 +29,6 @@ const DomesticStock = () => {
 
     eventSource.onmessage = (event) => {
       try {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-argument
         const parsedData: ListItem = JSON.parse(event.data);
         console.log(parsedData);
         setData(parsedData);
@@ -44,6 +44,20 @@ const DomesticStock = () => {
       eventSource.close();
     };
   }, []);
+
+  // useEffect(() => {
+  //   fetchDomesticStockApi()
+  //     .then((response) => {
+  //       console.log(response.data);
+  //       setData(response.data);
+  //       setLoading(false);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching data: ", error);
+  //       setError("Error fetching data");
+  //       setLoading(false);
+  //     });
+  // }, []);
 
   return (
     <>
