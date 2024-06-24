@@ -211,7 +211,7 @@ const ProblemUnitQuiz = ({
               ))}
             </ul>
           ) : (
-            <div className="mt-4 grid max-w-2xl grid-cols-2 gap-2 sm:grid-cols-3">
+            <div className="mt-4 grid max-w-2xl gap-2 sm:grid-cols-3">
               {currentProblem.problemSelect.map((option, index) => (
                 <div
                   key={index}
