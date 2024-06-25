@@ -107,6 +107,7 @@ const Lesson: NextPage = () => {
           backgroundColor="#00cd9c"
           increaseLessonsCompleted={handleIncreaseLessonsCompleted}
           status={status as string}
+          isFirstSkip={true}
         />
       ) : type === "3.1" ? (
         <ProblemUnitDescription

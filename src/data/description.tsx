@@ -222,6 +222,10 @@ export const titles2_3 = Array.from(
 // UNIT 3_0
 export const descriptionArr3_0: DescriptionItem[] = [
   {
+    "Unit3 에 오신 여러분, 환영합니다!":
+      "Unit2 의 금융 기초 지식, 기업 분석, 주식 분석 학습은 잘 끝내고 오셨나요?\n이제 재무제표에 대해 학습할 거예요. 화이팅!",
+  },
+  {
     "재무제표란 무엇인지 아시나요?": `재무제표는 회사의 건강 상태를 보여주는 증명서 같은 것입니다!
       재무상태표, 손익계산서, 자본변동표, 현금흐름표, 주석 5가지로 이루어져 있습니다. 
       하나씩 자세히 살펴볼까요?`,
@@ -273,8 +277,9 @@ export const descriptionArr3_0: DescriptionItem[] = [
   },
 ];
 
-export const nextIndexes3_0 = [5, 6, 7, 8, 9, 10, 11];
+export const nextIndexes3_0 = [0, 6, 7, 8, 9, 10, 11, 12];
 export const titles3_0 = [
+  "Unit3에 온 것을 환영해요!",
   "재무제표의 구성",
   "빚도 자산이라는 것을 아시나요?",
   "빚도 자산이라는 것을 아시나요? 예시",
@@ -283,8 +288,9 @@ export const titles3_0 = [
   "손익거래와 비손익거래 구분: 비손익거래",
   "이익은 수익에서 비용을 뺀 것",
 ];
-export const imageIndexes3_0 = [1, 2, 3, 4, 5, 6, 8];
+export const imageIndexes3_0 = [1, 2, 3, 4, 5, 6, 7, 9];
 export const images3_0 = [
+  "UNIT2_3/축하원숭이.png",
   "UNIT3_0/3-0-0_재무제표구성.png",
   "UNIT3_0/3-0-1_재무상태표.png",
   "UNIT3_0/3-0-2_손익계산서.png",
