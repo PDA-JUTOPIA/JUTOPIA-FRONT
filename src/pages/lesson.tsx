@@ -59,6 +59,7 @@ const Lesson: NextPage = () => {
           backgroundColor="#ce82ff"
           increaseLessonsCompleted={handleIncreaseLessonsCompleted}
           status={status as string}
+          isFirstSkip={true}
         />
       ) : type === "2.1" ? (
         <ProblemUnitDescription
@@ -106,6 +107,7 @@ const Lesson: NextPage = () => {
           backgroundColor="#00cd9c"
           increaseLessonsCompleted={handleIncreaseLessonsCompleted}
           status={status as string}
+          isFirstSkip={true}
         />
       ) : type === "3.1" ? (
         <ProblemUnitDescription
@@ -185,11 +187,35 @@ const Lesson: NextPage = () => {
       //     status={status as string}
       //   />
       type === "4.0" ? (
+        <ProblemUnitDescription
+          descriptionArr={descriptionData.descriptionArr4_0}
+          titles={descriptionData.titles4_0}
+          nextIndexes={descriptionData.nextIndexes4_0}
+          images={descriptionData.images4_0}
+          imageIndexes={descriptionData.imageIndexes4_0}
+          backgroundColor="#FF9EAA"
+          increaseLessonsCompleted={handleIncreaseLessonsCompleted}
+          status={status as string}
+          isFirstSkip={true}
+        />
+      ) : type === "4.1" ? (
         <ProblemUnitQuiz
           problem={problemData.problem3_0}
           backgroundColor="#FF9EAA"
           increaseLessonsCompleted={handleIncreaseLessonsCompleted}
           status={status as string}
+        />
+      ) : type === "4.2" ? (
+        <ProblemUnitDescription
+          descriptionArr={descriptionData.descriptionArr4_2}
+          titles={descriptionData.titles4_2}
+          nextIndexes={descriptionData.nextIndexes4_2}
+          images={descriptionData.images4_2}
+          imageIndexes={descriptionData.imageIndexes4_2}
+          backgroundColor="#FF9EAA"
+          increaseLessonsCompleted={handleIncreaseLessonsCompleted}
+          status={status as string}
+          isFirstSkip={true}
         />
       ) : (
         <div>Unknown type</div>

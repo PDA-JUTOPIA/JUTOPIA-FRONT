@@ -481,7 +481,7 @@ const UnitSection = ({ unit }: { unit: Unit }): JSX.Element => {
         backgroundColor={unit.backgroundColor}
         borderColor={unit.borderColor}
       />
-      <div className="relative mb-8 mt-[67px] flex max-w-[65rem] flex-col items-center gap-4">
+      <div className="relative mb-16 mt-[67px] flex max-w-[65rem] flex-col items-center gap-4">
         {unit.tiles.map((tile, i): JSX.Element => {
           console.log(lessonsCompleted);
           const status = tileStatus(tile, lessonsCompleted);
