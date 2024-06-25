@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useState } from "react";
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 import { IoArrowRedoOutline } from "react-icons/io5";
