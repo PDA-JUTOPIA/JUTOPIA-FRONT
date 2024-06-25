@@ -1,8 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import Error from "next/error";
 
-// const URL = "52.78.236.23";
-const URL = "localhost";
+const fullApiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 export interface IResRead {
   userCurrentLearning: number;
@@ -22,12 +21,12 @@ export async function createUserCurrentLearning(
 ): Promise<IResCreate> {
   try {
     const resp: AxiosResponse<IResCreate> = await axios.post(
-      `http://${URL}:3000/api/currentLearning/create`,
+      `${fullApiUrl}/api/currentLearning/create`,
       {
         email: email,
       },
     );
-    console.log("frontapis4,4444");
+
     return resp.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -43,13 +42,11 @@ export async function createUserCurrentLearning(
 export async function readUserCurrentLearning(
   email: string,
 ): Promise<IResRead> {
-  console.log("frontapis,1111");
   try {
-    console.log("frontapis2, 2222");
     const resp: AxiosResponse<IResRead> = await axios.get(
-      `http://${URL}:3000/api/currentLearning/${email}`,
+      `${fullApiUrl}/api/currentLearning/${email}`,
     );
-    console.log("frontapis3,3333");
+
     return resp.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -73,7 +70,7 @@ export async function updateUserCurrentLearning(
 ): Promise<IResUpdate> {
   try {
     const resp: AxiosResponse<IResUpdate> = await axios.put(
-      `http://${URL}:3000/api/currentLearning/update`,
+      `${fullApiUrl}/api/currentLearning/update`,
       {
         email: email,
         newCurrent_learning: newCurrent_learning,
