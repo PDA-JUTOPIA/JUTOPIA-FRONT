@@ -4,7 +4,7 @@ import type { NextRouter } from "next/router";
 import React, { useEffect } from "react";
 import BusinessCategories from "~/components/BusinessCategory";
 import HeroHome from "~/components/HeroHome";
-import { LandingPageHeader } from "~/components/LandingPageHeader";
+// import { LandingPageHeader } from "~/components/LandingPageHeader";
 import { useLoginScreen, LoginScreen } from "~/components/LoginScreen";
 import PageIllustration from "~/components/PageIllustration";
 import { useBoundStore } from "~/hooks/useBoundStore";
@@ -35,9 +35,10 @@ const Home: NextPage = () => {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center font-ttlaundrygothicb text-black">
-      <LandingPageHeader />
-      <PageIllustration />
+    <main className="relative flex min-h-screen flex-col items-center justify-center font-ttlaundrygothicb text-black">
+      {/* <LandingPageHeader /> */}
+      {/* <PageIllustration /> */}
+      <div className="background-image"></div>
       <HeroHome />
 
       <motion.div
@@ -57,7 +58,7 @@ const Home: NextPage = () => {
         </motion.button>
       </motion.div>
 
-      <BusinessCategories />
+      {/* <BusinessCategories /> */}
       <LoginScreen
         loginScreenState={loginScreenState}
         setLoginScreenState={setLoginScreenState}

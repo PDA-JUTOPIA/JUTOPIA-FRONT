@@ -1,0 +1,44 @@
+name: main branch ci process script
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Execute remote SSH commands
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_IP }}
+          username: ${{ secrets.EC2_USER_NAME }}
+          key: ${{ secrets.EC2_PRIVATE_KEY }}
+          port: 22
+          script: |
+            # Install NVM and Node.js on the remote server
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # Load nvm
+            [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # Load nvm bash_completion
+            nvm install 20.12.2
+            nvm use 20.12.2
+            npm install -g pm2
+
+            # Check Node.js and npm versions
+            node -v
+            npm -v
+
+            cd /home/ubuntu/jutopia-front
+            git pull origin main
+
+            # Install dependencies and build the project
+            npm i --force
+            npm run build
+
+            # Restart or start the frontend application with pm2
+            pm2 stop frontend
+            pm2 delete frontend
+            pm2 start npm --name frontend -- run dev

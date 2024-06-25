@@ -24,7 +24,7 @@ export default function HeroHome() {
   return (
     <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
       {/* Hero content */}
-      <div className="pb-6 pt-32 md:pt-40">
+      <div className="pb-6 pt-10 md:pt-20">
         {/* Section header */}
         <motion.div
           className="text-center"
@@ -33,22 +33,24 @@ export default function HeroHome() {
           variants={headerVariants}
         >
           <motion.div
-            className="mb-6 border-y [border-image:linear-gradient(to_right,transparent,theme(colors.slate.300/.8),transparent)1]"
+            className="mb-4 border-y border-t-0 border-slate-300/80"
             variants={headerVariants}
           ></motion.div>
           <motion.h1
-            className="mb-6 bg-gradient-to-r from-blue-500 via-indigo-500 to-blue-500 bg-clip-text text-5xl font-extrabold text-transparent md:text-6xl"
+            className="mb-4 bg-gradient-to-r from-blue-500 via-indigo-500 to-blue-500 bg-clip-text text-4xl font-extrabold text-transparent sm:text-5xl md:text-6xl"
             variants={titleVariants}
           >
-            주식이 어려운 당신을 위해, <br className="max-lg:hidden" />
-            <span className="mt-2 block text-9xl md:text-7xl">주토피아</span>
+            주식이 어려운 당신을 위해, <br className="hidden lg:inline" />
+            <span className="mt-2 block text-6xl sm:text-7xl md:text-9xl">
+              주토피아
+            </span>
           </motion.h1>
           <motion.div
-            className="mx-auto max-w-3xl"
+            className="mx-auto max-w-lg sm:max-w-2xl md:max-w-3xl"
             variants={paragraphVariants}
           >
             <motion.p
-              className="mb-8 text-lg text-gray-600"
+              className="mb-8 text-base text-gray-600 sm:text-lg md:text-xl"
               variants={paragraphVariants}
             >
               주식을 처음 시작하시는 분들을 위한 교육 플랫폼
