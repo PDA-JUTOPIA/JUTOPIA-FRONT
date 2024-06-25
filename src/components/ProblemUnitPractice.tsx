@@ -103,6 +103,7 @@ const ProblemUnitPractice = ({
           <QuitMessage
             quitMessageShown={quitMessageShown}
             setQuitMessageShown={setQuitMessageShown}
+            color={backgroundColor}
           />
         </>
       ) : (

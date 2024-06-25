@@ -108,6 +108,7 @@ const ProblemUnitDescription = ({
           <QuitMessage
             quitMessageShown={quitMessageShown}
             setQuitMessageShown={setQuitMessageShown}
+            color={backgroundColor}
           />
           <CharacterExplain
             onNext={onNext}
