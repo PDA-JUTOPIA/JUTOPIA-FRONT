@@ -17,6 +17,7 @@ const ProblemUnitDescription = ({
   imageIndexes,
   increaseLessonsCompleted,
   status,
+  isFirstSkip,
 }: {
   descriptionArr: DescriptionItem[];
   titles: string[];
@@ -26,8 +27,11 @@ const ProblemUnitDescription = ({
   imageIndexes: number[];
   increaseLessonsCompleted: (count: number) => void;
   status: string;
+  isFirstSkip?: boolean;
 }) => {
-  const totalCorrectAnswersNeeded = nextIndexes.length;
+  const totalCorrectAnswersNeeded = isFirstSkip
+    ? nextIndexes.length + 1
+    : nextIndexes.length;
   const [quitMessageShown, setQuitMessageShown] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [lessonComplete, setLessonComplete] = useState(false);
@@ -47,6 +51,10 @@ const ProblemUnitDescription = ({
   const onFinish = () => {
     setLessonComplete(true);
   };
+
+  useEffect(() => {
+    if (isFirstSkip) setCurrentStep((prevStep) => prevStep + 1);
+  }, [isFirstSkip]);
 
   useEffect(() => {
     if (imageIndexes.includes(currentIndex)) setImageIndex((prev) => prev + 1);

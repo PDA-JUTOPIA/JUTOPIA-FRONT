@@ -11,6 +11,10 @@ export interface DescriptionItem {
 }
 export const descriptionArr2_0: DescriptionItem[] = [
   {
+    "Unit2 에 오신 여러분, 환영합니다!":
+      "Unit1 의 계좌 개설, 매수, 매도 튜토리얼은 잘 끝내고 오셨나요?\n지금부터는 관련 개념을 학습하고 문제를 풀어볼 거예요.\n먼저 금융 기초 지식부터 학습해보아요. 화이팅!",
+  },
+  {
     "수익, 비용, 자산에 대해 알아볼까요? 먼저 수익이란?":
       "개인이나 기업이 일정 기간 동안 벌어들인 돈을 의미합니다.\n예를 들어, 개인의 월급, 기업의 매출 등이 수익에 해당합니다.",
   },
@@ -60,6 +64,7 @@ export const descriptionArr2_0: DescriptionItem[] = [
   },
 ];
 export const images2_0 = [
+  "UNIT2_3/축하원숭이.png",
   "UNIT2_0/001.png",
   "UNIT2_0/002.png",
   "UNIT2_0/003.png",
@@ -73,12 +78,13 @@ export const images2_0 = [
   "UNIT2_0/011.png",
   "UNIT2_0/012.png",
 ];
-export const nextIndexes2_0 = [2, 6, 9, 11];
+export const nextIndexes2_0 = [0, 3, 7, 10, 12];
 export const imageIndexes2_0 = Array.from(
   { length: descriptionArr2_0.length - 1 },
   (_, i) => i + 1,
 );
 export const titles2_0 = [
+  "Unit2에 온 것을 환영해요!",
   "수익, 비용, 자산이란?",
   "계좌와 신용이란?",
   "이자율과 적금, 예금이란?",
