@@ -49,10 +49,28 @@ jobs:
             git pull origin main
 
             # Install dependencies and build the project
+            echo "Installing dependencies..."
             npm ci --force
+
+            echo "Running build..."
             npm run build
 
+            # Output the directory structure to verify .next folder
+            echo "Directory structure after build:"
+            ls -al
+
+            # Check .next directory
+            echo "Contents of .next directory:"
+            ls -al .next
+
             # Restart or start the frontend application with pm2
+            echo "Stopping existing PM2 processes..."
             pm2 stop frontend || true
             pm2 delete frontend || true
-            pm2 start npm --name frontend -- run start
+
+            echo "Starting the application with PM2..."
+            pm2 start npm --name frontend -- start
+
+            # Display PM2 logs
+            echo "Displaying PM2 logs..."
+            pm2 logs frontend
