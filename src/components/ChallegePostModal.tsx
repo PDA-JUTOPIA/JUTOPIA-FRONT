@@ -5,7 +5,6 @@ interface ChallengePostModalProps {
 }
 
 const ChallengePostModal: React.FC<ChallengePostModalProps> = ({ onClose }) => {
-  const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [images, setImages] = useState<File[]>([]);
 
@@ -19,7 +18,6 @@ const ChallengePostModal: React.FC<ChallengePostModalProps> = ({ onClose }) => {
     event.preventDefault();
     // Handle form submission
     console.log({
-      title,
       content,
       images,
     });
@@ -40,14 +38,6 @@ const ChallengePostModal: React.FC<ChallengePostModalProps> = ({ onClose }) => {
         </button>
         <h2 className="mb-4 text-2xl font-bold">인증글 작성하기</h2>
         <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
-          <input
-            type="text"
-            placeholder="Title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            className="rounded-lg border border-gray-300 p-2"
-            required
-          />
           <textarea
             placeholder="Content"
             value={content}
