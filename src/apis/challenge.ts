@@ -16,6 +16,31 @@ export interface IResChallengeRecruit {
   updatedAt: string;
 }
 
+export interface IResCreateRecruit {
+  result: string;
+}
+
+export async function readJoinRecurit(
+  email: string,
+): Promise<IResChallengeRecruit[]> {
+  try {
+    const resp: AxiosResponse<IResChallengeRecruit[]> = await axios.post(
+      `${fullApiUrl}/api/challenge/joinChallengeList`,
+      { email: email },
+    );
+    console.log(resp);
+    return resp.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.error("Failed to read data (AxiosError):", error.message);
+    } else if (error instanceof Error) {
+      console.error("Failed to read data:", error);
+    } else {
+      console.error("Failed to read data: An unknown error occurred.");
+    }
+  }
+}
+
 export async function readAllRecurit(): Promise<IResChallengeRecruit[]> {
   try {
     const resp: AxiosResponse<IResChallengeRecruit[]> = await axios.get(
@@ -30,6 +55,31 @@ export async function readAllRecurit(): Promise<IResChallengeRecruit[]> {
       console.error("Failed to read data:", error);
     } else {
       console.error("Failed to read data: An unknown error occurred.");
+    }
+  }
+}
+
+export async function createRecurit(
+  formData: FormData,
+): Promise<IResCreateRecruit> {
+  try {
+    const resp: AxiosResponse<IResCreateRecruit> = await axios.post(
+      `${fullApiUrl}/api/challenge/createRecurit`,
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      },
+    );
+    return resp.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.error("Failed to create data (AxiosError):", error.message);
+    } else if (error instanceof Error) {
+      console.error("Failed to create data:", error);
+    } else {
+      console.error("Failed to create data: An unknown error occurred.");
     }
   }
 }
