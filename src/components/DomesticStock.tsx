@@ -23,7 +23,7 @@ const DomesticStock = () => {
 
   useEffect(() => {
     const eventSource = new EventSource(
-      `http://${URL}:3000/api/koreainvestment/domestic-stock`,
+      `http://${URL}:3001/api/koreainvestment/domestic-stock`,
     );
 
     eventSource.onmessage = (event) => {
