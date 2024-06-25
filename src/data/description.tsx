@@ -311,7 +311,7 @@ export const descriptionArr3_1: DescriptionItem[] = [
 3. 법인세차감전이익(세전이익) = 영업이익 + 영업외수익 - 영업외비용
 4. 당기순이익 = 법인세차감전이익 - 법인세비용
 
-갑자기 수식을 보니 어렵죠? 하나씩 자세히 살펴볼께요!`,
+갑자기 수식을 보니 어렵죠? 하나씩 자세히 살펴볼게요!`,
   },
   {
     "삼성전자 재무제표로 손익계산을 해봐요!": `
@@ -400,7 +400,7 @@ export const descriptionArr3_1: DescriptionItem[] = [
   },
 ];
 
-export const nextIndexes3_1 = [1, 3, 5, 6, 7, 9, 11, 12, 13];
+export const nextIndexes3_1 = [1, 3, 5, 6, 7, 9, 11, 12, 13, 15];
 export const titles3_1 = [
   "손익 계산 단계",
   "손익 계산 1단계 : 매출총이익",
