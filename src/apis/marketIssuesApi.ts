@@ -1,15 +1,12 @@
 import axios from "axios";
 
-const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-const apiPort = process.env.NEXT_PUBLIC_API_PORT;
+const fullApiUrl = process.env.NEXT_PUBLIC_API_URL;
 
-if (!apiUrl || !apiPort) {
+if (!fullApiUrl) {
   throw new Error(
     "Environment variables NEXT_PUBLIC_API_URL or NEXT_PUBLIC_API_PORT are not set",
   );
 }
-
-const fullApiUrl = `${apiUrl}:${apiPort}`;
 
 export const fetchMarketIssuesApi = async () => {
   interface MarketIssue {
