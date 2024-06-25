@@ -26,6 +26,12 @@ const config = {
         port: "",
         pathname: "/100/100",
       },
+      {
+        protocol: "https",
+        hostname: "jutopia.s3.ap-northeast-2.amazonaws.com",
+        port: "",
+        pathname: "/challenge/**",
+      },
     ],
   },
 };
