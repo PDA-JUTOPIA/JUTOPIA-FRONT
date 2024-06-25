@@ -4,41 +4,17 @@ import { IoIosInformationCircleOutline } from "react-icons/io";
 import ProgressBar from "~/components/LessonProgressBar";
 import QuitMessage from "~/components/LessonQuitMessage";
 import CheckAnswer from "~/components/LessonCheckAnswer";
+import LessonComplete from "./LessonComplete";
 import type { Problem, ProblemItem } from "~/data/problem";
-import Link from "next/link";
-
-const LessonComplete = ({ backgroundColor }: { backgroundColor: string }) => {
-  return (
-    <div className="flex min-h-screen flex-col gap-5 px-4 py-5 font-['TTLaundryGothicB'] sm:px-0 sm:py-0">
-      <div className="flex grow flex-col items-center justify-center gap-8 font-bold">
-        <h1 className="text-center text-3xl text-yellow-400">
-          Lesson Complete!
-        </h1>
-      </div>
-      <section className="border-gray-200 sm:border-t-2 sm:p-10">
-        <div className="mx-auto flex max-w-5xl sm:justify-between">
-          <Link
-            className={`bg-${backgroundColor}-500 flex w-full items-center justify-center rounded-2xl border-b-4 border-${backgroundColor}-600 p-3 font-bold uppercase text-white transition hover:brightness-105 sm:min-w-[150px] sm:max-w-fit`}
-            href="/tutorial"
-          >
-            돌아가기
-          </Link>
-        </div>
-      </section>
-    </div>
-  );
-};
 
 const ProblemUnitQuiz = ({
   problem,
   backgroundColor,
-  progressbarColor,
   increaseLessonsCompleted,
   status,
 }: {
   problem: ProblemItem;
-  backgroundColor: string;
-  progressbarColor: string;
+  backgroundColor: "blue" | "#ce82ff" | "#00cd9c" | "#FF9EAA";
   increaseLessonsCompleted: (count: number) => void;
   status: string;
 }) => {
@@ -141,7 +117,7 @@ const ProblemUnitQuiz = ({
         increaseLessonsCompleted(1);
       }
     }
-  }, [isComplete, increaseLessonsCompleted]);
+  }, [isComplete, increaseLessonsCompleted, status]);
 
   return isComplete ? (
     <LessonComplete backgroundColor={backgroundColor} />
@@ -153,7 +129,7 @@ const ProblemUnitQuiz = ({
             correctAnswerCount={correctAnswerCount}
             totalCorrectAnswersNeeded={totalCorrectAnswersNeeded}
             setQuitMessageShown={setQuitMessageShown}
-            color={progressbarColor}
+            color={backgroundColor}
           />
         </div>
         <section className="flex grow flex-col gap-5 self-center rounded-lg text-center sm:items-center sm:justify-center sm:gap-5 sm:px-5">

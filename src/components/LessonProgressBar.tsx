@@ -10,8 +10,21 @@ const ProgressBar = ({
   correctAnswerCount: number;
   totalCorrectAnswersNeeded: number;
   setQuitMessageShown: (isShown: boolean) => void;
-  color: string;
+  color: "blue" | "#ce82ff" | "#00cd9c" | "#FF9EAA";
 }) => {
+  const color400 = {
+    blue: "bg-blue-400",
+    "#ce82ff": "bg-fuchsia-400",
+    "#00cd9c": "bg-emerald-400",
+    "#FF9EAA": "bg-rose-400",
+  };
+  const color500 = {
+    blue: "bg-blue-500",
+    "#ce82ff": "bg-fuchsia-500",
+    "#00cd9c": "bg-emerald-500",
+    "#FF9EAA": "bg-rose-500",
+  };
+
   return (
     <header className="flex items-center gap-4">
       {correctAnswerCount === 0 ? ( //첫 번째 문제는 바로 나가기 가능
@@ -38,14 +51,16 @@ const ProgressBar = ({
       >
         <div
           className={
-            `h-full rounded-full bg-${color}-500 transition-all duration-700 ` +
+            `h-full rounded-full ${color500[color]} transition-all duration-700 ` +
             (correctAnswerCount > 0 ? "px-2 pt-1 " : "")
           }
           style={{
             width: `${(correctAnswerCount / totalCorrectAnswersNeeded) * 100}%`,
           }}
         >
-          <div className={`h-[5px] w-full rounded-full bg-${color}-400`}></div>
+          <div
+            className={`h-[5px] w-full rounded-full ${color400[color]}`}
+          ></div>
         </div>
       </div>
     </header>

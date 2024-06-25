@@ -20,11 +20,18 @@ const CheckAnswer = ({
   correctAnswer: string;
   isAnswerDetail?: boolean;
   answerDetail?: string;
-  color: string;
+  color: "blue" | "#ce82ff" | "#00cd9c" | "#FF9EAA";
   onCheckAnswer: () => void;
   onFinish: () => void;
   onSkip: () => void;
 }) => {
+  const buttonColor = {
+    blue: "border-blue-500 bg-blue-400",
+    "#ce82ff": "border-fuchsia-500 bg-fuchsia-400",
+    "#00cd9c": "border-emerald-500 bg-emerald-400",
+    "#FF9EAA": "border-rose-500 bg-rose-400",
+  };
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const modalTitle = "해설";
 
@@ -63,7 +70,7 @@ const CheckAnswer = ({
           ) : (
             <button
               onClick={onCheckAnswer}
-              className={`grow rounded-2xl border-b-4 border-${color}-600 bg-${color}-500 p-3 font-bold uppercase text-white sm:min-w-[150px] sm:max-w-fit sm:grow-0`}
+              className={`grow rounded-2xl border-b-4 ${buttonColor[color]} p-3 font-bold uppercase text-white sm:min-w-[150px] sm:max-w-fit sm:grow-0`}
             >
               Check
             </button>
