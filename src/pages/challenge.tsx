@@ -5,12 +5,17 @@ import { useEffect, useState } from "react";
 import ChallengeChracter3 from "../../public/Challenge/챌린지캐릭터3.svg";
 import Image from "next/image";
 import type { IResChallengeRecruit } from "~/apis/challenge";
-import { readAllRecurit, createRecurit } from "~/apis/challenge";
+import {
+  readAllRecurit,
+  createRecurit,
+  readJoinRecurit,
+} from "~/apis/challenge";
 import { useRouter } from "next/router";
+import { useBoundStore } from "~/hooks/useBoundStore";
 
 const TABS = [
   { id: 1, title: "모집중인 챌린지" },
-  { id: 2, title: "참여중인 챌린지", apiEndpoint: "/api/tab2" },
+  { id: 2, title: "참여중인 챌린지" },
 ];
 
 const Challenge: NextPage = () => {
@@ -29,6 +34,7 @@ const Challenge: NextPage = () => {
     challenge_end: "",
   });
   const router = useRouter();
+  const email = useBoundStore((x) => x.email);
 
   useEffect(() => {
     setIsHydrated(true);
@@ -41,10 +47,8 @@ const Challenge: NextPage = () => {
           const response = await readAllRecurit();
           setData(response);
         } else {
-          // 참여중인 챌린지 조회 api
-          // const response = await
-          // setData(response);
-          setData(null);
+          const response = await readJoinRecurit(email);
+          setData(response);
         }
       } catch (error) {
         console.error("Error fetching data", error);
@@ -184,12 +188,12 @@ const Challenge: NextPage = () => {
             </div>
 
             <div className="mt-5">
-              {activeTab === 1 && data && (
+              {data && (
                 <div className="flex flex-row p-4 ">
                   {data.map((challenge) => (
                     <div
                       key={challenge.challenge_id}
-                      className="mr-4 flex w-full flex-col items-center justify-between rounded-lg border-b p-4 shadow-lg"
+                      className="mr-4 flex w-1/3 flex-col items-center justify-between rounded-lg border-b p-4 shadow-lg"
                       onClick={() =>
                         handleChallengeDetailClick(challenge.challenge_id)
                       }
@@ -219,10 +223,9 @@ const Challenge: NextPage = () => {
                   ))}
                 </div>
               )}
-              {activeTab === 2 && (
-                // 참여중인 챌린지 데이터를 렌더링
-                <div>참여중인 챌린지 데이터</div>
-              )}
+              {/* {activeTab === 2 && (
+                
+              )} */}
             </div>
           </div>
 
