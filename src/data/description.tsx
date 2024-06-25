@@ -283,7 +283,7 @@ export const titles3_0 = [
   "손익거래와 비손익거래 구분: 비손익거래",
   "이익은 수익에서 비용을 뺀 것",
 ];
-export const imageIndexes3_0 = [1, 2, 3, 4, 5, 6, 8, 11];
+export const imageIndexes3_0 = [1, 2, 3, 4, 5, 6, 8];
 export const images3_0 = [
   "UNIT3_0/3-0-0_재무제표구성.png",
   "UNIT3_0/3-0-1_재무상태표.png",
