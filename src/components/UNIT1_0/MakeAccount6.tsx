@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 import Tooltip from "../Tooltip";
 import dynamic from "next/dynamic";
 
@@ -9,27 +8,27 @@ interface MakeAccountProps {
   onPrev: () => void;
 }
 const MakeAccount6: React.FC<MakeAccountProps> = ({ onNext, onPrev }) => {
-  const [run, setRun] = useState(true);
+  // const [run, setRun] = useState(true);
   const steps = [
     {
       target: "#explainMessage",
-      content: "해당 정보들을 기재해주세요.",
+      content: "해당 정보들을 기재해주세요!",
       placement: "bottom" as const,
       disableBeacon: true,
     },
     {
       target: "#clickButton6",
-      content: "동의하고 인증번호 받기 버튼을 클릭해봅시다.",
-      placement: "center" as const,
+      content: "동의하고 인증번호 받기 버튼을 클릭해봅시다!",
+      placement: "top" as const,
       disableBeacon: true,
     },
   ];
   return (
     <div>
-      <div className="h-screen max-h-[500px] w-screen max-w-[300px] rounded-lg border-2 bg-white p-4">
+      <div className="ml-3 mt-8 h-screen max-h-[510px] w-screen max-w-[300px] bg-white p-4">
         <Joyride
           steps={steps}
-          run={run}
+          run={true}
           continuous={true}
           spotlightClicks={true}
           // scrollToFirstStep={true}
@@ -41,7 +40,7 @@ const MakeAccount6: React.FC<MakeAccountProps> = ({ onNext, onPrev }) => {
             },
           }}
         />
-        <div className="py-6">
+        <div className="py-3">
           <h2 className="text-base font-bold text-black">
             휴대폰 인증으로
             <br />한 번 더 본인을 확인할게요
@@ -76,14 +75,14 @@ const MakeAccount6: React.FC<MakeAccountProps> = ({ onNext, onPrev }) => {
             동의하고 인증번호 받기
           </button>
         </div>
-      </div>
-      <div className=" flex justify-center">
-        <button
-          onClick={onPrev}
-          className="mt-4 flex justify-center rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
-        >
-          이전
-        </button>
+        <div className=" flex justify-center">
+          <button
+            onClick={onPrev}
+            className="mt-14 flex justify-center rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
+          >
+            이전
+          </button>
+        </div>
       </div>
     </div>
   );

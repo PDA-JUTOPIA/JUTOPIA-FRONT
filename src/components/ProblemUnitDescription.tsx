@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { useEffect, useState, useRef } from "react";
 import ProgressBar from "~/components/LessonProgressBar";
 import QuitMessage from "~/components/LessonQuitMessage";
 import CharacterExplain from "./CharacterExplain";
-import { DescriptionItem } from "~/data/description";
+import type { DescriptionItem } from "~/data/description";
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+import { IoIosInformationCircleOutline } from "react-icons/io";
 import Link from "next/link";
 
 const ProblemUnitDescription = ({
@@ -13,6 +16,8 @@ const ProblemUnitDescription = ({
   images,
   imageIndexes,
   progressbarColor,
+  increaseLessonsCompleted,
+  status,
 }: {
   descriptionArr: DescriptionItem[];
   titles: string[];
@@ -21,6 +26,8 @@ const ProblemUnitDescription = ({
   images: string[];
   imageIndexes: number[];
   progressbarColor: string;
+  increaseLessonsCompleted: (count: number) => void;
+  status: string;
 }) => {
   const totalCorrectAnswersNeeded = nextIndexes.length;
   const [quitMessageShown, setQuitMessageShown] = useState(false);
@@ -29,6 +36,7 @@ const ProblemUnitDescription = ({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [titleIndex, setTitleIndex] = useState(0);
   const [imageIndex, setImageIndex] = useState(0);
+  const transformWrapperRef = useRef<any>(null);
 
   const onNext = (): void => {
     if (currentStep < totalCorrectAnswersNeeded) {
@@ -44,11 +52,26 @@ const ProblemUnitDescription = ({
 
   useEffect(() => {
     if (imageIndexes.includes(currentIndex)) setImageIndex((prev) => prev + 1);
-  }, [currentIndex]);
+  }, [currentIndex, imageIndexes]);
+
+  useEffect(() => {
+    if (transformWrapperRef.current) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+      transformWrapperRef.current.resetTransform();
+    }
+  }, [imageIndex]);
+
+  useEffect(() => {
+    if (lessonComplete) {
+      if (status === "active") {
+        increaseLessonsCompleted(1);
+      }
+    }
+  }, [lessonComplete, increaseLessonsCompleted]);
 
   const LessonComplete = () => {
     return (
-      <div className="flex min-h-screen flex-col gap-5 px-4 py-5 sm:px-0 sm:py-0">
+      <div className="flex min-h-screen flex-col gap-5 px-4 py-5 font-['TTLaundryGothicB'] sm:px-0 sm:py-0">
         <div className="flex grow flex-col items-center justify-center gap-8 font-bold">
           <h1 className="text-center text-3xl text-yellow-400">
             Lesson Complete!
@@ -71,10 +94,10 @@ const ProblemUnitDescription = ({
   };
 
   return (
-    <div className="flex min-h-screen flex-col gap-5 px-4 py-5 sm:px-0 sm:py-0">
+    <div className="flex min-h-screen flex-col gap-5 px-4 py-5 font-['TTLaundryGothicB'] sm:px-0 sm:py-0">
       {!lessonComplete ? (
         <>
-          <div className="flex grow flex-col items-center gap-5">
+          <div className="flex grow flex-col items-center gap-8">
             <div className="w-full max-w-5xl sm:mt-8 sm:px-5">
               <ProgressBar
                 correctAnswerCount={currentStep}
@@ -86,11 +109,27 @@ const ProblemUnitDescription = ({
             <h1 className="mb-2 text-2xl font-bold sm:text-3xl">
               {titles[titleIndex]}
             </h1>
-            <img
-              alt="설명 이미지"
-              src={images[imageIndex]}
-              style={{ height: "300px" }}
-            />
+            <div>
+              <TransformWrapper
+                initialScale={1}
+                minScale={1}
+                maxScale={5}
+                ref={transformWrapperRef}
+              >
+                <TransformComponent>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    className="h-[45vh] w-[100vw] cursor-pointer object-contain"
+                    alt="설명 이미지"
+                    src={images[imageIndex]}
+                  />
+                </TransformComponent>
+              </TransformWrapper>
+              <p className="max-[768px] mt-[2.5vh] cursor-default text-center text-[11px] text-gray-600">
+                <IoIosInformationCircleOutline className="inline pr-0.5 text-[14px]" />
+                마우스 스크롤시 이미지 확대/축소가 가능합니다.
+              </p>
+            </div>
           </div>
           <QuitMessage
             quitMessageShown={quitMessageShown}

@@ -2,21 +2,18 @@ import type { NextPage } from "next";
 import { BottomBar } from "~/components/BottomBar";
 import { LeftBar } from "~/components/LeftBar";
 import {
-  BronzeLeagueSvg,
   EditPencilSvg,
-  EmptyFireSvg,
-  FireSvg,
-  LightningProgressSvg,
-  EmptyMedalSvg,
   ProfileTimeJoinedSvg,
-  CheckSvg,
   MoreOptionsSvg,
+  CheckSvg,
   LogoutIconSvg,
 } from "~/components/Svgs";
 import { useBoundStore } from "~/hooks/useBoundStore";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import dayjs from "dayjs";
+import ChallengeGrid from "~/components/ChallengeGrid";
+import { updateName } from "~/apis/user";
 
 const MyPage: NextPage = () => {
   const [updateState, setUpdateState] = useState<"update" | "view">("view");
@@ -25,7 +22,6 @@ const MyPage: NextPage = () => {
   const [localName, setLocalName] = useState(name);
 
   const email = useBoundStore((x) => x.email);
-  const setEmail = useBoundStore((x) => x.setEmail);
   const [localEmail, setLocalEmail] = useState(email);
   const [isHydrated, setIsHydrated] = useState(false);
   const loggedIn = useBoundStore((x) => x.loggedIn);
@@ -41,9 +37,8 @@ const MyPage: NextPage = () => {
     } else {
       // 로그인 상태인 경우 서버에서 데이터 가져와서 설정
       setLocalName(name); // 초기 localName 설정
-      // setEmail(email); // 초기 localEmail 설정
     }
-  }, [loggedIn]);
+  }, [loggedIn, name]);
 
   if (!isHydrated) {
     // 초기 로딩 상태 표시 또는 빈 상태로 렌더링
@@ -51,8 +46,20 @@ const MyPage: NextPage = () => {
   }
   const updateProfile = () => {
     setUpdateState("view");
-    setName(localName);
-    setEmail(localEmail);
+    //update api
+    async function update() {
+      try {
+        const newName = localName;
+        const response = await updateName(email, newName);
+
+        setName(response.newName);
+      } catch (error) {
+        console.error("Error fetching update:", error);
+      }
+    }
+    update().catch((error) => {
+      console.error("Unhandled error:", error);
+    });
   };
 
   return (
@@ -76,7 +83,6 @@ const MyPage: NextPage = () => {
             setLocalEmail={setLocalEmail}
             updateProfile={updateProfile}
           />
-          <MypageStatsSection />
           <MypageRewardSection />
         </div>
       </div>
@@ -111,7 +117,7 @@ const MyPageTopBar = (props: MyPageTopBarProps) => {
   const [menu, setMenu] = useState<MenuState>("HIDDEN");
 
   const logOut = useBoundStore((x) => x.logOut);
-  var router = useRouter();
+  const router = useRouter();
 
   const handleLogOut = () => {
     void logOut();
@@ -119,7 +125,7 @@ const MyPageTopBar = (props: MyPageTopBarProps) => {
   };
 
   return (
-    <div className="fixed left-0 right-0 top-0 flex h-16 items-center justify-between border-b-2 border-gray-200 bg-white px-5 text-xl font-bold text-gray-300 md:hidden">
+    <div className="fixed left-0 right-0 top-0 z-50 flex h-16 items-center justify-between border-b-2 border-gray-200 bg-white px-5 text-xl font-bold text-gray-300 md:hidden">
       <MoreOptionsSvg
         onClick={() => setMenu((x) => (x === "MORE" ? "HIDDEN" : "MORE"))}
         role="button"
@@ -168,7 +174,7 @@ const MyPageTopBar = (props: MyPageTopBarProps) => {
           role="button"
         />
       </div>
-      <span className="text-gray-400">Profile</span>
+      <span className="text-gray-400">😎마이 페이지😎</span>
       {props.updateState === "view" ? (
         <div
           onClick={() => props.setUpdateState("update")}
@@ -184,13 +190,10 @@ const MyPageTopBar = (props: MyPageTopBarProps) => {
     </div>
   );
 };
-
 const MypageTopSection = (props: MypageTopSectionProps) => {
-  var router = useRouter();
+  const router = useRouter();
   const loggedIn = useBoundStore((x) => x.loggedIn);
 
-  // const joinedAt = useBoundStore((x) => x.joinedAt).format("MMMM YYYY");
-  // const joinedAt = useBoundStore((x) => x.joinedAt);
   const dd = useBoundStore((state) => state.joinedAt);
   const joinedAt = dayjs(dd).format("MMMM YYYY");
 
@@ -202,7 +205,7 @@ const MypageTopSection = (props: MypageTopSectionProps) => {
   }, [loggedIn, router]);
 
   return (
-    <section className="flex flex-row-reverse border-b-2 border-gray-200 pb-8 md:flex-row md:gap-8">
+    <section className="flex flex-row-reverse items-center justify-center border-b-2 border-gray-200 pb-8 md:flex-row md:gap-8">
       <div
         className="flex h-20 w-20 items-center justify-center rounded-full border-2 border-dashed border-gray-400 text-3xl font-bold text-gray-400 md:h-44 md:w-44 md:text-7xl"
         style={{ minWidth: "80px" }}
@@ -213,37 +216,27 @@ const MypageTopSection = (props: MypageTopSectionProps) => {
         <div className="flex flex-col gap-2">
           <div style={{ maxWidth: "16rem" }}>
             {props.updateState === "view" ? (
-              <div>
-                <h1 className="text-2xl font-bold">{props.name}</h1>
-                <div className="text-sm text-gray-400">{props.email}</div>
+              <div className="flex flex-col items-start">
+                {" "}
+                <h1 className="text-4xl font-bold">{props.name}</h1>{" "}
+                <div className="mt-1 text-sm text-gray-500">{props.email}</div>{" "}
               </div>
             ) : (
               <div>
                 <input
                   type="text"
-                  className="text-2xl font-bold"
+                  className="w-full border-b border-blue-500 text-2xl font-bold focus:border-blue-500 focus:outline-none"
                   value={props.localName}
-                  style={{
-                    borderBottom: "1px solid gray",
-                    outline: "none",
-                    maxWidth: "95%",
-                  }}
                   onChange={(e) => props.setLocalName(e.target.value)}
                 />
                 <br />
-                <input
-                  type="text"
-                  className="text-sm text-gray-400"
-                  value={props.localEmail}
-                  style={{ borderBottom: "1px solid gray", outline: "none" }}
-                  onChange={(e) => props.setLocalEmail(e.target.value)}
-                />
+                <p className="text-sm text-gray-400">{props.localEmail}</p>
               </div>
             )}
           </div>
           <div className="flex items-center gap-3">
             <ProfileTimeJoinedSvg />
-            <span className="text-gray-500">{`Joined ${joinedAt}`}</span>
+            <span className="text-gray-500">{`${joinedAt}에 가입함`}</span>
           </div>
         </div>
       </div>
@@ -269,76 +262,16 @@ const MypageTopSection = (props: MypageTopSectionProps) => {
   );
 };
 
-const MypageStatsSection = () => {
-  const streak = useBoundStore((x) => x.streak);
-  const totalXp = 125;
-  const league = "Bronze";
-  const top3Finishes = 0;
-
-  return (
-    <section>
-      <h2 className="mb-5 text-2xl font-bold">Statistics</h2>
-      <div className="grid grid-cols-2 gap-3">
-        <div className="flex gap-2 rounded-2xl border-2 border-gray-200 p-2 md:gap-3 md:px-6 md:py-4">
-          {streak === 0 ? <EmptyFireSvg /> : <FireSvg />}
-          <div className="flex flex-col">
-            <span
-              className={[
-                "text-xl font-bold",
-                streak === 0 ? "text-gray-400" : "",
-              ].join(" ")}
-            >
-              {streak}
-            </span>
-            <span className="text-sm text-gray-400 md:text-base">
-              Day streak
-            </span>
-          </div>
-        </div>
-        <div className="flex gap-2 rounded-2xl border-2 border-gray-200 p-2 md:gap-3 md:px-6 md:py-4">
-          <LightningProgressSvg size={35} />
-          <div className="flex flex-col">
-            <span className="text-xl font-bold">{totalXp}</span>
-            <span className="text-sm text-gray-400 md:text-base">Total XP</span>
-          </div>
-        </div>
-        <div className="flex gap-2 rounded-2xl border-2 border-gray-200 p-2 md:gap-3 md:px-6 md:py-4">
-          <BronzeLeagueSvg width={25} height={35} />
-          <div className="flex flex-col">
-            <span className="text-xl font-bold">{league}</span>
-            <span className="text-sm text-gray-400 md:text-base">
-              Current league
-            </span>
-          </div>
-        </div>
-        <div className="flex gap-2 rounded-2xl border-2 border-gray-200 p-2 md:gap-3 md:px-6 md:py-4">
-          {top3Finishes === 0 ? <EmptyMedalSvg /> : <EmptyMedalSvg />}
-          <div className="flex flex-col">
-            <span
-              className={[
-                "text-xl font-bold",
-                top3Finishes === 0 ? "text-gray-400" : "",
-              ].join(" ")}
-            >
-              {top3Finishes}
-            </span>
-            <span className="text-sm text-gray-400 md:text-base">
-              Top 3 finishes
-            </span>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
-
 const MypageRewardSection = () => {
   return (
-    <section>
-      <h2 className="mb-5 text-2xl font-bold">도전과제</h2>
-      <div className="rounded-2xl border-2 border-gray-200">
-        <div className="flex items-center justify-center py-10 text-center text-gray-500"></div>
-      </div>
-    </section>
+    <div className="flex max-w-[65rem] grow flex-col">
+      <br />
+      <h1 className="border-b-2 pb-4 text-center text-4xl font-bold">
+        달성한 도전 과제
+      </h1>
+      <br />
+      <div className="pt-[40px]"></div>
+      <ChallengeGrid showOnlyCompleted />
+    </div>
   );
 };

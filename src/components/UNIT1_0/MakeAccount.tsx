@@ -1,5 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
 import React from "react";
-import { useState } from "react";
 import { HiOutlineBell } from "react-icons/hi2";
 import { FiSearch } from "react-icons/fi";
 import Tooltip from "../Tooltip";
@@ -12,7 +12,7 @@ interface MakeAccountProps {
 }
 
 const MakeAccount: React.FC<MakeAccountProps> = ({ onNext }) => {
-  const [run, setRun] = useState(true);
+  // const [run, setRun] = useState(true);
   const steps = [
     {
       target: "#welcomeMessage", // 코치마크를 표시할 대상 요소의 CSS 선택자
@@ -22,18 +22,18 @@ const MakeAccount: React.FC<MakeAccountProps> = ({ onNext }) => {
     },
     {
       target: "#clickButton1",
-      content: "계좌 만들기 버튼을 클릭해봅시다.",
-      placement: "center" as const,
+      content: "계좌 만들기 버튼을 클릭해보세요!",
+      placement: "top" as const,
       disableBeacon: true,
     },
   ];
 
   return (
     <div>
-      <div className="h-screen max-h-[500px] w-screen max-w-[300px] rounded-lg border-2 bg-white">
+      <div className="ml-3 mt-8 h-screen max-h-[510px] w-screen max-w-[300px] bg-white">
         <Joyride
           steps={steps}
-          run={run}
+          run={true}
           continuous={true}
           spotlightClicks={true}
           // scrollToFirstStep={true}
@@ -137,7 +137,7 @@ const MakeAccount: React.FC<MakeAccountProps> = ({ onNext }) => {
           </div>
         </div>
 
-        <div className="mt-2">
+        <div className="mt-5">
           <hr />
         </div>
         <div className="ml-3 flex items-center justify-between p-1">

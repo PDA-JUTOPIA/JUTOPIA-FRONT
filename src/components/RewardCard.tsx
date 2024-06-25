@@ -1,15 +1,18 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useState } from "react";
 
 interface RewardCardProps {
   title: string;
   imageUrl: string;
   description: string;
+  completed: boolean;
 }
 
 const RewardCard: React.FC<RewardCardProps> = ({
   title,
   imageUrl,
   description,
+  completed,
 }) => {
   const [showModal, setShowModal] = useState(false);
 
@@ -22,12 +25,12 @@ const RewardCard: React.FC<RewardCardProps> = ({
   };
 
   return (
-    <div className="flex flex-col items-center rounded-lg border p-4 shadow-lg">
+    <div className="rounded-lg border p-4 shadow-lg">
       <h2 className="mb-4 text-xl font-bold">{title}</h2>
       <img
         src={imageUrl}
         alt={title}
-        className="mb-4 h-40 w-full transform cursor-pointer rounded-lg object-cover transition-transform duration-300 hover:scale-105"
+        className={`mb-4 h-40 w-full transform cursor-pointer rounded-lg object-contain transition-transform duration-300 hover:scale-105 ${!completed ? "grayscale" : ""}`}
         onClick={openModal}
       />
       <p className="text-center">{description}</p>
@@ -44,7 +47,7 @@ const RewardCard: React.FC<RewardCardProps> = ({
             <img
               src={imageUrl}
               alt={title}
-              className="mb-4 h-60 w-full rounded-lg object-cover"
+              className={`mb-4 h-60 w-full rounded-lg object-cover ${!completed ? "grayscale" : ""}`}
             />
             <p className="mb-4 text-center">{description}</p>
             <button
