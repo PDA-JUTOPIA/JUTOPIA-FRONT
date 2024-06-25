@@ -21,7 +21,7 @@ function truncate(str: string, maxlength: number): string {
 }
 
 const MarketIssues: React.FC = () => {
-  const [data, setData] = useState<ListItem[]>([]);
+  const [data, setData] = useState<ListItem[]>([]); // 초기 데이터 타입을 ListItem[]로 설정
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -41,9 +41,7 @@ const MarketIssues: React.FC = () => {
   useEffect(() => {
     fetchMarketIssuesApi()
       .then((response) => {
-        const responseData = response.data as ListItem[];
-        console.log(responseData);
-        setData(responseData);
+        setData(response); // response.data가 아닌 response 자체를 사용
         setLoading(false);
       })
       .catch((error) => {
