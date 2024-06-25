@@ -211,6 +211,7 @@ const ProblemUnitQuiz = ({
       <QuitMessage
         quitMessageShown={quitMessageShown}
         setQuitMessageShown={setQuitMessageShown}
+        color={backgroundColor}
       />
       <CheckAnswer
         isAnswerSelected={selectedAnswer !== null}
