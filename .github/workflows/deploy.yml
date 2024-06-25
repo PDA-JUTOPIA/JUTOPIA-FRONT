@@ -15,7 +15,6 @@ jobs:
         run: |
           echo "NEXT_PUBLIC_API_URL=${{ secrets.EC2_API_URL }}" >> .env
 
-      # Build step removed since there is no build script
       - name: Copy files via SSH
         uses: appleboy/scp-action@master
         with:
@@ -50,10 +49,10 @@ jobs:
             git pull origin main
 
             # Install dependencies and build the project
-            npm i --force
+            npm ci --force
             npm run build
 
             # Restart or start the frontend application with pm2
-            pm2 stop frontend
-            pm2 delete frontend
+            pm2 stop frontend || true
+            pm2 delete frontend || true
             pm2 start npm --name frontend -- run start
