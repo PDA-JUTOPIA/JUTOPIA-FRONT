@@ -109,6 +109,7 @@ export const LoginScreen = ({
       console.error("Unhandled error in handleButtonClick:", error);
     });
   };
+
   return (
     <article
       className={[

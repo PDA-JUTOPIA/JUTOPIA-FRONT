@@ -24,10 +24,7 @@ import { LoginScreen, useLoginScreen } from "~/components/LoginScreen";
 import { useBoundStore } from "~/hooks/useBoundStore";
 import type { Tile, TileType, Unit } from "~/utils/units";
 import { units } from "~/utils/units";
-import {
-  readUserCurrentLearning,
-  createUserCurrentLearning,
-} from "~/apis/userCurrentLearning";
+import { readUserCurrentLearning } from "~/apis/userCurrentLearning";
 
 type TileStatus = "LOCKED" | "ACTIVE" | "COMPLETE";
 
@@ -439,7 +436,6 @@ const TileTooltip = ({
 
 const UnitSection = ({ unit }: { unit: Unit }): JSX.Element => {
   const [selectedTile, setSelectedTile] = useState<null | number>(null);
-  // const [currentLearning, setCurrentLearning] = useState<number>(0); //최종
 
   useEffect(() => {
     const unselectTile = () => setSelectedTile(null);
@@ -462,14 +458,10 @@ const UnitSection = ({ unit }: { unit: Unit }): JSX.Element => {
     async function fetchCurrentLearning() {
       try {
         console.log("Fetching current learning for email:", email);
-        let response = await readUserCurrentLearning(email);
-        if (!response || !response.userCurrentLearning) {
-          console.log("No current learning data, creating new...");
-          await createUserCurrentLearning(email);
-          response = await readUserCurrentLearning(email);
-        }
+        const response = await readUserCurrentLearning(email);
+
         const current = response.userCurrentLearning;
-        // setCurrentLearning(current);
+
         setLessonsCompleted(current);
         console.log("Fetched data:", current);
       } catch (error) {

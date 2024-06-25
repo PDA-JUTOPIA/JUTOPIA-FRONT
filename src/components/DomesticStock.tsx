@@ -2,8 +2,13 @@ import type { ListItem } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { GoTriangleUp, GoTriangleDown } from "react-icons/go";
 
-//const URL = "52.78.236.23";
-const URL = "127.0.0.1";
+const fullApiUrl = process.env.NEXT_PUBLIC_API_URL;
+
+if (!fullApiUrl) {
+  throw new Error(
+    "Environment variables NEXT_PUBLIC_API_URL or NEXT_PUBLIC_API_PORT are not set",
+  );
+}
 
 interface ListItem {
   [key: string]: {
@@ -23,7 +28,7 @@ const DomesticStock = () => {
 
   useEffect(() => {
     const eventSource = new EventSource(
-      `http://${URL}:3000/api/koreainvestment/domestic-stock`,
+      `${fullApiUrl}/api/koreainvestment/domestic-stock`,
     );
 
     eventSource.onmessage = (event) => {

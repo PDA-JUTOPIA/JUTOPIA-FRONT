@@ -2,12 +2,22 @@ import React, { useState } from "react";
 import Image from "next/image";
 import image from "/public/bgimage.jpg";
 import PostCard from "./ChallengePostCard";
+import ChallengePostModal from "./ChallegePostModal";
 
 const ChallengeExplain: React.FC = () => {
   const [activeTab, setActiveTab] = useState("내 인증 현황");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleTabClick = (tab: string) => {
     setActiveTab(tab);
+  };
+
+  const handleModalOpen = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
   };
 
   const renderTabContent = () => {
@@ -71,9 +81,17 @@ const ChallengeExplain: React.FC = () => {
           주식 어린이, 주린이를 탈출합시다! 꾸준히 참여만 해도 주식 바보
           탈출하기 챌린지😄
         </div>
-        <p className="text-center text-sm text-slate-500 lg:text-left">
-          🔥주토피아 자체 제공하는 챌린지입니다.
-        </p>
+        <div>
+          <p className="text-center text-sm text-slate-500 lg:text-left">
+            🔥주토피아 자체 제공하는 챌린지입니다.
+          </p>
+          <button
+            className="mt-4 rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+            onClick={handleModalOpen}
+          >
+            인증글 작성하기
+          </button>
+        </div>
       </div>
       <div className="lg:w-1/2">
         <div className="mb-4 flex space-x-4">
@@ -98,10 +116,15 @@ const ChallengeExplain: React.FC = () => {
             참가자 인증 현황
           </button>
         </div>
-        <div className="scroll-box flex flex-col space-y-4 rounded-lg bg-white shadow-lg">
+        <div
+          className="scroll-box flex flex-col space-y-4 rounded-lg bg-white p-5 shadow-lg"
+          style={{ height: "75vh" }}
+        >
           {renderTabContent()}
         </div>
       </div>
+
+      {isModalOpen && <ChallengePostModal onClose={handleModalClose} />}
     </div>
   );
 };
