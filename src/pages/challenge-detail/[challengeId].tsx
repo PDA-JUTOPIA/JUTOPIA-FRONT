@@ -57,7 +57,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const { challengeId } = context.params as { challengeId: string };
 
   const res = await fetch(
-    `http://localhost:3001/api/challenge/readChallenge/challengeId/${challengeId}`,
+    `http://localhost:3000/api/challenge/readChallenge/challengeId/${challengeId}`,
   );
   const challenge = await res.json();
 
