@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Image from "next/image";
 import PostLike from "./ChallengePostLikeButton";
 import { readComment, createComment } from "~/apis/challengePostComment";
-import { challenges } from "~/data/challengesData";
 import type { IResComment } from "~/apis/challengePostComment";
 import { getUserIdByEmail } from "~/apis/user";
 import { useBoundStore } from "~/hooks/useBoundStore";
