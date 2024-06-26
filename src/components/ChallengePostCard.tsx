@@ -9,7 +9,7 @@ interface PostCardProps {
   postTime: string;
   postContent: string;
   postImages: string[];
-  commentsCount: number;
+  challengePostId: number;
   likesCount: number;
 }
 
@@ -19,7 +19,7 @@ const PostCard: React.FC<PostCardProps> = ({
   postTime,
   postContent,
   postImages,
-  commentsCount,
+  challengePostId,
   likesCount,
 }) => {
   const handleEdit = () => {
@@ -66,7 +66,7 @@ const PostCard: React.FC<PostCardProps> = ({
       </div>
       <div className="px-4 py-2">
         <CommentLikeSection
-          initialComments={commentsCount}
+          challengePostId={challengePostId}
           initialLikes={likesCount}
         />
       </div>
