@@ -1,19 +1,25 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import PostLike from "./ChallengePostLikeButton";
+import { readComment, createComment } from "~/apis/challengePostComment";
+import type { IResComment } from "~/apis/challengePostComment";
+import { getUserIdByEmail } from "~/apis/user";
+import { useBoundStore } from "~/hooks/useBoundStore";
 
 interface CommentLikeSectionProps {
-  initialComments: number;
+  challengePostId: number;
   initialLikes: number;
 }
 
 const CommentLikeSection: React.FC<CommentLikeSectionProps> = ({
-  initialComments,
+  challengePostId,
   initialLikes,
 }) => {
   const [showComments, setShowComments] = useState(false);
   const [comment, setComment] = useState("");
-  const [commentsCount, setCommentsCount] = useState(initialComments);
+  const [commentsCount, setCommentsCount] = useState(0);
+  const [data, setData] = useState<IResComment[] | null>(null);
+  const email = useBoundStore((x) => x.email);
 
   const handleCommentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setComment(e.target.value);
@@ -22,9 +28,26 @@ const CommentLikeSection: React.FC<CommentLikeSectionProps> = ({
   const handleCommentUpload = () => {
     if (!comment.trim()) return;
 
-    console.log("Comment uploaded:", comment);
+    craeteCommentData().catch((err) => {
+      console.log(err);
+    });
+
     setComment("");
     setCommentsCount(commentsCount + 1);
+  };
+
+  const craeteCommentData = async () => {
+    try {
+      const userId = await getUserIdByEmail(email);
+      const response = await createComment(
+        userId.userId,
+        challengePostId,
+        comment,
+      );
+      console.log(response.challenge_post_comment_id);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -34,7 +57,21 @@ const CommentLikeSection: React.FC<CommentLikeSectionProps> = ({
   };
 
   const toggleComments = () => {
+    // 댓글 조회
+    readCommentData().catch((err) => {
+      console.log(err);
+    });
+
     setShowComments(!showComments);
+  };
+
+  const readCommentData = async () => {
+    try {
+      const response = await readComment(challengePostId);
+      setData(response);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -55,12 +92,14 @@ const CommentLikeSection: React.FC<CommentLikeSectionProps> = ({
         </div>
         <PostLike initialLikes={initialLikes} />
       </div>
-      {showComments && (
+      {showComments && data && (
         <div className="px-4 py-1">
           <div className="mb-2 rounded-md bg-gray-100 p-2">
-            <p>Comment 1</p>
-            <p>Comment 2</p>
-            {/* 실제 코멘트 데이터로 대체 */}
+            {data.map((comment) => (
+              <div key={comment.challenge_post_comment_id}>
+                <div>{comment.challenge_post_comment_text}</div>
+              </div>
+            ))}
           </div>
         </div>
       )}

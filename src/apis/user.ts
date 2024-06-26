@@ -1,5 +1,6 @@
 import axios from "axios";
 import type { AxiosResponse } from "axios";
+import { resolveNaptr } from "dns";
 
 const fullApiUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -21,6 +22,30 @@ export interface IResLogin {
 export interface IResUpdate {
   newName: string;
   email: string;
+}
+
+export interface IResUserId {
+  userId: number;
+}
+
+export async function getUserIdByEmail(email: string) {
+  try {
+    const resp: AxiosResponse<IResUserId> = await axios.post(
+      `${fullApiUrl}/api/users/user-id`,
+      {
+        email: email,
+      },
+    );
+    return resp.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.error("Failed to getUserId (AxiosError):", error.message);
+    } else if (error instanceof Error) {
+      console.error("Failed to getUserId:", error);
+    } else {
+      console.error("Failed to getUserId: An unknown error occurred.");
+    }
+  }
 }
 
 export async function login(

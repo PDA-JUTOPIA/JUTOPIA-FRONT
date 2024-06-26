@@ -8,6 +8,8 @@ import { LeftBar } from "~/components/LeftBar";
 import { BottomBar } from "~/components/BottomBar";
 import ChallengeExplain from "~/components/ChallengeExplain";
 
+const fullApiUrl = process.env.NEXT_PUBLIC_API_URL;
+
 interface ChallengeDetailProps {
   challenge: Challenge; // challenge 속성은 Challenge 타입을 가져야 함
 }
@@ -60,7 +62,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const { challengeId } = context.params as { challengeId: string };
 
   const res = await fetch(
-    `http://localhost:3001/api/challenge/readChallenge/challengeId/${challengeId}`,
+    `${fullApiUrl}/api/challenge/readChallenge/challengeId/${challengeId}`,
   );
   // 이 부분은 ec2로 맞춰서 변경해봅시다
   const challengeResponse = (await res.json()) as Challenge;

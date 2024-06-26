@@ -28,7 +28,7 @@ export async function readJoinRecurit(
       `${fullApiUrl}/api/challenge/joinChallengeList`,
       { email: email },
     );
-    console.log(resp);
+
     return resp.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -46,7 +46,7 @@ export async function readAllRecurit(): Promise<IResChallengeRecruit[]> {
     const resp: AxiosResponse<IResChallengeRecruit[]> = await axios.get(
       `${fullApiUrl}/api/challenge/readAllRecurit`,
     );
-    console.log(resp);
+
     return resp.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {

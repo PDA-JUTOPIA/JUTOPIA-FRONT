@@ -49,7 +49,7 @@ const ChallengeExplain: React.FC<ChallengeExplainProps> = ({ challenge }) => {
               postTime="2024-06-23"
               postContent="챌린지 인증용 UI"
               postImages={["/Reward/coin1.svg"]}
-              commentsCount={4}
+              challengePostId={1}
               likesCount={3}
             />
           </div>
@@ -63,7 +63,7 @@ const ChallengeExplain: React.FC<ChallengeExplainProps> = ({ challenge }) => {
               postTime="2024-06-23"
               postContent="챌린지 인증용 UI"
               postImages={["/Reward/coin1.svg"]}
-              commentsCount={4}
+              challengePostId={1}
               likesCount={3}
             />
             <PostCard
@@ -72,7 +72,7 @@ const ChallengeExplain: React.FC<ChallengeExplainProps> = ({ challenge }) => {
               postTime="2024-06-23"
               postContent="챌린지 인증용 UI"
               postImages={["/Reward/coin1.svg"]}
-              commentsCount={4}
+              challengePostId={1}
               likesCount={3}
             />
             <PostCard
@@ -81,7 +81,7 @@ const ChallengeExplain: React.FC<ChallengeExplainProps> = ({ challenge }) => {
               postTime="2024-06-23"
               postContent="챌린지 인증용 UI"
               postImages={["/Reward/coin1.svg"]}
-              commentsCount={4}
+              challengePostId={1}
               likesCount={3}
             />
             <PostCard
@@ -90,7 +90,7 @@ const ChallengeExplain: React.FC<ChallengeExplainProps> = ({ challenge }) => {
               postTime="2024-06-23"
               postContent="챌린지 인증용 UI"
               postImages={["/Reward/coin1.svg"]}
-              commentsCount={4}
+              challengePostId={1}
               likesCount={3}
             />
           </div>
