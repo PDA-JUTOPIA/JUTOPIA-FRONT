@@ -25,7 +25,10 @@ import { useBoundStore } from "~/hooks/useBoundStore";
 import type { Tile, TileType, Unit } from "~/utils/units";
 import { units } from "~/utils/units";
 import { readUserCurrentLearning } from "~/apis/userCurrentLearning";
-
+import { readRewards } from "~/apis/reward";
+import RewardCard from "~/components/RewardCard";
+// import { challenges } from "~/data/challengesData";
+// import { challenges } from "~/data/challengesData";
 type TileStatus = "LOCKED" | "ACTIVE" | "COMPLETE";
 
 const tileStatus = (tile: Tile, lessonsCompleted: number): TileStatus => {
@@ -456,6 +459,8 @@ const TileTooltip = ({
 const UnitSection = ({ unit }: { unit: Unit }): JSX.Element => {
   const [selectedTile, setSelectedTile] = useState<null | number>(null);
 
+  const [showModal, setShowModal] = useState(false);
+
   useEffect(() => {
     const unselectTile = () => setSelectedTile(null);
     window.addEventListener("scroll", unselectTile);
@@ -470,28 +475,57 @@ const UnitSection = ({ unit }: { unit: Unit }): JSX.Element => {
   const increaseLessonsCompleted = useBoundStore(
     (x) => x.increaseLessonsCompleted,
   );
+  const lingots = useBoundStore((x) => x.lingots);
+  const setLingots = useBoundStore((x) => x.setLingots);
   const increaseLingots = useBoundStore((x) => x.increaseLingots);
+
   const email = useBoundStore((x) => x.email);
+
+  interface Reward {
+    reward_id: number;
+    reward_name: string;
+    reward_explain: string;
+    reward_img_url: string;
+  }
+  const [challenges, setChallenges] = useState<Reward[]>([]);
 
   useEffect(() => {
     async function fetchCurrentLearning() {
       try {
-        console.log("Fetching current learning for email:", email);
         const response = await readUserCurrentLearning(email);
 
-        const current = response.userCurrentLearning;
+        const current_learning = response.userCurrentLearning;
+        const current_reward = response.userCurrentReward;
 
-        setLessonsCompleted(current);
-        console.log("Fetched data:", current);
+        setLessonsCompleted(current_learning);
+        setLingots(current_reward);
       } catch (error) {
-        console.error("Failed to fetch or create current learning", error);
+        console.error(
+          "Failed to fetch or create current learning,reward",
+          error,
+        );
       }
     }
 
     fetchCurrentLearning().catch((error) => {
       console.error("Unhandled error:", error);
     });
-  }, [setLessonsCompleted, email]);
+  }, [setLessonsCompleted, setLingots, email]);
+
+  useEffect(() => {
+    async function fetchReward() {
+      try {
+        const response = await readRewards();
+        setChallenges(response);
+      } catch (error) {
+        console.error("Failed to fetch RewardList", error);
+      }
+    }
+
+    fetchReward().catch((error) => {
+      console.error("Unhandled error:", error);
+    });
+  }, []);
   return (
     <>
       <UnitHeader
@@ -576,7 +610,9 @@ const UnitSection = ({ unit }: { unit: Unit }): JSX.Element => {
                         onClick={() => {
                           if (status === "ACTIVE") {
                             increaseLessonsCompleted(email, 1);
-                            increaseLingots(1);
+                            increaseLingots(email, 1);
+                            console.log(lingots);
+                            setShowModal(true);
                           }
                         }}
                         role="button"
@@ -588,6 +624,19 @@ const UnitSection = ({ unit }: { unit: Unit }): JSX.Element => {
                           <HoverLabel text="Open" textColor="text-yellow-400" />
                         )}
                         <TileIcon tileType={tile.type} status={status} />
+
+                        {showModal && challenges.length > 0 && (
+                          <RewardCard
+                            key={lingots}
+                            title={challenges[lingots].reward_name}
+                            imageUrl={challenges[lingots].reward_img_url}
+                            description={challenges[lingots].reward_explain}
+                            completed={true}
+                            showDetails={false}
+                            showModal={showModal}
+                            setShowModal={setShowModal}
+                          />
+                        )}
                       </div>
                     );
                 }
