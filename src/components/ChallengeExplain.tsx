@@ -34,35 +34,43 @@ const ChallengeExplain: React.FC<ChallengeExplainProps> = ({ challenge }) => {
     //이미 참여중인지 상태 확인.
     const fetchUserId = async () => {
       try {
+        console.log(userId); //타입 에러 때문에 찍음
         const id = await getUserIdByEmail(email);
         setUserId(id.userId);
+        return id.userId;
       } catch (error) {
         console.error("Error fetching user ID:", error);
       }
     };
-    fetchUserId().catch((err) => {
-      console.log(err);
-    });
+
     // 가져온 userid로 참여중인지 확인
-    const checkStatus = async () => {
+    const checkStatus = async (userId: number) => {
       try {
-        const check = await isInChallenge(userId);
+        const check = await isInChallenge(userId, challenge.challenge_id);
         setShowJoinState(check.status);
       } catch (error) {
         console.error("Error fetching challenge status:", error);
       }
     };
-    checkStatus().catch((err) => {
-      console.log(err);
-    });
-  }, []);
+
+    fetchUserId()
+      .then((userId) => {
+        if (userId) {
+          checkStatus(userId).catch((err) => {
+            console.log(err);
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [email]);
   // [] 안에 의존성 배열을 빈 배열로 설정하여 한 번만 데이터를 로드하도록 설정
   const handleJoinChallenge = () => {
     joinChallenge().catch((err) => {
       console.log(err);
     });
-    // 상태변경,
-    console.log(showJoinState);
+
     setShowJoinState(!showJoinState);
   };
   const joinChallenge = async () => {
@@ -180,7 +188,7 @@ const ChallengeExplain: React.FC<ChallengeExplainProps> = ({ challenge }) => {
             >
               인증글 작성하기
             </button>
-            {showJoinState && (
+            {!showJoinState && (
               <button
                 className="mt-4 rounded-lg bg-red-400 px-4 py-2 text-white hover:bg-red-600"
                 onClick={handleJoinChallenge}
