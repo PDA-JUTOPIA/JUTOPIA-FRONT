@@ -58,17 +58,17 @@ const DomesticStock = () => {
         <div>{error}</div>
       ) : (
         <>
-          <div className="relative z-[-1] overflow-x-auto px-[10px] pt-[10px] shadow-md sm:rounded-lg">
+          <div className="relative z-[-1] flex overflow-x-auto px-[10px] pt-[10px] shadow-md max-[1200px]:justify-between sm:rounded-lg min-[1200px]:flex-col">
             {stockNum.map((elem) => (
               <div key={elem}>
-                <div className="text-sm">
+                <div className="text-sm max-[500px]:text-[3.1vw]">
                   {elem === "0001"
                     ? "코스피"
                     : elem === "1001"
                       ? "코스닥"
                       : "코스피200"}
                 </div>
-                <div className="text-lg">
+                <div className="text-lg max-[500px]:text-[3.6vw]">
                   {data[elem]?.output.bstp_nmix_prpr}
                 </div>
                 <div className="mb-[10px] text-xs">
@@ -76,9 +76,9 @@ const DomesticStock = () => {
                     <div className="flex">
                       {/*양수일 때*/}
                       <GoTriangleUp className="inline-block" color="red" />
-                      <span className="text-red-500">
+                      <span className="text-red-500 max-[500px]:text-[2.5vw]">
                         {data[elem]?.output.bstp_nmix_prdy_vrss}
-                        <span className="ml-[10px]">
+                        <span className="ml-[10px] max-[500px]:text-[2.5vw]">
                           {data[elem]?.output.bstp_nmix_prdy_ctrt}%
                         </span>
                       </span>
@@ -87,9 +87,9 @@ const DomesticStock = () => {
                     <div className="flex">
                       {/*음수일 때*/}
                       <GoTriangleDown className="inline-block" color="blue" />
-                      <span className="text-blue-700">
+                      <span className="text-blue-700 max-[500px]:text-[2.5vw]">
                         {data[elem]?.output.bstp_nmix_prdy_vrss}
-                        <span className="ml-[10px]">
+                        <span className="ml-[10px] max-[500px]:text-[2.5vw]">
                           {data[elem]?.output.bstp_nmix_prdy_ctrt}%
                         </span>
                       </span>
@@ -99,7 +99,7 @@ const DomesticStock = () => {
                       {/*0일 때*/}
                       <span>
                         {data[elem]?.output.bstp_nmix_prdy_vrss}
-                        <span className="ml-[10px]">
+                        <span className="ml-[10px] max-[500px]:text-[2.5vw]">
                           {data[elem]?.output.bstp_nmix_prdy_ctrt}%
                         </span>
                       </span>
