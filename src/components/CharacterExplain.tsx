@@ -50,10 +50,6 @@ const CharacterExplain = ({
     }
   };
 
-  const handleTypingComplete = () => {
-    setIsTypingComplete(true);
-  };
-
   const handleDragStart = (e: React.DragEvent<HTMLDivElement>) => {
     setDragStartX(e.clientX);
   };
@@ -105,7 +101,7 @@ const CharacterExplain = ({
                 </h2>
                 <div
                   className="flex cursor-default items-center"
-                  onClick={handleTypingComplete}
+                  onClick={() => setIsTypingComplete(true)}
                 >
                   {isTypingComplete ? (
                     <div className="cursor-default whitespace-pre-line font-['TTLaundryGothicB']">
@@ -122,7 +118,7 @@ const CharacterExplain = ({
                           Object.keys(currentItem)[0] as keyof DescriptionItem
                         ]
                       }
-                      onTypingComplete={handleTypingComplete}
+                      setIsTypingComplete={setIsTypingComplete}
                     />
                   )}
                 </div>
