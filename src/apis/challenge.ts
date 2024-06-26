@@ -20,6 +20,58 @@ export interface IResCreateRecruit {
   result: string;
 }
 
+export interface IResJoinRecruit {
+  is_challenge_end: boolean;
+  challenge_participation_count: number;
+  user_id: number;
+  challenge_id: number;
+}
+
+export interface IResIsJoin {
+  status: boolean;
+}
+
+export async function isInChallenge(userId: number): Promise<IResIsJoin> {
+  try {
+    const resp: AxiosResponse<IResIsJoin> = await axios.get(
+      `${fullApiUrl}/api/challenge/checkJoin/${userId}`,
+    );
+    return resp.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.error("Failed to check join (AxiosError):", error.message);
+    } else if (error instanceof Error) {
+      console.error("Failed to check join:", error);
+    } else {
+      console.error("Failed to check join: An unknown error occurred.");
+    }
+  }
+}
+
+export async function joinRecurit(
+  email: string,
+  challengeId: number,
+): Promise<IResJoinRecruit> {
+  try {
+    const resp: AxiosResponse<IResJoinRecruit> = await axios.post(
+      `${fullApiUrl}/api/challenge/join`,
+      {
+        email: email,
+        challengeId: challengeId,
+      },
+    );
+    return resp.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.error("Failed to join recurit (AxiosError):", error.message);
+    } else if (error instanceof Error) {
+      console.error("Failed to join recurit:", error);
+    } else {
+      console.error("Failed to join recurit: An unknown error occurred.");
+    }
+  }
+}
+
 export async function readJoinRecurit(
   email: string,
 ): Promise<IResChallengeRecruit[]> {
