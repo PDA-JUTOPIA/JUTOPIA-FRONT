@@ -23,7 +23,7 @@ const WeeklyCalendar: React.FC = () => {
       <h2 className="mb-3 border-b-2 border-white pb-2 text-xl font-semibold sm:text-2xl">
         This Week
       </h2>
-      <div className="grid w-full grid-cols-4 gap-3 min-[850px]:flex min-[850px]:justify-evenly min-[850px]:gap-6">
+      <div className="grid w-full grid-cols-4 gap-3 min-[850px]:flex min-[850px]:justify-between">
         {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
           <div
             key={day}

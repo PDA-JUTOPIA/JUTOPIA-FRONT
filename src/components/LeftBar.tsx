@@ -59,7 +59,7 @@ export const LeftBar = ({ selectedTab }: { selectedTab: Tab | null }) => {
           <div>
             {loggedIn && (
               <button
-                className="px-5 py-2 text-center text-gray-500 hover:text-gray-600"
+                className="p-2 text-center text-gray-500 hover:text-gray-600"
                 style={{ fontFamily: "TTLaundryGothicB" }}
                 onClick={handleLogOut}
               >
