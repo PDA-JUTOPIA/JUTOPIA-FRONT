@@ -645,9 +645,6 @@ const getTopBarColors = (
     backgroundColor: "bg-[#0046ff]",
     borderColor: "border-[#235390]",
   } as const;
-  window.addEventListener("scroll", function () {
-    console.log(window.scrollY);
-  });
   if (scrollY < 630) {
     return defaultColors;
   } else if (scrollY < 1490) {
