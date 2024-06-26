@@ -8,6 +8,8 @@ import { LeftBar } from "~/components/LeftBar";
 import { BottomBar } from "~/components/BottomBar";
 import ChallengeExplain from "~/components/ChallengeExplain";
 
+const fullApiUrl = process.env.NEXT_PUBLIC_API_URL;
+
 interface ChallengeDetailProps {
   challenge: {
     challenge_id: number;
@@ -57,7 +59,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const { challengeId } = context.params as { challengeId: string };
 
   const res = await fetch(
-    `http://localhost:3000/api/challenge/readChallenge/challengeId/${challengeId}`,
+    `${fullApiUrl}/api/challenge/readChallenge/challengeId/${challengeId}`,
   );
   const challenge = await res.json();
 
