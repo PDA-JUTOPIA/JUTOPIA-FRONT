@@ -263,6 +263,7 @@ const MypageTopSection = (props: MypageTopSectionProps) => {
 };
 
 const MypageRewardSection = () => {
+  const email = useBoundStore((x) => x.email);
   return (
     <div className="flex max-w-[65rem] grow flex-col">
       <br />
@@ -271,7 +272,7 @@ const MypageRewardSection = () => {
       </h1>
       <br />
       <div className="pt-[40px]"></div>
-      <ChallengeGrid showOnlyCompleted />
+      <ChallengeGrid showOnlyCompleted email={email} />
     </div>
   );
 };

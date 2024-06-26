@@ -1,11 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState } from "react";
+import React from "react";
 
 interface RewardCardProps {
   title: string;
   imageUrl: string;
   description: string;
   completed: boolean;
+  showDetails?: boolean;
+  showModal: boolean;
+  setShowModal: (value: boolean) => void;
 }
 
 const RewardCard: React.FC<RewardCardProps> = ({
@@ -13,9 +16,10 @@ const RewardCard: React.FC<RewardCardProps> = ({
   imageUrl,
   description,
   completed,
+  showDetails = true,
+  showModal,
+  setShowModal,
 }) => {
-  const [showModal, setShowModal] = useState(false);
-
   const openModal = () => {
     setShowModal(true);
   };
@@ -26,16 +30,19 @@ const RewardCard: React.FC<RewardCardProps> = ({
 
   return (
     <div className="rounded-lg border p-4 shadow-lg">
-      <h2 className="mb-4 text-xl font-bold">{title}</h2>
-      <img
-        src={imageUrl}
-        alt={title}
-        className={`mb-4 h-40 w-full transform cursor-pointer rounded-lg object-contain transition-transform duration-300 hover:scale-105 ${!completed ? "grayscale" : ""}`}
-        onClick={openModal}
-      />
-      <p className="text-center">{description}</p>
+      {showDetails && (
+        <>
+          <h2 className="mb-4 text-xl font-bold">{title}</h2>
+          <img
+            src={imageUrl}
+            alt={title}
+            className={`mb-4 h-40 w-full transform cursor-pointer rounded-lg object-contain transition-transform duration-300 hover:scale-105 ${!completed ? "grayscale" : ""}`}
+            onClick={openModal}
+          />
+          <p className="text-center">{description}</p>
+        </>
+      )}
 
-      {/* Modal */}
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
           <div
