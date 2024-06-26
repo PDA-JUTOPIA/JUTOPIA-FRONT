@@ -133,44 +133,44 @@ const Lesson: NextPage = () => {
         />
       ) : type === "3.3" ? (
         <ProblemUnitDescription
-          descriptionArr={descriptionData.descriptionArr3_0}
-          titles={descriptionData.titles3_0}
-          nextIndexes={descriptionData.nextIndexes3_0}
-          images={descriptionData.images3_0}
-          imageIndexes={descriptionData.imageIndexes3_0}
+          descriptionArr={descriptionData.descriptionArr3_3}
+          titles={descriptionData.titles3_3}
+          nextIndexes={descriptionData.nextIndexes3_3}
+          images={descriptionData.images3_3}
+          imageIndexes={descriptionData.imageIndexes3_3}
           backgroundColor="#00cd9c"
           increaseLessonsCompleted={handleIncreaseLessonsCompleted}
           status={status as string}
         />
       ) : type === "3.4" ? (
         <ProblemUnitDescription
-          descriptionArr={descriptionData.descriptionArr3_0}
-          titles={descriptionData.titles3_0}
-          nextIndexes={descriptionData.nextIndexes3_0}
-          images={descriptionData.images3_0}
-          imageIndexes={descriptionData.imageIndexes3_0}
+          descriptionArr={descriptionData.descriptionArr3_4}
+          titles={descriptionData.titles3_4}
+          nextIndexes={descriptionData.nextIndexes3_4}
+          images={descriptionData.images3_4}
+          imageIndexes={descriptionData.imageIndexes3_4}
           backgroundColor="#00cd9c"
           increaseLessonsCompleted={handleIncreaseLessonsCompleted}
           status={status as string}
         />
       ) : type === "3.5" ? (
         <ProblemUnitDescription
-          descriptionArr={descriptionData.descriptionArr3_0}
-          titles={descriptionData.titles3_0}
-          nextIndexes={descriptionData.nextIndexes3_0}
-          images={descriptionData.images3_0}
-          imageIndexes={descriptionData.imageIndexes3_0}
+          descriptionArr={descriptionData.descriptionArr3_5}
+          titles={descriptionData.titles3_5}
+          nextIndexes={descriptionData.nextIndexes3_5}
+          images={descriptionData.images3_5}
+          imageIndexes={descriptionData.imageIndexes3_5}
           backgroundColor="#00cd9c"
           increaseLessonsCompleted={handleIncreaseLessonsCompleted}
           status={status as string}
         />
       ) : type === "3.6" ? (
         <ProblemUnitDescription
-          descriptionArr={descriptionData.descriptionArr3_0}
-          titles={descriptionData.titles3_0}
-          nextIndexes={descriptionData.nextIndexes3_0}
-          images={descriptionData.images3_0}
-          imageIndexes={descriptionData.imageIndexes3_0}
+          descriptionArr={descriptionData.descriptionArr3_6}
+          titles={descriptionData.titles3_6}
+          nextIndexes={descriptionData.nextIndexes3_6}
+          images={descriptionData.images3_6}
+          imageIndexes={descriptionData.imageIndexes3_6}
           backgroundColor="#00cd9c"
           increaseLessonsCompleted={handleIncreaseLessonsCompleted}
           status={status as string}
