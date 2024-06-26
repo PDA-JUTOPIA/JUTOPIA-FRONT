@@ -87,7 +87,7 @@ export const units: readonly Unit[] = [
       { type: "3.4", description: "손익계산서와 재무상태표 크로스 분석" },
       { type: "3.5", description: "손익계산서와 재무상태표 크로스 분석2" },
       { type: "3.6", description: "손익계산서와 재무상태표 크로스 분석" },
-      { type: "3.7", description: "손익계산서와 재무상태표 크로스 분석2" },
+
       { type: "treasure" },
     ],
   },
