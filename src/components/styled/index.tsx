@@ -8,10 +8,14 @@ interface DescriptionFrameProps {
 export const DescriptionFrame = styled.section<DescriptionFrameProps>`
   background: ${(props: DescriptionFrameProps) => props.backgroundColor};
   border-radius: 20px;
-  padding: 20px;
-  margin: 20px 15px;
+  padding: 10px 20px;
+  margin: auto;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   color: whitesmoke;
+  max-width: 64rem;
+  width: 90vw;
+  margin-bottom: 20px;
+  min-height: 25vh;
 `;
 
 // modal

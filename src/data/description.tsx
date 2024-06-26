@@ -64,7 +64,7 @@ export const descriptionArr2_0: DescriptionItem[] = [
   },
 ];
 export const images2_0 = [
-  "UNIT2_3/축하원숭이.png",
+  "UNIT2_0/000.png",
   "UNIT2_0/001.png",
   "UNIT2_0/002.png",
   "UNIT2_0/003.png",
@@ -290,7 +290,7 @@ export const titles3_0 = [
 ];
 export const imageIndexes3_0 = [1, 2, 3, 4, 5, 6, 7, 9];
 export const images3_0 = [
-  "UNIT2_3/축하원숭이.png",
+  "UNIT3_0/000.png",
   "UNIT3_0/3-0-0_재무제표구성.png",
   "UNIT3_0/3-0-1_재무상태표.png",
   "UNIT3_0/3-0-2_손익계산서.png",
@@ -802,7 +802,7 @@ export const descriptionArr4_0: DescriptionItem[] = [
       "Unit3 의 재무제표 학습은 잘 끝내고 오셨나요?\n이제 지금까지 학습한 것들을 문제를 통해 복습해 볼 거예요. 화이팅!",
   },
 ];
-export const images4_0 = ["UNIT2_3/축하원숭이.png"];
+export const images4_0 = ["UNIT4_0/000.png"];
 export const nextIndexes4_0 = [0];
 export const imageIndexes4_0 = [1];
 export const titles4_0 = ["Unit4에 온 것을 환영해요!"];
@@ -813,7 +813,7 @@ export const descriptionArr4_2: DescriptionItem[] = [
       "그동안 열심히 공부한 만큼 여러분의 금융 지식도 한 뼘 성장했겠죠?\n여러분의 투자를 응원합니다!",
   },
 ];
-export const images4_2 = ["UNIT2_3/축하원숭이.png"];
+export const images4_2 = ["UNIT4_2/000.png"];
 export const nextIndexes4_2 = [0];
 export const imageIndexes4_2 = [1];
 export const titles4_2 = ["축하합니다! 모든 과정을 완료했어요!"];

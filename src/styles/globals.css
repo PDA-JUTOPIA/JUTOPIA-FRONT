@@ -43,12 +43,12 @@
     opacity: 0;
   }
 }
-@media (max-width: 768px) {
+@media (max-width: 650px) {
   .blink-on-small {
     animation: custom-blink 1s infinite;
   }
 }
-@media (min-width: 768px) {
+@media (min-width: 650px) {
   .blink-on-small {
     display: none;
   }

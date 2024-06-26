@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 
 interface AnimationProps {
   text: string | undefined;
-  onTypingComplete: () => void;
+  setIsTypingComplete: (v: boolean) => void;
 }
 
-const TextTypingAni = ({ text, onTypingComplete }: AnimationProps) => {
+const TextTypingAni = ({ text, setIsTypingComplete }: AnimationProps) => {
   const [sequence, setSequence] = useState<string>("");
 
   useEffect(() => {
@@ -18,12 +18,12 @@ const TextTypingAni = ({ text, onTypingComplete }: AnimationProps) => {
         currentIndex++;
       } else {
         clearInterval(interval);
-        onTypingComplete();
+        setIsTypingComplete(true);
       }
     }, 60);
 
     return () => clearInterval(interval);
-  }, [text, onTypingComplete]);
+  }, [text, setIsTypingComplete]);
 
   return (
     <p
