@@ -4,7 +4,7 @@ import TopBar from "~/components/TopBar";
 import { LeftBar } from "~/components/LeftBar";
 import { BottomBar } from "~/components/BottomBar";
 import { useState, useEffect } from "react";
-import ChallengeExplain from "~/components/ChallengeExplain";
+// import ChallengeExplain from "~/components/ChallengeExplain";
 
 const ChallengeDetail: NextPage = () => {
   const [isHydrated, setIsHydrated] = useState(false);
@@ -24,7 +24,7 @@ const ChallengeDetail: NextPage = () => {
 
       <div className="flex justify-evenly pt-10 md:ml-[8rem] lg:ml-64 lg:gap-6">
         <div className="flex w-full flex-col justify-around gap-5 p-2">
-          <ChallengeExplain />
+          {/* <ChallengeExplain /> */}
         </div>
       </div>
 

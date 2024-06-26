@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Image from "next/image";
-import image from "/public/bgimage.jpg";
 import PostCard from "./ChallengePostCard";
 import ChallengePostModal from "./ChallegePostModal";
 // import { readAllRecurit, IResChallengeRecruit } from "~/apis/challenge";
