@@ -31,10 +31,13 @@ export interface IResIsJoin {
   status: boolean;
 }
 
-export async function isInChallenge(userId: number): Promise<IResIsJoin> {
+export async function isInChallenge(
+  userId: number,
+  challengeId: number,
+): Promise<IResIsJoin> {
   try {
     const resp: AxiosResponse<IResIsJoin> = await axios.get(
-      `${fullApiUrl}/api/challenge/checkJoin/${userId}`,
+      `${fullApiUrl}/api/challenge/checkJoin/${userId}/${challengeId}`,
     );
     return resp.data;
   } catch (error) {
