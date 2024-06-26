@@ -48,6 +48,11 @@
     animation: custom-blink 1s infinite;
   }
 }
+@media (min-width: 768px) {
+  .blink-on-small {
+    display: none;
+  }
+}
 
 /* scroll */
 .scroll-box {

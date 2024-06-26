@@ -109,6 +109,7 @@ export const LoginScreen = ({
       console.error("Unhandled error in handleButtonClick:", error);
     });
   };
+
   return (
     <article
       className={[
@@ -145,36 +146,24 @@ export const LoginScreen = ({
             {loginScreenState === "SIGNUP" && (
               <input
                 className="grow rounded-2xl border-2 border-gray-200 bg-gray-50 px-4 py-3"
-                placeholder="Name (optional)"
+                placeholder="Name"
                 ref={nameInputRef}
               />
             )}
             <input
               className="grow rounded-2xl border-2 border-gray-200 bg-gray-50 px-4 py-3"
               placeholder={
-                loginScreenState === "LOGIN"
-                  ? "Email or username (optional)"
-                  : "Email (optional)"
+                loginScreenState === "LOGIN" ? "Email or username" : "Email"
               }
               ref={emailInputRef}
             />
             <div className="relative flex grow">
               <input
                 className="grow rounded-2xl border-2 border-gray-200 bg-gray-50 px-4 py-3"
-                placeholder="Password (optional)"
+                placeholder="Password"
                 type="password"
                 ref={passwordInputRef}
               />
-              {loginScreenState === "LOGIN" && (
-                <div className="absolute bottom-0 right-0 top-0 flex items-center justify-center pr-5">
-                  <Link
-                    className="font-bold uppercase text-gray-400 hover:brightness-75"
-                    href="/forgot-password"
-                  >
-                    Forgot?
-                  </Link>
-                </div>
-              )}
             </div>
           </div>
           <button

@@ -13,6 +13,7 @@ export default {
         "shinhan-gray": "#BEBEBE", //텍스트 gray
         "shinhan-button": "#293FEB", //버튼 진한 블루
         "shnhan-whitegray-back": "#F6F5FA",
+        "shinhan-rino-blue": "#94CAFF", //하늘색
       },
       width: {
         "2/5": "40%",

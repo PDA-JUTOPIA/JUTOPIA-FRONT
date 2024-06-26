@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useState } from "react";
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 import { IoArrowRedoOutline } from "react-icons/io5";
@@ -23,8 +24,15 @@ const CharacterExplain = ({
   setTitleIndex: React.Dispatch<React.SetStateAction<number>>;
   descriptionArr: DescriptionItem[];
   nextIndexes: number[];
-  backgroundColor: string;
+  backgroundColor: "blue" | "#ce82ff" | "#00cd9c" | "#FF9EAA";
 }) => {
+  const hoverColor = {
+    blue: "hover:text-blue-700",
+    "#ce82ff": "hover:text-fuchsia-700",
+    "#00cd9c": "hover:text-emerald-700",
+    "#FF9EAA": "hover:text-rose-700",
+  };
+
   const [dragStartX, setDragStartX] = useState<number | null>(null);
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
 
@@ -128,7 +136,7 @@ const CharacterExplain = ({
               ? currentIndex === descriptionArr.length - 1
                 ? isTypingComplete && (
                     <button
-                      className="mb-2 me-2 rounded-lg border border-gray-200 bg-white px-5 py-2.5 font-['TTLaundryGothicB'] text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
+                      className={`mb-2 me-2 rounded-lg border border-gray-200 bg-white px-5 py-2.5 font-['TTLaundryGothicB'] text-sm font-medium text-gray-900 hover:bg-gray-100 ${hoverColor[backgroundColor]} focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700`}
                       onClick={handleNext}
                     >
                       COMPLETE!

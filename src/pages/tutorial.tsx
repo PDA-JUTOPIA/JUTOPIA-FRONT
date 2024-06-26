@@ -181,13 +181,28 @@ const TileIcon = ({
       );
     case "4.0":
       return status === "COMPLETE" ? (
+        <CheckmarkSvg />
+      ) : status === "ACTIVE" ? (
+        <StarSvg />
+      ) : (
+        <LockSvg />
+      );
+    case "4.1":
+      return status === "COMPLETE" ? (
         <GoldenBookSvg />
       ) : status === "ACTIVE" ? (
         <ActiveBookSvg />
       ) : (
         <LockedBookSvg />
       );
-
+    case "4.2":
+      return status === "COMPLETE" ? (
+        <GoldenDumbbellSvg />
+      ) : status === "ACTIVE" ? (
+        <ActiveDumbbellSvg />
+      ) : (
+        <LockedDumbbellSvg />
+      );
     case "treasure":
       return status === "COMPLETE" ? (
         <GoldenTreasureSvg />
@@ -355,6 +370,10 @@ const TileTooltip = ({
         return `/lesson?type=3.7&${statusParam}`;
       case "4.0":
         return `/lesson?type=4.0&${statusParam}`;
+      case "4.1":
+        return `/lesson?type=4.1&${statusParam}`;
+      case "4.2":
+        return `/lesson?type=4.2&${statusParam}`;
       default:
         return `/lesson&${statusParam}`;
     }
@@ -481,7 +500,7 @@ const UnitSection = ({ unit }: { unit: Unit }): JSX.Element => {
         backgroundColor={unit.backgroundColor}
         borderColor={unit.borderColor}
       />
-      <div className="relative mb-8 mt-[67px] flex max-w-[65rem] flex-col items-center gap-4">
+      <div className="relative mb-16 mt-[67px] flex max-w-[65rem] flex-col items-center gap-4">
         {unit.tiles.map((tile, i): JSX.Element => {
           console.log(lessonsCompleted);
           const status = tileStatus(tile, lessonsCompleted);
@@ -506,6 +525,8 @@ const UnitSection = ({ unit }: { unit: Unit }): JSX.Element => {
                   case "3.6":
                   case "3.7":
                   case "4.0":
+                  case "4.1":
+                  case "4.2":
                     return (
                       <div
                         className={[
@@ -595,6 +616,8 @@ const UnitSection = ({ unit }: { unit: Unit }): JSX.Element => {
                     case "3.6":
                     case "3.7":
                     case "4.0":
+                    case "4.1":
+                    case "4.2":
                       return tile.description;
                     case "treasure":
                       return "";
@@ -622,13 +645,17 @@ const getTopBarColors = (
     backgroundColor: "bg-[#0046ff]",
     borderColor: "border-[#235390]",
   } as const;
-
-  if (scrollY < 680) {
+  window.addEventListener("scroll", function () {
+    console.log(window.scrollY);
+  });
+  if (scrollY < 630) {
     return defaultColors;
-  } else if (scrollY < 1830) {
+  } else if (scrollY < 1490) {
     return units[1] ?? defaultColors;
-  } else {
+  } else if (scrollY < 2660) {
     return units[2] ?? defaultColors;
+  } else {
+    return units[3] ?? defaultColors;
   }
 };
 

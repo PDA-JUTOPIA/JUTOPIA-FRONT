@@ -27,7 +27,7 @@ const WeeklyCalendar: React.FC = () => {
         {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
           <div
             key={day}
-            className="flex transform cursor-pointer flex-col items-center transition-transform duration-200 ease-in-out hover:scale-105"
+            className="flex transform flex-col items-center transition-transform duration-200 ease-in-out"
             onClick={() => toggleSticker(day)}
           >
             <span

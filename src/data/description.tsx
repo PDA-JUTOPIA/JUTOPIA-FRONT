@@ -11,6 +11,10 @@ export interface DescriptionItem {
 }
 export const descriptionArr2_0: DescriptionItem[] = [
   {
+    "Unit2 에 오신 여러분, 환영합니다!":
+      "Unit1 의 계좌 개설, 매수, 매도 튜토리얼은 잘 끝내고 오셨나요?\n지금부터는 관련 개념을 학습하고 문제를 풀어볼 거예요.\n먼저 금융 기초 지식부터 학습해보아요. 화이팅!",
+  },
+  {
     "수익, 비용, 자산에 대해 알아볼까요? 먼저 수익이란?":
       "개인이나 기업이 일정 기간 동안 벌어들인 돈을 의미합니다.\n예를 들어, 개인의 월급, 기업의 매출 등이 수익에 해당합니다.",
   },
@@ -60,6 +64,7 @@ export const descriptionArr2_0: DescriptionItem[] = [
   },
 ];
 export const images2_0 = [
+  "UNIT2_3/축하원숭이.png",
   "UNIT2_0/001.png",
   "UNIT2_0/002.png",
   "UNIT2_0/003.png",
@@ -73,12 +78,13 @@ export const images2_0 = [
   "UNIT2_0/011.png",
   "UNIT2_0/012.png",
 ];
-export const nextIndexes2_0 = [2, 6, 9, 11];
+export const nextIndexes2_0 = [0, 3, 7, 10, 12];
 export const imageIndexes2_0 = Array.from(
   { length: descriptionArr2_0.length - 1 },
   (_, i) => i + 1,
 );
 export const titles2_0 = [
+  "Unit2에 온 것을 환영해요!",
   "수익, 비용, 자산이란?",
   "계좌와 신용이란?",
   "이자율과 적금, 예금이란?",
@@ -216,6 +222,10 @@ export const titles2_3 = Array.from(
 // UNIT 3_0
 export const descriptionArr3_0: DescriptionItem[] = [
   {
+    "Unit3 에 오신 여러분, 환영합니다!":
+      "Unit2 의 금융 기초 지식, 기업 분석, 주식 분석 학습은 잘 끝내고 오셨나요?\n이제 재무제표에 대해 학습할 거예요. 화이팅!",
+  },
+  {
     "재무제표란 무엇인지 아시나요?": `재무제표는 회사의 건강 상태를 보여주는 증명서 같은 것입니다!
       재무상태표, 손익계산서, 자본변동표, 현금흐름표, 주석 5가지로 이루어져 있습니다. 
       하나씩 자세히 살펴볼까요?`,
@@ -267,8 +277,9 @@ export const descriptionArr3_0: DescriptionItem[] = [
   },
 ];
 
-export const nextIndexes3_0 = [5, 6, 7, 8, 9, 10, 11];
+export const nextIndexes3_0 = [0, 6, 7, 8, 9, 10, 11, 12];
 export const titles3_0 = [
+  "Unit3에 온 것을 환영해요!",
   "재무제표의 구성",
   "빚도 자산이라는 것을 아시나요?",
   "빚도 자산이라는 것을 아시나요? 예시",
@@ -277,8 +288,9 @@ export const titles3_0 = [
   "손익거래와 비손익거래 구분: 비손익거래",
   "이익은 수익에서 비용을 뺀 것",
 ];
-export const imageIndexes3_0 = [1, 2, 3, 4, 5, 6, 8, 11];
+export const imageIndexes3_0 = [1, 2, 3, 4, 5, 6, 7, 9];
 export const images3_0 = [
+  "UNIT2_3/축하원숭이.png",
   "UNIT3_0/3-0-0_재무제표구성.png",
   "UNIT3_0/3-0-1_재무상태표.png",
   "UNIT3_0/3-0-2_손익계산서.png",
@@ -299,7 +311,7 @@ export const descriptionArr3_1: DescriptionItem[] = [
 3. 법인세차감전이익(세전이익) = 영업이익 + 영업외수익 - 영업외비용
 4. 당기순이익 = 법인세차감전이익 - 법인세비용
 
-갑자기 수식을 보니 어렵죠? 하나씩 자세히 살펴볼께요!`,
+갑자기 수식을 보니 어렵죠? 하나씩 자세히 살펴볼게요!`,
   },
   {
     "삼성전자 재무제표로 손익계산을 해봐요!": `
@@ -388,7 +400,7 @@ export const descriptionArr3_1: DescriptionItem[] = [
   },
 ];
 
-export const nextIndexes3_1 = [1, 3, 5, 6, 7, 9, 11, 12, 13];
+export const nextIndexes3_1 = [1, 3, 5, 6, 7, 9, 11, 12, 13, 15];
 export const titles3_1 = [
   "손익 계산 단계",
   "손익 계산 1단계 : 매출총이익",
@@ -783,3 +795,25 @@ export const images2_10 = [
   "UNIT2_10/2-10-8_영업순환주기.png",
   "UNIT2_10/2-10-8_영업순환주기와현금창출주기.png",
 ];
+
+export const descriptionArr4_0: DescriptionItem[] = [
+  {
+    "Unit4 에 오신 여러분, 환영합니다!":
+      "Unit3 의 재무제표 학습은 잘 끝내고 오셨나요?\n이제 지금까지 학습한 것들을 문제를 통해 복습해 볼 거예요. 화이팅!",
+  },
+];
+export const images4_0 = ["UNIT2_3/축하원숭이.png"];
+export const nextIndexes4_0 = [0];
+export const imageIndexes4_0 = [1];
+export const titles4_0 = ["Unit4에 온 것을 환영해요!"];
+
+export const descriptionArr4_2: DescriptionItem[] = [
+  {
+    "모든 과정을 끝낸 여러분, 축하합니다!":
+      "그동안 열심히 공부한 만큼 여러분의 금융 지식도 한 뼘 성장했겠죠?\n여러분의 투자를 응원합니다!",
+  },
+];
+export const images4_2 = ["UNIT2_3/축하원숭이.png"];
+export const nextIndexes4_2 = [0];
+export const imageIndexes4_2 = [1];
+export const titles4_2 = ["축하합니다! 모든 과정을 완료했어요!"];

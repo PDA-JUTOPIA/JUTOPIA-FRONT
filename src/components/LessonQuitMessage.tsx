@@ -4,10 +4,18 @@ import Link from "next/link";
 const QuitMessage = ({
   quitMessageShown,
   setQuitMessageShown,
+  color,
 }: {
   quitMessageShown: boolean;
   setQuitMessageShown: (isShown: boolean) => void;
+  color: "blue" | "#ce82ff" | "#00cd9c" | "#FF9EAA";
 }) => {
+  const buttonColor = {
+    blue: "border-blue-500 bg-blue-400",
+    "#ce82ff": "border-fuchsia-500 bg-fuchsia-400",
+    "#00cd9c": "border-emerald-500 bg-emerald-400",
+    "#FF9EAA": "border-rose-500 bg-rose-400",
+  };
   return (
     <>
       <div
@@ -39,7 +47,7 @@ const QuitMessage = ({
         </div>
         <div className="flex grow flex-col items-center justify-center gap-4 font-['TTLaundryGothicB'] sm:flex-row-reverse">
           <Link
-            className="flex w-full items-center justify-center rounded-2xl border-b-4 border-blue-500 bg-blue-400 py-3 font-bold uppercase text-white transition hover:brightness-105 sm:w-48"
+            className={`flex w-full items-center justify-center rounded-2xl border-b-4 ${buttonColor[color]} py-3 font-bold uppercase text-white transition hover:brightness-105 sm:w-48`}
             href="/tutorial"
           >
             Quit

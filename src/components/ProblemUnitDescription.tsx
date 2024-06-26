@@ -6,7 +6,7 @@ import CharacterExplain from "./CharacterExplain";
 import type { DescriptionItem } from "~/data/description";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import { IoIosInformationCircleOutline } from "react-icons/io";
-import Link from "next/link";
+import LessonComplete from "./LessonComplete";
 
 const ProblemUnitDescription = ({
   descriptionArr,
@@ -15,21 +15,23 @@ const ProblemUnitDescription = ({
   backgroundColor,
   images,
   imageIndexes,
-  progressbarColor,
   increaseLessonsCompleted,
   status,
+  isFirstSkip,
 }: {
   descriptionArr: DescriptionItem[];
   titles: string[];
   nextIndexes: number[];
-  backgroundColor: string;
+  backgroundColor: "blue" | "#ce82ff" | "#00cd9c" | "#FF9EAA";
   images: string[];
   imageIndexes: number[];
-  progressbarColor: string;
   increaseLessonsCompleted: (count: number) => void;
   status: string;
+  isFirstSkip?: boolean;
 }) => {
-  const totalCorrectAnswersNeeded = nextIndexes.length;
+  const totalCorrectAnswersNeeded = isFirstSkip
+    ? nextIndexes.length + 1
+    : nextIndexes.length;
   const [quitMessageShown, setQuitMessageShown] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [lessonComplete, setLessonComplete] = useState(false);
@@ -51,6 +53,10 @@ const ProblemUnitDescription = ({
   };
 
   useEffect(() => {
+    if (isFirstSkip) setCurrentStep((prevStep) => prevStep + 1);
+  }, [isFirstSkip]);
+
+  useEffect(() => {
     if (imageIndexes.includes(currentIndex)) setImageIndex((prev) => prev + 1);
   }, [currentIndex, imageIndexes]);
 
@@ -67,31 +73,7 @@ const ProblemUnitDescription = ({
         increaseLessonsCompleted(1);
       }
     }
-  }, [lessonComplete, increaseLessonsCompleted]);
-
-  const LessonComplete = () => {
-    return (
-      <div className="flex min-h-screen flex-col gap-5 px-4 py-5 font-['TTLaundryGothicB'] sm:px-0 sm:py-0">
-        <div className="flex grow flex-col items-center justify-center gap-8 font-bold">
-          <h1 className="text-center text-3xl text-yellow-400">
-            Lesson Complete!
-          </h1>
-        </div>
-        <section className="border-gray-200 sm:border-t-2 sm:p-10">
-          <div className="mx-auto flex max-w-5xl sm:justify-between">
-            <Link
-              className={
-                "flex w-full items-center justify-center rounded-2xl border-b-4 border-green-600 bg-green-500 p-3 font-bold uppercase text-white transition hover:brightness-105 sm:min-w-[150px] sm:max-w-fit"
-              }
-              href="/tutorial"
-            >
-              돌아가기
-            </Link>
-          </div>
-        </section>
-      </div>
-    );
-  };
+  }, [lessonComplete, increaseLessonsCompleted, status]);
 
   return (
     <div className="flex min-h-screen flex-col gap-5 px-4 py-5 font-['TTLaundryGothicB'] sm:px-0 sm:py-0">
@@ -103,7 +85,7 @@ const ProblemUnitDescription = ({
                 correctAnswerCount={currentStep}
                 totalCorrectAnswersNeeded={totalCorrectAnswersNeeded}
                 setQuitMessageShown={setQuitMessageShown}
-                color={progressbarColor}
+                color={backgroundColor}
               />
             </div>
             <h1 className="mb-2 text-2xl font-bold sm:text-3xl">
@@ -134,6 +116,7 @@ const ProblemUnitDescription = ({
           <QuitMessage
             quitMessageShown={quitMessageShown}
             setQuitMessageShown={setQuitMessageShown}
+            color={backgroundColor}
           />
           <CharacterExplain
             onNext={onNext}
@@ -147,7 +130,7 @@ const ProblemUnitDescription = ({
           />
         </>
       ) : (
-        <LessonComplete />
+        <LessonComplete backgroundColor={backgroundColor} />
       )}
     </div>
   );
