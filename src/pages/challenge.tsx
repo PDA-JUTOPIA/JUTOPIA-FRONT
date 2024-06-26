@@ -1,3 +1,4 @@
+// pages/challenge.tsx
 import type { NextPage } from "next";
 import { LeftBar } from "~/components/LeftBar";
 import { BottomBar } from "~/components/BottomBar";
@@ -12,6 +13,9 @@ import {
 } from "~/apis/challenge";
 import { useRouter } from "next/router";
 import { useBoundStore } from "~/hooks/useBoundStore";
+import Tabs from "~/components/ChallengeTabs";
+import ChallengeCard from "~/components/ChallengeCard";
+import ChallengeForm from "~/components/ChallengeForm";
 
 const TABS = [
   { id: 1, title: "모집중인 챌린지" },
@@ -131,7 +135,6 @@ const Challenge: NextPage = () => {
   };
 
   if (!isHydrated) {
-    // 초기 로딩 상태 표시 또는 빈 상태로 렌더링
     return null;
   }
 
@@ -145,9 +148,7 @@ const Challenge: NextPage = () => {
           <div className="flex max-w-[65rem] grow flex-col">
             <div className="flex flex-row items-center justify-start rounded-lg bg-shinhan-rino-blue p-5 text-white shadow-lg">
               <div className="relative ml-4 h-48 w-48 overflow-hidden rounded-full bg-white p-5">
-                {/* <ChallengeChracter3 /> */}
                 <Image
-                  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                   src={ChallengeChracter3}
                   alt="Challenge Character"
                   width={0}
@@ -167,17 +168,11 @@ const Challenge: NextPage = () => {
             </div>
             <div className="flex flex-row justify-between">
               <div className="mt-5">
-                <div className="flex border-b">
-                  {TABS.map((tab) => (
-                    <button
-                      key={tab.id}
-                      className={`-mb-px border-b-2 px-4 py-2 ${activeTab === tab.id ? "border-blue-500 text-blue-500" : "border-transparent"}`}
-                      onClick={() => setActiveTab(tab.id)}
-                    >
-                      {tab.title}
-                    </button>
-                  ))}
-                </div>
+                <Tabs
+                  tabs={TABS}
+                  activeTab={activeTab}
+                  onTabClick={setActiveTab}
+                />
               </div>
               <button
                 className="mt-5 flex h-[40px] items-center justify-center rounded bg-blue-500 px-4 py-2 text-center text-white"
@@ -191,41 +186,14 @@ const Challenge: NextPage = () => {
               {data && (
                 <div className="flex flex-row p-4 ">
                   {data.map((challenge) => (
-                    <div
+                    <ChallengeCard
                       key={challenge.challenge_id}
-                      className="mr-4 flex w-1/3 flex-col items-center justify-between rounded-lg border-b p-4 shadow-lg"
-                      onClick={() =>
-                        handleChallengeDetailClick(challenge.challenge_id)
-                      }
-                    >
-                      <h2 className="text-3xl font-bold">
-                        {challenge.challenge_name}
-                      </h2>
-                      <div>
-                        <Image
-                          src={challenge.challenge_thumbnail}
-                          width={300}
-                          height={200}
-                          layout="fixed"
-                          alt={challenge.challenge_name}
-                        />
-                      </div>
-                      <div>{challenge.challenge_detail}</div>
-                      <div>
-                        모집기간:{" "}
-                        {new Date(
-                          challenge.challenge_start,
-                        ).toLocaleDateString()}
-                        {" ~ "}
-                        {new Date(challenge.challenge_end).toLocaleDateString()}
-                      </div>
-                    </div>
+                      challenge={challenge}
+                      onClick={handleChallengeDetailClick}
+                    />
                   ))}
                 </div>
               )}
-              {/* {activeTab === 2 && (
-                
-              )} */}
             </div>
           </div>
 
@@ -233,114 +201,13 @@ const Challenge: NextPage = () => {
         </div>
       </div>
       {isModalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="rounded-lg bg-white p-8 shadow-lg">
-            <h2 className="mb-4 text-2xl font-bold">챌린지 등록</h2>
-            <form onSubmit={handleSubmit}>
-              <div className="mb-2">
-                <label className="block text-gray-700">챌린지 이름</label>
-                <input
-                  type="text"
-                  name="challenge_name"
-                  value={formData.challenge_name}
-                  onChange={handleFormChange}
-                  className="w-full rounded border p-2"
-                  required
-                />
-              </div>
-              <div className="mb-2">
-                <label className="block text-gray-700">챌린지 설명</label>
-                <textarea
-                  name="challenge_detail"
-                  value={formData.challenge_detail}
-                  onChange={handleFormChange}
-                  className="w-full rounded border p-2"
-                  required
-                />
-              </div>
-              <div className="mb-2">
-                <label className="block text-gray-700">Challenge Total</label>
-                <input
-                  id="challenge_total"
-                  name="challenge_total"
-                  type="number"
-                  value={formData.challenge_total}
-                  onChange={handleFormChange}
-                />
-              </div>
-              <div className="mb-2">
-                <label className="block text-gray-700">챌린지 썸네일</label>
-                <input
-                  type="file"
-                  name="challenge_thumbnail"
-                  accept="image/*"
-                  onChange={handleFileChange}
-                  className="w-full rounded border p-2"
-                  required
-                />
-              </div>
-              <div className="mb-2">
-                <label className="block text-gray-700">모집 시작 날짜</label>
-                <input
-                  type="date"
-                  name="challenge_recurit_start"
-                  value={formData.challenge_recurit_start}
-                  onChange={handleFormChange}
-                  className="w-full rounded border p-2"
-                  required
-                />
-              </div>
-              <div className="mb-2">
-                <label className="block text-gray-700">모집 종료 날짜</label>
-                <input
-                  type="date"
-                  name="challenge_recurit_end"
-                  value={formData.challenge_recurit_end}
-                  onChange={handleFormChange}
-                  className="w-full rounded border p-2"
-                  required
-                />
-              </div>
-              <div className="mb-2">
-                <label className="block text-gray-700">챌린지 시작 날짜</label>
-                <input
-                  type="date"
-                  name="challenge_start"
-                  value={formData.challenge_start}
-                  onChange={handleFormChange}
-                  className="w-full rounded border p-2"
-                  required
-                />
-              </div>
-              <div className="mb-2">
-                <label className="block text-gray-700">챌린지 종료 날짜</label>
-                <input
-                  type="date"
-                  name="challenge_end"
-                  value={formData.challenge_end}
-                  onChange={handleFormChange}
-                  className="w-full rounded border p-2"
-                  required
-                />
-              </div>
-              <div className="flex justify-end">
-                <button
-                  type="button"
-                  className="mr-2 rounded bg-gray-500 px-4 py-2 text-white"
-                  onClick={() => setIsModalOpen(false)}
-                >
-                  취소
-                </button>
-                <button
-                  type="submit"
-                  className="rounded bg-blue-500 px-4 py-2 text-white"
-                >
-                  등록
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
+        <ChallengeForm
+          formData={formData}
+          onChange={handleFormChange}
+          onFileChange={handleFileChange}
+          onSubmit={handleSubmit}
+          onCancel={() => setIsModalOpen(false)}
+        />
       )}
     </>
   );
