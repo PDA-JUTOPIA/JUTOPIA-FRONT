@@ -1,7 +1,7 @@
 // pages/challenge-detail/[challengeId].tsx
 
 /* eslint-disable @next/next/no-img-element */
-import { NextPage, GetServerSideProps } from "next";
+import type { NextPage, GetServerSideProps } from "next";
 import { useState, useEffect } from "react";
 import TopBar from "~/components/TopBar";
 import { LeftBar } from "~/components/LeftBar";
@@ -11,19 +11,22 @@ import ChallengeExplain from "~/components/ChallengeExplain";
 const fullApiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 interface ChallengeDetailProps {
-  challenge: {
-    challenge_id: number;
-    challenge_name: string;
-    challenge_detail: string;
-    challenge_thumbnail: string;
-    challenge_total: number;
-    challenge_recurit_start: string;
-    challenge_recurit_end: string;
-    challenge_start: string;
-    challenge_end: string;
-    createdAt: string;
-    updatedAt: string;
-  };
+  challenge: Challenge; // challenge 속성은 Challenge 타입을 가져야 함
+}
+
+// Challenge 인터페이스 정의
+interface Challenge {
+  challenge_id: number; // 챌린지 ID
+  challenge_name: string; // 챌린지 이름
+  challenge_detail: string; // 챌린지 상세 설명
+  challenge_thumbnail: string; // 챌린지 썸네일 이미지 URL
+  challenge_total: number; // 챌린지 전체 참가자 수
+  challenge_recurit_start: string; // 챌린지 모집 시작일
+  challenge_recurit_end: string; // 챌린지 모집 종료일
+  challenge_start: string; // 챌린지 시작일
+  challenge_end: string; // 챌린지 종료일
+  createdAt: string; // 생성일
+  updatedAt: string; // 최근 수정일
 }
 
 const ChallengeDetail: NextPage<ChallengeDetailProps> = ({ challenge }) => {
@@ -61,11 +64,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const res = await fetch(
     `${fullApiUrl}/api/challenge/readChallenge/challengeId/${challengeId}`,
   );
-  const challenge = await res.json();
+  // 이 부분은 ec2로 맞춰서 변경해봅시다
+  const challengeResponse = (await res.json()) as Challenge;
 
   return {
     props: {
-      challenge,
+      challenge: challengeResponse,
     },
   };
 };

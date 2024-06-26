@@ -112,7 +112,7 @@ const ChallengeExplain: React.FC<ChallengeExplainProps> = ({ challenge }) => {
             alt={challenge.challenge_thumbnail}
             width={500}
             height={500}
-            className="rounded-lg shadow-md"
+            className="h-80 w-80 rounded-lg shadow-md"
           />
         </div>
         <div className="text-center text-3xl font-bold text-gray-600 lg:text-left">
@@ -120,6 +120,9 @@ const ChallengeExplain: React.FC<ChallengeExplainProps> = ({ challenge }) => {
         </div>
         <div>
           <div className="text-center text-sm text-slate-500 lg:text-left">
+            <p className="border-b-2 p-1 text-xl font-bold">
+              인증 총 {challenge.challenge_total}번
+            </p>
             <p>
               기간 : {new Date(challenge.challenge_start).toLocaleString()} ~{" "}
               {new Date(challenge.challenge_end).toLocaleString()}
@@ -134,7 +137,7 @@ const ChallengeExplain: React.FC<ChallengeExplainProps> = ({ challenge }) => {
             </button>
             <button
               className="mt-4 rounded-lg bg-red-400 px-4 py-2 text-white hover:bg-red-600"
-              onClick={handleModalOpen}
+              onClick={() => console.log("챌린지 참여")}
             >
               챌린지 참여하기
             </button>
