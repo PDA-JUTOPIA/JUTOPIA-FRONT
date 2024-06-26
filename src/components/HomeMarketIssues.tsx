@@ -68,7 +68,7 @@ const MarketIssues: React.FC = () => {
       ref={tableRef}
       className="relative overflow-x-auto shadow-md sm:rounded-lg"
     >
-      <div className="max-h-60 overflow-y-auto">
+      <div className="scroll-box max-h-60 overflow-y-auto">
         <table className="w-full text-left text-sm text-gray-500 rtl:text-right dark:text-gray-400">
           <thead className="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
             <tr>
@@ -77,13 +77,13 @@ const MarketIssues: React.FC = () => {
               </th>
               <th
                 scope="col"
-                className="hidden table-fixed px-4 py-3 md:table-cell"
+                className="hidden table-fixed px-4 py-3 lg:table-cell"
               >
                 발행일
               </th>
               <th
                 scope="col"
-                className="hidden table-fixed px-4 py-3 md:table-cell"
+                className="hidden table-fixed px-4 py-3 lg:table-cell"
               >
                 PDF 파일
                 <span className="sr-only">Download</span>
@@ -129,11 +129,11 @@ const MarketIssues: React.FC = () => {
                     </button>
                   </div>
                 </th>
-                <td className="hidden px-4 py-2 md:table-cell">
+                <td className="hidden px-4 py-2 lg:table-cell">
                   {item.reg_date}
                 </td>{" "}
                 {/* 모바일에서 숨기기 */}
-                <td className="hidden px-4 py-2 text-right md:table-cell">
+                <td className="hidden px-4 py-2 text-right lg:table-cell">
                   {" "}
                   {/* 모바일에서 숨기기 */}
                   <a
@@ -150,10 +150,10 @@ const MarketIssues: React.FC = () => {
           </tbody>
         </table>
         {visibleItems < data.length && (
-          <div className="mb-2 mt-2 flex justify-center">
+          <div className="mt-1 flex justify-center">
             <button
               onClick={loadMoreItems}
-              className="rounded-full bg-white px-4 py-2 text-sm font-bold text-gray-900 hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:hover:border-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
+              className="rounded-full bg-white px-4 py-1 text-sm font-bold text-gray-900 hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:hover:border-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
             >
               더보기
             </button>
@@ -169,7 +169,7 @@ const MarketIssues: React.FC = () => {
             title={selectedItem.title}
             detail={
               <>
-                <div className="scroll-box">
+                <div>
                   <div className="px-3">
                     <p>
                       <strong>게시판:</strong> {selectedItem.bbs_name}

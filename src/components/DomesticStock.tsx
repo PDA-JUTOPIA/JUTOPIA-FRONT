@@ -73,7 +73,7 @@ const DomesticStock = () => {
                 </div>
                 <div className="mb-[10px] text-xs">
                   {Number(data[elem]?.output.bstp_nmix_prdy_ctrt) > 0 ? (
-                    <>
+                    <div className="flex">
                       {/*양수일 때*/}
                       <GoTriangleUp className="inline-block" color="red" />
                       <span className="text-red-500">
@@ -82,9 +82,9 @@ const DomesticStock = () => {
                           {data[elem]?.output.bstp_nmix_prdy_ctrt}%
                         </span>
                       </span>
-                    </>
+                    </div>
                   ) : Number(data[elem]?.output.bstp_nmix_prdy_ctrt) < 0 ? (
-                    <>
+                    <div className="flex">
                       {/*음수일 때*/}
                       <GoTriangleDown className="inline-block" color="blue" />
                       <span className="text-blue-700">
@@ -93,7 +93,7 @@ const DomesticStock = () => {
                           {data[elem]?.output.bstp_nmix_prdy_ctrt}%
                         </span>
                       </span>
-                    </>
+                    </div>
                   ) : (
                     <>
                       {/*0일 때*/}
