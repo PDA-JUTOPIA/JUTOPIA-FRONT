@@ -101,7 +101,7 @@ const ProblemUnitDescription = ({
                 <TransformComponent>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    className="h-[45vh] w-[100vw] cursor-pointer object-contain"
+                    className="h-[38vh] w-[100vw] cursor-pointer object-contain"
                     alt="설명 이미지"
                     src={images[imageIndex]}
                   />
@@ -118,18 +118,16 @@ const ProblemUnitDescription = ({
             setQuitMessageShown={setQuitMessageShown}
             color={backgroundColor}
           />
-          <div>
-            <CharacterExplain
-              onNext={onNext}
-              onFinish={onFinish}
-              currentIndex={currentIndex}
-              setCurrentIndex={setCurrentIndex}
-              setTitleIndex={setTitleIndex}
-              descriptionArr={descriptionArr}
-              nextIndexes={nextIndexes}
-              backgroundColor={backgroundColor}
-            />
-          </div>
+          <CharacterExplain
+            onNext={onNext}
+            onFinish={onFinish}
+            currentIndex={currentIndex}
+            setCurrentIndex={setCurrentIndex}
+            setTitleIndex={setTitleIndex}
+            descriptionArr={descriptionArr}
+            nextIndexes={nextIndexes}
+            backgroundColor={backgroundColor}
+          />
         </>
       ) : (
         <LessonComplete backgroundColor={backgroundColor} />

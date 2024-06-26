@@ -85,7 +85,7 @@ const CharacterExplain = ({
         onTouchEnd={handleTouchEnd}
       >
         <MdOutlineSwipeLeft
-          className={`${isTypingComplete && currentIndex < descriptionArr.length - 1 ? "blink-on-small" : "hidden"} absolute left-2/4 size-[150px] translate-x-[-50%] opacity-0`}
+          className={`${isTypingComplete && currentIndex < descriptionArr.length - 1 ? "blink-on-small" : "hidden"} absolute left-2/4 mt-[2vh] size-[150px] translate-x-[-50%] opacity-0`}
         />
         <div className="container mx-auto block max-w-[70vw] items-center justify-around sm:flex">
           <div className="block sm:flex">
@@ -123,28 +123,26 @@ const CharacterExplain = ({
           <div
             className={`ml-10 flex items-center transition-transform max-[650px]:justify-end ${isTypingComplete ? "animate-bounce" : ""}`}
           >
-            {nextIndexes.includes(currentIndex)
-              ? currentIndex === descriptionArr.length - 1
-                ? isTypingComplete && (
-                    <button
-                      className={`mb-2 me-2 rounded-lg border border-gray-200 bg-white px-5 py-2.5 font-['TTLaundryGothicB'] text-sm font-medium text-gray-900 hover:bg-gray-100 ${hoverColor[backgroundColor]} focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700`}
-                      onClick={handleNext}
-                    >
-                      COMPLETE!
-                    </button>
-                  )
-                : isTypingComplete && (
-                    <MdKeyboardDoubleArrowRight
-                      className="cursor-pointer text-[40px] text-white max-[650px]:hidden"
-                      onClick={handleNext}
-                    />
-                  )
-              : isTypingComplete && (
-                  <IoArrowRedoOutline
-                    className="cursor-pointer text-[30px] max-[650px]:hidden"
-                    onClick={handleNext}
-                  />
-                )}
+            {nextIndexes.includes(currentIndex) ? (
+              currentIndex === descriptionArr.length - 1 ? (
+                <button
+                  className={`${isTypingComplete ? "" : "invisible"} mb-2 me-2 rounded-lg border border-gray-200 bg-white px-5 py-2.5 font-['TTLaundryGothicB'] text-sm font-medium text-gray-900 hover:bg-gray-100 ${hoverColor[backgroundColor]} focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700`}
+                  onClick={handleNext}
+                >
+                  COMPLETE!
+                </button>
+              ) : (
+                <MdKeyboardDoubleArrowRight
+                  className={`${isTypingComplete ? "" : "invisible"} cursor-pointer text-[40px] text-white max-[650px]:hidden`}
+                  onClick={handleNext}
+                />
+              )
+            ) : (
+              <IoArrowRedoOutline
+                className={`${isTypingComplete ? "" : "invisible"} cursor-pointer text-[30px] max-[650px]:hidden`}
+                onClick={handleNext}
+              />
+            )}
           </div>
         </div>
       </DescriptionFrame>
