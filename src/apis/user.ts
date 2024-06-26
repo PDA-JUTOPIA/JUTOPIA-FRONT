@@ -1,6 +1,5 @@
 import axios from "axios";
 import type { AxiosResponse } from "axios";
-import { resolveNaptr } from "dns";
 
 const fullApiUrl = process.env.NEXT_PUBLIC_API_URL;
 
