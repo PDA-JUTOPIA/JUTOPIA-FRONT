@@ -118,16 +118,18 @@ const ProblemUnitDescription = ({
             setQuitMessageShown={setQuitMessageShown}
             color={backgroundColor}
           />
-          <CharacterExplain
-            onNext={onNext}
-            onFinish={onFinish}
-            currentIndex={currentIndex}
-            setCurrentIndex={setCurrentIndex}
-            setTitleIndex={setTitleIndex}
-            descriptionArr={descriptionArr}
-            nextIndexes={nextIndexes}
-            backgroundColor={backgroundColor}
-          />
+          <div>
+            <CharacterExplain
+              onNext={onNext}
+              onFinish={onFinish}
+              currentIndex={currentIndex}
+              setCurrentIndex={setCurrentIndex}
+              setTitleIndex={setTitleIndex}
+              descriptionArr={descriptionArr}
+              nextIndexes={nextIndexes}
+              backgroundColor={backgroundColor}
+            />
+          </div>
         </>
       ) : (
         <LessonComplete backgroundColor={backgroundColor} />

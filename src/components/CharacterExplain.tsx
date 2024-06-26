@@ -85,15 +85,10 @@ const CharacterExplain = ({
         onTouchEnd={handleTouchEnd}
       >
         <MdOutlineSwipeLeft
-          className={`${isTypingComplete && currentIndex < descriptionArr.length - 1 ? "blink-on-small" : "hidden"} absolute left-2/4 size-[150px] translate-x-[-50%] translate-y-[50%] opacity-0`}
+          className={`${isTypingComplete && currentIndex < descriptionArr.length - 1 ? "blink-on-small" : "hidden"} absolute left-2/4 size-[150px] translate-x-[-50%] opacity-0`}
         />
-        <div className="container mx-auto block max-w-[70vw] items-center justify-between sm:flex">
+        <div className="container mx-auto block max-w-[70vw] items-center justify-around sm:flex">
           <div className="block sm:flex">
-            <img
-              className="m-[15px] h-[7rem] w-[7rem] rounded-[100%] border-4 border-solid border-white object-cover"
-              src="character_finger.webp"
-              alt="Character pointing"
-            />
             {currentItem && (
               <div className="p-4 ">
                 <h2 className="mb-5 cursor-default whitespace-pre-line font-['TTLaundryGothicB'] text-[1.5rem]">
@@ -126,7 +121,7 @@ const CharacterExplain = ({
             )}
           </div>
           <div
-            className={`ml-10 flex items-center transition-transform ${isTypingComplete ? "animate-bounce" : ""}`}
+            className={`ml-10 flex items-center transition-transform max-[650px]:justify-end ${isTypingComplete ? "animate-bounce" : ""}`}
           >
             {nextIndexes.includes(currentIndex)
               ? currentIndex === descriptionArr.length - 1
@@ -140,13 +135,13 @@ const CharacterExplain = ({
                   )
                 : isTypingComplete && (
                     <MdKeyboardDoubleArrowRight
-                      className="cursor-pointer text-[40px] text-white max-[768px]:hidden"
+                      className="cursor-pointer text-[40px] text-white max-[650px]:hidden"
                       onClick={handleNext}
                     />
                   )
               : isTypingComplete && (
                   <IoArrowRedoOutline
-                    className="cursor-pointer text-[30px] max-[768px]:hidden"
+                    className="cursor-pointer text-[30px] max-[650px]:hidden"
                     onClick={handleNext}
                   />
                 )}
