@@ -71,7 +71,3 @@ jobs:
 
             echo "Starting the application with PM2..."
             pm2 start npm --name frontend -- start
-
-            # Display PM2 logs
-            echo "Displaying PM2 logs..."
-            pm2 logs frontend
