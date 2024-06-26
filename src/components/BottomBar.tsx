@@ -122,7 +122,8 @@ export const useBottomBarItems = () => {
           fill="none"
           className="h-[50px] w-[50px]"
         >
-          <image href="challenge.svg" width="32" height="32" />
+          <image href="/challenge.svg" width="32" height="32" />
+          {/* 절대경로지정 */}
         </svg>
       ),
     },

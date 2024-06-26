@@ -1,9 +1,10 @@
 // pages/challenge.tsx
 import type { NextPage } from "next";
+import TopBar from "~/components/TopBar";
 import { LeftBar } from "~/components/LeftBar";
 import { BottomBar } from "~/components/BottomBar";
 import { useEffect, useState } from "react";
-import ChallengeChracter3 from "../../public/Challenge/챌린지캐릭터3.svg";
+// import ChallengeChracter3 from "../../public/Challenge/챌린지캐릭터3.svg";
 import Image from "next/image";
 import type { IResChallengeRecruit } from "~/apis/challenge";
 import {
@@ -141,32 +142,34 @@ const Challenge: NextPage = () => {
   return (
     <>
       <div className="font-ttlaundrygothicb">
+        <TopBar menuName="챌린지" />
         <LeftBar selectedTab="챌린지" />
 
         <BottomBar selectedTab="챌린지" />
         <div className="flex justify-center gap-3 pt-14 sm:p-6 sm:pt-10 md:ml-24 lg:ml-64 lg:gap-12">
           <div className="flex max-w-[65rem] grow flex-col">
-            <div className="flex flex-row items-center justify-start rounded-lg bg-shinhan-rino-blue p-5 text-white shadow-lg">
-              <div className="relative ml-4 h-48 w-48 overflow-hidden rounded-full bg-white p-5">
+            <div className="flex flex-row items-center justify-center rounded-lg bg-shinhan-rino-blue p-5 text-white shadow-lg">
+              <div className="flex items-center rounded-lg bg-gray-100 p-8 shadow-lg">
                 <Image
-                  src={ChallengeChracter3}
+                  src="/Challenge/챌린지캐릭.png"
                   alt="Challenge Character"
-                  width={0}
-                  height={0}
+                  width="500"
+                  height="500"
                   sizes="100vw"
-                  className="contain"
+                  className="h-24 w-24 rounded-full border-4 border-white shadow-md sm:h-40 sm:w-40"
                 />
-              </div>
-              <div className="flex flex-col">
-                <div className="pb-8 pl-8 text-4xl font-bold">
-                  챌린지를 통해 주린이를 탈출해요
-                </div>
-                <div className="pl-8  text-3xl font-bold">
-                  지식을 나누고 궁금증을 해결해요
+
+                <div className="ml-8 flex flex-col sm:ml-2 md:ml-4">
+                  <div className="pb-4 text-2xl font-bold text-gray-800 sm:text-4xl">
+                    🔥챌린지를 통해 주린이를 탈출해요🔥
+                  </div>
+                  <div className="text-xl font-bold text-gray-600 sm:text-2xl">
+                    지식을 나누고 궁금증을 해결해요
+                  </div>
                 </div>
               </div>
             </div>
-            <div className="flex flex-row justify-between">
+            <div className="flex flex-wrap justify-between">
               <div className="mt-5">
                 <Tabs
                   tabs={TABS}
@@ -184,7 +187,7 @@ const Challenge: NextPage = () => {
 
             <div className="mt-5">
               {data && (
-                <div className="flex flex-row p-4 ">
+                <div className="flex flex-wrap justify-around p-4 ">
                   {data.map((challenge) => (
                     <ChallengeCard
                       key={challenge.challenge_id}
