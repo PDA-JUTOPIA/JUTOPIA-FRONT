@@ -5,11 +5,17 @@ const fullApiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 export interface IResRead {
   userCurrentLearning: number;
+  userCurrentReward: number;
 }
 
 export interface IResUpdate {
   email: string;
   newCurrent_learning: number;
+}
+
+export interface IResUpdateReward {
+  email: string;
+  newCurrent_reward: number;
 }
 
 export interface IResCreate {
@@ -85,6 +91,31 @@ export async function updateUserCurrentLearning(
       console.error("Failed to update:", error);
     } else {
       console.error("Failed to update: An unknown error occurred.");
+    }
+  }
+}
+
+export async function updateUserCurrentReward(
+  email: string,
+  newCurrent_reward: number,
+): Promise<IResUpdateReward> {
+  try {
+    const resp: AxiosResponse<IResUpdateReward> = await axios.put(
+      `${fullApiUrl}/api/currentLearning/update/reward`,
+      {
+        email: email,
+        newCurrent_reward: newCurrent_reward,
+      },
+    );
+
+    return resp.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.error("Failed to update (AxiosError):", error.message);
+    } else if (error instanceof Error) {
+      console.error("Failed to update reward:", error);
+    } else {
+      console.error("Failed to update reward: An unknown error occurred.");
     }
   }
 }

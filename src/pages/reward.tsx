@@ -4,10 +4,10 @@ import { LeftBar } from "~/components/LeftBar";
 import { BottomBar } from "~/components/BottomBar";
 import { useState, useEffect } from "react";
 import ChallengeGrid from "~/components/ChallengeGrid";
-
+import { useBoundStore } from "~/hooks/useBoundStore";
 const Reward: NextPage = () => {
   const [isHydrated, setIsHydrated] = useState(false);
-
+  const email = useBoundStore((x) => x.email);
   useEffect(() => {
     setIsHydrated(true);
   }, []);
@@ -28,7 +28,7 @@ const Reward: NextPage = () => {
             🔥도전과제🔥 <div className="pt-[40px]"></div>
           </h1>
           <div className="pt-[40px]"></div>
-          <ChallengeGrid />
+          <ChallengeGrid email={email} />
         </div>
       </div>
       <div className="pt-[90px]"></div>
