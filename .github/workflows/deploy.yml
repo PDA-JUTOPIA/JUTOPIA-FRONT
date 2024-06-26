@@ -46,7 +46,8 @@ jobs:
             npm -v
 
             cd /home/ubuntu/jutopia-front
-            git pull origin main
+            git fetch origin main
+            git reset --hard origin/main
 
             # Install dependencies and build the project
             echo "Installing dependencies..."
