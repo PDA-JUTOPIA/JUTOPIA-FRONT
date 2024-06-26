@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import PostCard from "./ChallengePostCard";
 import ChallengePostModal from "./ChallegePostModal";
+import { joinRecurit, isInChallenge } from "~/apis/challenge";
+import { useBoundStore } from "~/hooks/useBoundStore";
 // import { readAllRecurit, IResChallengeRecruit } from "~/apis/challenge";
+import { getUserIdByEmail } from "~/apis/user";
 
 interface ChallengeExplainProps {
   challenge: {
@@ -23,8 +26,50 @@ interface ChallengeExplainProps {
 const ChallengeExplain: React.FC<ChallengeExplainProps> = ({ challenge }) => {
   const [activeTab, setActiveTab] = useState("내 인증 현황");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showJoinState, setShowJoinState] = useState(false);
+  const email = useBoundStore((x) => x.email);
+  const [userId, setUserId] = useState(0);
 
+  useEffect(() => {
+    //이미 참여중인지 상태 확인.
+    const fetchUserId = async () => {
+      try {
+        const id = await getUserIdByEmail(email);
+        setUserId(id.userId);
+      } catch (error) {
+        console.error("Error fetching user ID:", error);
+      }
+    };
+    fetchUserId().catch((err) => {
+      console.log(err);
+    });
+    // 가져온 userid로 참여중인지 확인
+    const checkStatus = async () => {
+      try {
+        const check = await isInChallenge(userId);
+        setShowJoinState(check.status);
+      } catch (error) {
+        console.error("Error fetching challenge status:", error);
+      }
+    };
+    checkStatus().catch((err) => {
+      console.log(err);
+    });
+  }, []);
   // [] 안에 의존성 배열을 빈 배열로 설정하여 한 번만 데이터를 로드하도록 설정
+  const handleJoinChallenge = () => {
+    joinChallenge().catch((err) => {
+      console.log(err);
+    });
+    // 상태변경,
+    console.log(showJoinState);
+    setShowJoinState(!showJoinState);
+  };
+  const joinChallenge = async () => {
+    //챌린지 참가
+    const resp = await joinRecurit(email, challenge.challenge_id);
+    setUserId(resp.user_id);
+  };
 
   const handleTabClick = (tab: string) => {
     setActiveTab(tab);
@@ -135,12 +180,14 @@ const ChallengeExplain: React.FC<ChallengeExplainProps> = ({ challenge }) => {
             >
               인증글 작성하기
             </button>
-            <button
-              className="mt-4 rounded-lg bg-red-400 px-4 py-2 text-white hover:bg-red-600"
-              onClick={() => console.log("챌린지 참여")}
-            >
-              챌린지 참여하기
-            </button>
+            {showJoinState && (
+              <button
+                className="mt-4 rounded-lg bg-red-400 px-4 py-2 text-white hover:bg-red-600"
+                onClick={handleJoinChallenge}
+              >
+                챌린지 참여하기
+              </button>
+            )}
           </div>
         </div>
       </div>

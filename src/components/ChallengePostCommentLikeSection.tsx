@@ -68,6 +68,7 @@ const CommentLikeSection: React.FC<CommentLikeSectionProps> = ({
   const readCommentData = async () => {
     try {
       const response = await readComment(challengePostId);
+      setCommentsCount(response.length);
       setData(response);
     } catch (err) {
       console.log(err);
