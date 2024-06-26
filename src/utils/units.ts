@@ -26,7 +26,9 @@ export type Tile =
         | "3.5"
         | "3.6"
         | "3.7"
-        | "4.0";
+        | "4.0"
+        | "4.1"
+        | "4.2";
       description: string;
     }
   | { type: "treasure" };
@@ -95,6 +97,11 @@ export const units: readonly Unit[] = [
     backgroundColor: "bg-[#FF9EAA]",
     textColor: "text-[#FF9EAA]",
     borderColor: "border-[#FF9EAA]",
-    tiles: [{ type: "4.0", description: "퀴즈" }, { type: "treasure" }],
+    tiles: [
+      { type: "4.0", description: "Unit4 시작하기" },
+      { type: "4.1", description: "퀴즈로 복습하기" },
+      { type: "4.2", description: "모든 과정을 완료했어요!" },
+      { type: "treasure" },
+    ],
   },
 ];
