@@ -2,11 +2,9 @@ import { type NextPage } from "next";
 import { useRouter } from "next/router";
 import type { NextRouter } from "next/router";
 import React, { useEffect } from "react";
-import BusinessCategories from "~/components/BusinessCategory";
 import HeroHome from "~/components/HeroHome";
 // import { LandingPageHeader } from "~/components/LandingPageHeader";
 import { useLoginScreen, LoginScreen } from "~/components/LoginScreen";
-import PageIllustration from "~/components/PageIllustration";
 import { useBoundStore } from "~/hooks/useBoundStore";
 import { motion } from "framer-motion"; // Import Framer Motion
 

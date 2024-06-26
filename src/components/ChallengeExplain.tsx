@@ -24,7 +24,9 @@ const ChallengeExplain: React.FC = () => {
       }
     };
 
-    fetchChallenges();
+    fetchChallenges().catch((error) => {
+      console.error("Error in fetchChallenges:", error);
+    });
   }, []); // [] 안에 의존성 배열을 빈 배열로 설정하여 한 번만 데이터를 로드하도록 설정
 
   if (loading) {

@@ -28,7 +28,8 @@
     "**/*.ts",
     "**/*.tsx",
     "**/*.cjs",
-    "**/*.mjs"
+    "**/*.mjs",
+    "ecosystem.config.js"
   ],
   "exclude": ["node_modules"]
 }
