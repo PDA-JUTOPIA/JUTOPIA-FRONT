@@ -175,17 +175,6 @@ const Lesson: NextPage = () => {
           increaseLessonsCompleted={handleIncreaseLessonsCompleted}
           status={status as string}
         />
-      ) : type === "3.7" ? (
-        <ProblemUnitDescription
-          descriptionArr={descriptionData.descriptionArr3_0}
-          titles={descriptionData.titles3_0}
-          nextIndexes={descriptionData.nextIndexes3_0}
-          images={descriptionData.images3_0}
-          imageIndexes={descriptionData.imageIndexes3_0}
-          backgroundColor="#00cd9c"
-          increaseLessonsCompleted={handleIncreaseLessonsCompleted}
-          status={status as string}
-        />
       ) : type === "4.0" ? (
         <ProblemUnitDescription
           descriptionArr={descriptionData.descriptionArr4_0}
@@ -217,9 +206,7 @@ const Lesson: NextPage = () => {
           status={status as string}
           isFirstSkip={true}
         />
-      ) : (
-        <div>Unknown type</div>
-      )}
+      ) : null}
     </div>
   );
 };

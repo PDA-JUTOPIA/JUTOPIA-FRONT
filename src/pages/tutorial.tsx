@@ -174,14 +174,7 @@ const TileIcon = ({
       ) : (
         <LockSvg />
       );
-    case "3.7":
-      return status === "COMPLETE" ? (
-        <GoldenBookSvg />
-      ) : status === "ACTIVE" ? (
-        <ActiveBookSvg />
-      ) : (
-        <LockedBookSvg />
-      );
+
     case "4.0":
       return status === "COMPLETE" ? (
         <CheckmarkSvg />
@@ -369,8 +362,7 @@ const TileTooltip = ({
         return `/lesson?type=3.5&${statusParam}`;
       case "3.6":
         return `/lesson?type=3.6&${statusParam}`;
-      case "3.7":
-        return `/lesson?type=3.7&${statusParam}`;
+
       case "4.0":
         return `/lesson?type=4.0&${statusParam}`;
       case "4.1":
@@ -557,7 +549,7 @@ const UnitSection = ({ unit }: { unit: Unit }): JSX.Element => {
                   case "3.4":
                   case "3.5":
                   case "3.6":
-                  case "3.7":
+
                   case "4.0":
                   case "4.1":
                   case "4.2":
@@ -663,7 +655,7 @@ const UnitSection = ({ unit }: { unit: Unit }): JSX.Element => {
                     case "3.4":
                     case "3.5":
                     case "3.6":
-                    case "3.7":
+
                     case "4.0":
                     case "4.1":
                     case "4.2":
