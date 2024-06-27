@@ -9,7 +9,10 @@ import { FaLock } from "react-icons/fa6";
 import { TbArrowBigUpFilled } from "react-icons/tb";
 import { TbArrowBigDownFilled } from "react-icons/tb";
 import { GoTriangleUp } from "react-icons/go";
-
+import Button from "@mui/material/Button";
+import { Modal, Box } from "@mui/material";
+import { useState } from "react";
+import { Drawer } from "@mui/material";
 import Tooltip from "../Tooltip";
 import dynamic from "next/dynamic";
 const Joyride = dynamic(() => import("react-joyride"), { ssr: false });
@@ -19,6 +22,9 @@ interface SellProps {
 }
 
 const Sell: React.FC<SellProps> = ({ onNext }) => {
+  const [open, setOpen] = useState(false);
+  const [modalopen, setModalOpen] = useState(false);
+  const [run, setRun] = useState(true);
   const steps = [
     {
       target: "#welcomeMessage", // 코치마크를 표시할 대상 요소의 CSS 선택자
@@ -89,9 +95,30 @@ const Sell: React.FC<SellProps> = ({ onNext }) => {
     };
   }, []);
 
+  useEffect(() => {}, [setRun]);
+  const handleOpen = () => {
+    setOpen(true);
+    setRun(false);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleModalOpen = () => {
+    handleClose(); // 먼저 Drawer를 닫고
+    setModalOpen(true); // Modal 열기
+  };
+  const handleModalClose = () => setModalOpen(false);
   const containerRef = useRef();
   const sampleRef = useRef();
-
+  // Modal style
+  const style = {
+    position: "absolute",
+    width: "auto",
+    bgcolor: "background.paper",
+    borderRadius: "16px",
+    p: 4,
+  };
   return (
     <div
       ref={containerRef}
@@ -101,7 +128,7 @@ const Sell: React.FC<SellProps> = ({ onNext }) => {
         <Joyride
           steps={steps}
           disableScrolling={true}
-          run={true}
+          run={run}
           continuous={true}
           spotlightClicks={true}
           tooltipComponent={Tooltip}
@@ -360,12 +387,135 @@ const Sell: React.FC<SellProps> = ({ onNext }) => {
                 <div className="text-sm">0원</div>
               </div>
               <button
-                onClick={onNext}
+                onClick={handleOpen}
                 id="clickButton1"
                 className="mt-1 h-[35px] w-full rounded-md bg-blue-500 text-xs font-medium text-white"
               >
                 현금매도
               </button>
+              <Drawer
+                style={{ position: "fixed" }}
+                anchor="bottom"
+                open={open}
+                onClose={handleClose}
+                container={() => {
+                  return containerRef.current;
+                }}
+                ModalProps={{
+                  style: { position: "absolute" },
+                  keepMounted: true,
+                }}
+                // variant="persistent"
+                variant="temporary"
+                SlideProps={{
+                  container: sampleRef.current,
+                }}
+                PaperProps={{
+                  style: {
+                    position: "absolute",
+                  },
+                }}
+              >
+                <div className="p-4">
+                  <div className="text-sm font-semibold text-shinhan-blue">
+                    현금매도 <span className="text-black">주문확인 </span>
+                  </div>
+                  <div className="mt-2">
+                    <div className="text-custom font-semibold text-gray-600">
+                      <div className="flex justify-between ">
+                        <span className="">계좌번호</span>
+                        <span className="text-black">
+                          270-37-612754 [01] CMA RP 고유민
+                        </span>
+                      </div>
+                      <div className="mt-2 flex justify-between ">
+                        <span className="">주문종목</span>
+                        <span className="text-black">삼성전자(005930)</span>
+                      </div>
+                      <div className="mt-2 flex justify-between ">
+                        <span className="">주문유형</span>
+                        <span className="text-black">지정가</span>
+                      </div>
+                      <div className="mt-2 flex justify-between ">
+                        <span className="">주문단가</span>
+                        <span className="text-gray-600">0원</span>
+                      </div>
+                      <div className="mt-2 flex justify-between ">
+                        <span className="">주문수량</span>
+                        <span className="text-shinhan-blue">1주</span>
+                      </div>
+                      <div className="mt-2 flex justify-between ">
+                        <span className="">주문금액</span>
+                        <span className="text-black"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <span className="mt-5 text-custom font-medium text-gray-400">
+                    * 수수료 및 제세금은 체결내역에서 확인하세요
+                  </span>
+                  <Button
+                    onClick={handleModalOpen}
+                    sx={{
+                      backgroundColor: "#3B82F6", //blue-500
+                      color: "white",
+                      "&:hover": {
+                        backgroundColor: "#3B82F6",
+                      },
+                      "&:active": {
+                        backgroundColor: "#3B82F6",
+                      },
+                    }}
+                    className="mt-4 h-[35px] w-full rounded-lg bg-blue-500 text-xs font-medium"
+                  >
+                    매도주문
+                  </Button>
+                </div>
+              </Drawer>
+              <Modal
+                open={modalopen}
+                onClose={handleModalClose}
+                container={containerRef.current}
+                style={{
+                  position: "absolute",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Box sx={style}>
+                  <div className="p4 flex flex-col items-center text-custom font-semibold text-gray-600">
+                    <span className="">주문을 접수했어요.</span>
+                    <span className="">체결 내역을 꼭 확인하세요</span>
+                  </div>
+                  <div className="mt-4 flex items-center justify-between">
+                    <Button
+                      sx={{
+                        backgroundColor: "shnhan-whitegray-back",
+                        color: "black",
+                      }}
+                      className="h-[35px] w-[10px] rounded-lg bg-shnhan-whitegray-back text-xs font-medium text-black"
+                    >
+                      닫기
+                    </Button>
+                    <Button
+                      onClick={onNext}
+                      sx={{
+                        backgroundColor: "red",
+                        color: "white",
+                        "&:hover": {
+                          backgroundColor: "red",
+                        },
+                        "&:active": {
+                          backgroundColor: "red",
+                        },
+                      }}
+                      className="bg-red ml-2 h-[35px] w-full rounded-lg text-xs font-medium"
+                    >
+                      체결 내역 확인
+                    </Button>
+                  </div>
+                </Box>
+              </Modal>
               <div ref={sampleRef}></div>
             </div>
           </div>

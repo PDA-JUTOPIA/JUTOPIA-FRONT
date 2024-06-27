@@ -1,4 +1,5 @@
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
+import type { AxiosResponse } from "axios";
 
 const fullApiUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -21,6 +22,27 @@ export interface IResReadPost {
   imageURL: string[];
 }
 
+export interface IResDeletePost {
+  message: string;
+  deletedPostId: number;
+}
+
+export async function deletePost(postId: number, email: string) {
+  try {
+    const resp: AxiosResponse<IResDeletePost> = await axios.delete(
+      `${fullApiUrl}/api/challenge-detail/del-post/${postId}/${email}`,
+    );
+    return resp.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.error("Failed to delete post (AxiosError):", error.message);
+    } else if (error instanceof Error) {
+      console.error("Failed to delete post:", error);
+    } else {
+      console.error("Failed to delete post: An unknown error occurred.");
+    }
+  }
+}
 export async function readUserPost(challengeId: number, email: string) {
   try {
     const resp: AxiosResponse<IResRead> = await axios.get(

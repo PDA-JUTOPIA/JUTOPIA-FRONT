@@ -18,6 +18,7 @@ const ProblemUnitDescription = ({
   increaseLessonsCompleted,
   status,
   isFirstSkip,
+  isPlusOne,
 }: {
   descriptionArr: DescriptionItem[];
   titles: string[];
@@ -28,8 +29,9 @@ const ProblemUnitDescription = ({
   increaseLessonsCompleted: (count: number) => void;
   status: string;
   isFirstSkip?: boolean;
+  isPlusOne?: boolean;
 }) => {
-  const totalCorrectAnswersNeeded = isFirstSkip
+  const totalCorrectAnswersNeeded = isPlusOne
     ? nextIndexes.length + 1
     : nextIndexes.length;
   const [quitMessageShown, setQuitMessageShown] = useState(false);
@@ -79,7 +81,7 @@ const ProblemUnitDescription = ({
     <div className="flex min-h-screen flex-col gap-5 px-4 py-5 font-['TTLaundryGothicB'] sm:px-0 sm:py-0">
       {!lessonComplete ? (
         <>
-          <div className="flex grow flex-col items-center gap-8">
+          <div className="flex grow flex-col items-center gap-2 sm:gap-4 md:gap-8">
             <div className="w-full max-w-5xl sm:mt-8 sm:px-5">
               <ProgressBar
                 correctAnswerCount={currentStep}

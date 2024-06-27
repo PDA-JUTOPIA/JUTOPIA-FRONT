@@ -96,6 +96,7 @@ const ChallengeExplain: React.FC<ChallengeExplainProps> = ({ challenge }) => {
     fetchData().catch((err) => {
       console.log(err);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTab]);
 
   // [] 안에 의존성 배열을 빈 배열로 설정하여 한 번만 데이터를 로드하도록 설정
@@ -138,6 +139,10 @@ const ChallengeExplain: React.FC<ChallengeExplainProps> = ({ challenge }) => {
               postImages={post.imageURL}
               challengePostId={post.challenge_post_id}
               likesCount={3}
+              setPostData={setPostData}
+              postData={postData}
+              activeTab={activeTab}
+              challengeId={challenge.challenge_id}
             />
           ))}
       </div>
@@ -229,6 +234,9 @@ const ChallengeExplain: React.FC<ChallengeExplainProps> = ({ challenge }) => {
           onClose={handleModalClose}
           challengeId={challenge.challenge_id}
           email={email}
+          setPostData={setPostData}
+          postData={postData}
+          activeTab={activeTab}
         />
       )}
     </div>

@@ -4,7 +4,8 @@ import { readUserRewards } from "~/apis/userReward";
 import { readRewards } from "~/apis/reward";
 import RewardCard from "~/components/RewardCard";
 // import { challenges } from "~/data/challengesData";
-
+import { readUserParticipationCount } from "~/apis/user";
+import { createUserReward } from "~/apis/userReward";
 interface ChallengeGridProps {
   showOnlyCompleted?: boolean;
   email: string;
@@ -27,21 +28,84 @@ const ChallengeGrid: React.FC<ChallengeGridProps> = ({
   useEffect(() => {
     async function fetchInitialData() {
       try {
+        // 1. 전체 리워드 조회 db
         const response = await readRewards();
         const initialChallenges = response.map((challenge) => ({
           ...challenge,
           completed: false,
         }));
 
-        const rewardsArray = await readUserRewards(email); // Reward[] 타입의 배열을 받아옴
+        // 2. 유저 리워드 조회 및 필터링
+        const rewardsArray2 = await readUserRewards(email);
+        let filteredRewards: number[] = rewardsArray2.userRewardIds.slice();
+        //출석
+        if (!filteredRewards.includes(5)) {
+          await createUserReward(email, 4)
+            .then(() => {
+              filteredRewards.push(5);
+            })
+            .catch((error) => {
+              console.error("Failed to create user reward:", error);
+            });
+        }
+        // 6을 필터링
+        if (filteredRewards.includes(6)) {
+          const response = await readUserParticipationCount(email);
+          if (response.totalParticipationCount < 1) {
+            filteredRewards = filteredRewards.filter(
+              (rewardId) => rewardId !== 6,
+            );
+          }
+        }
 
+        // 7을 필터링
+        if (filteredRewards.includes(7)) {
+          const response = await readUserParticipationCount(email);
+          if (response.totalParticipationCount < 3) {
+            filteredRewards = filteredRewards.filter(
+              (rewardId) => rewardId !== 7,
+            );
+          }
+        }
+
+        // 3. 새로운 리워드 추가
+        const response2 = await readUserParticipationCount(email);
+        if (
+          response2.totalParticipationCount === 1 ||
+          response2.totalParticipationCount === 3
+        ) {
+          if (
+            response2.totalParticipationCount === 1 &&
+            !filteredRewards.includes(6)
+          ) {
+            await createUserReward(email, 5)
+              .then(() => {
+                filteredRewards.push(6);
+              })
+              .catch((error) => {
+                console.error("Failed to create user reward:", error);
+              });
+          } else if (
+            response2.totalParticipationCount === 3 &&
+            !filteredRewards.includes(7)
+          ) {
+            await createUserReward(email, 6)
+              .then(() => {
+                filteredRewards.push(7);
+              })
+              .catch((error) => {
+                console.error("Failed to create user reward:", error);
+              });
+          }
+        }
+
+        // 4. updatedChallenges 생성
         const updatedChallenges = initialChallenges.map((challenge) => ({
           ...challenge,
-          completed: rewardsArray.userRewardIds.includes(challenge.reward_id),
+          completed: filteredRewards.includes(challenge.reward_id),
         }));
 
         setChallenges(updatedChallenges);
-
         setModalStates(updatedChallenges.map(() => false));
       } catch (error) {
         console.error("Failed to fetch initial rewards:", error);

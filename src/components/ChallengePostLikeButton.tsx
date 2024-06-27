@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import Image from "next/image";
+import { SlHeart } from "react-icons/sl";
+import { ImHeart } from "react-icons/im";
 
 interface PostLikeProps {
   initialLikes: number;
@@ -16,13 +17,11 @@ const PostLike: React.FC<PostLikeProps> = ({ initialLikes }) => {
 
   return (
     <div className="flex cursor-pointer items-center" onClick={handleLikeClick}>
-      <Image
-        className="mr-2"
-        src={liked ? "/challenge/like2.png" : "/challenge/like1.png"}
-        alt="Likes"
-        width={24}
-        height={24}
-      />
+      {!liked ? (
+        <SlHeart size={24} className="mr-2" />
+      ) : (
+        <ImHeart size={24} color="red" className="mr-2" />
+      )}
       <span>{likesCount} Likes</span>
     </div>
   );

@@ -27,6 +27,14 @@ export interface IResUserId {
   userId: number;
 }
 
+export interface IResLearningStatus {
+  learningStatus: string;
+}
+
+export interface IResParticipationCount {
+  totalParticipationCount: number;
+}
+
 export async function getUserIdByEmail(email: string) {
   try {
     const resp: AxiosResponse<IResUserId> = await axios.post(
@@ -136,5 +144,80 @@ export async function updateName(
     } else {
       console.error("Failed to update: An unknown error occurred.");
     }
+  }
+}
+
+export async function readUserLearningStatus(
+  email: string,
+): Promise<IResLearningStatus> {
+  try {
+    const resp: AxiosResponse<IResLearningStatus> = await axios.post(
+      `${fullApiUrl}/api/users/get-user-learning-status`,
+      {
+        email: email,
+      },
+    );
+    return resp.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.error(
+        "Failed to read learning status (AxiosError):",
+        error.message,
+      );
+    } else if (error instanceof Error) {
+      console.error("Failed to read learning status:", error);
+    } else {
+      console.error(
+        "Failed to read learning status: An unknown error occurred.",
+      );
+    }
+  }
+}
+
+export async function readUserParticipationCount(
+  email: string,
+): Promise<IResParticipationCount> {
+  try {
+    const resp: AxiosResponse<IResParticipationCount> = await axios.get(
+      `${fullApiUrl}/api/challenge/get-user-participation-count/${email}`,
+    );
+    return resp.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.error(
+        "Failed to read participation count (AxiosError):",
+        error.message,
+      );
+    } else if (error instanceof Error) {
+      console.error("Failed to read participation count:", error);
+    } else {
+      console.error(
+        "Failed to read participation count: An unknown error occurred.",
+      );
+    }
+  }
+}
+
+export async function readUserPostCheck(
+  email: string,
+): Promise<boolean[] | undefined> {
+  try {
+    const resp: AxiosResponse<boolean[]> = await axios.post(
+      `${fullApiUrl}/api/users/get-post-check`,
+      { email },
+    );
+    return resp.data;
+  } catch (error) {
+    handleAxiosError(error, "Failed to read post check");
+    return undefined;
+  }
+}
+function handleAxiosError(error: unknown, message: string): void {
+  if (axios.isAxiosError(error)) {
+    console.error(`${message} (AxiosError):`, error.message);
+  } else if (error instanceof Error) {
+    console.error(`${message}:`, error.message);
+  } else {
+    console.error(`${message}: An unknown error occurred.`);
   }
 }
