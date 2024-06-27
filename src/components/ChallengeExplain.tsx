@@ -1,4 +1,9 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import React, { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import PostCard from "./ChallengePostCard";
 import ChallengePostModal from "./ChallegePostModal";
@@ -6,6 +11,8 @@ import { joinRecurit, isInChallenge } from "~/apis/challenge";
 import { useBoundStore } from "~/hooks/useBoundStore";
 // import { readAllRecurit, IResChallengeRecruit } from "~/apis/challenge";
 import { getUserIdByEmail } from "~/apis/user";
+import type { IResReadPost } from "~/apis/challengePost";
+import { readUserPost, readAllPost } from "~/apis/challengePost";
 
 interface ChallengeExplainProps {
   challenge: {
@@ -28,7 +35,11 @@ const ChallengeExplain: React.FC<ChallengeExplainProps> = ({ challenge }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showJoinState, setShowJoinState] = useState(false);
   const email = useBoundStore((x) => x.email);
+  // const name = useBoundStore((x) => x.name);
   const [userId, setUserId] = useState(0);
+  const anchorRef = useRef<HTMLDivElement>(null);
+  const secondCardMaxHeight = anchorRef.current?.offsetHeight - 58;
+  const [postData, setPostData] = useState<IResReadPost[] | null>(null);
 
   useEffect(() => {
     //이미 참여중인지 상태 확인.
@@ -64,7 +75,29 @@ const ChallengeExplain: React.FC<ChallengeExplainProps> = ({ challenge }) => {
       .catch((err) => {
         console.log(err);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [email]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (activeTab === "내 인증 현황") {
+          const resp = await readUserPost(challenge.challenge_id, email);
+          setPostData(resp.posts);
+        } else if (activeTab === "참가자 인증 현황") {
+          const resp = await readAllPost(challenge.challenge_id);
+          setPostData(resp.posts);
+        }
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+      }
+    };
+
+    fetchData().catch((err) => {
+      console.log(err);
+    });
+  }, [activeTab]);
+
   // [] 안에 의존성 배열을 빈 배열로 설정하여 한 번만 데이터를 로드하도록 설정
   const handleJoinChallenge = () => {
     joinChallenge().catch((err) => {
@@ -92,70 +125,31 @@ const ChallengeExplain: React.FC<ChallengeExplainProps> = ({ challenge }) => {
   };
 
   const renderTabContent = () => {
-    switch (activeTab) {
-      case "내 인증 현황":
-        return (
-          <div className="flex flex-col space-y-4">
+    return (
+      <div className="flex flex-col space-y-4">
+        {Array.isArray(postData) &&
+          postData.map((post) => (
             <PostCard
-              userName="윤경"
-              userAvatar="/Reward/chart.svg"
-              postTime="2024-06-23"
-              postContent="챌린지 인증용 UI"
-              postImages={["/Reward/coin1.svg"]}
-              challengePostId={1}
+              key={post.challenge_post_id}
+              userName={post.userName}
+              userAvatar={"/Reward/chart.svg"}
+              postTime={post.challenge_post_date}
+              postContent={post.challenge_post_text}
+              postImages={post.imageURL}
+              challengePostId={post.challenge_post_id}
               likesCount={3}
             />
-          </div>
-        );
-      case "참가자 인증 현황":
-        return (
-          <div className="flex flex-col space-y-4">
-            <PostCard
-              userName="윤경"
-              userAvatar="/Reward/chart.svg"
-              postTime="2024-06-23"
-              postContent="챌린지 인증용 UI"
-              postImages={["/Reward/coin1.svg"]}
-              challengePostId={1}
-              likesCount={3}
-            />
-            <PostCard
-              userName="윤경"
-              userAvatar="/Reward/chart.svg"
-              postTime="2024-06-23"
-              postContent="챌린지 인증용 UI"
-              postImages={["/Reward/coin1.svg"]}
-              challengePostId={1}
-              likesCount={3}
-            />
-            <PostCard
-              userName="윤경"
-              userAvatar="/Reward/chart.svg"
-              postTime="2024-06-23"
-              postContent="챌린지 인증용 UI"
-              postImages={["/Reward/coin1.svg"]}
-              challengePostId={1}
-              likesCount={3}
-            />
-            <PostCard
-              userName="윤경"
-              userAvatar="/Reward/chart.svg"
-              postTime="2024-06-23"
-              postContent="챌린지 인증용 UI"
-              postImages={["/Reward/coin1.svg"]}
-              challengePostId={1}
-              likesCount={3}
-            />
-          </div>
-        );
-      default:
-        return null;
-    }
+          ))}
+      </div>
+    );
   };
 
   return (
-    <div className="flex flex-col space-y-6 bg-gray-100 p-6 lg:flex-row lg:space-x-6 lg:space-y-0">
-      <div className="flex flex-col space-y-6 rounded-lg bg-white p-6 shadow-lg lg:w-1/2">
+    <div className="flex flex-col space-y-12 bg-gray-100 p-6 lg:flex-row lg:space-x-6 lg:space-y-0">
+      <div
+        className="flex flex-col space-y-6 rounded-lg bg-white p-6 shadow-lg lg:w-1/2"
+        ref={anchorRef}
+      >
         <div className="flex flex-col items-center justify-between space-y-4">
           <h1 className="text-5xl font-medium text-slate-900">
             {challenge.challenge_name}
@@ -176,21 +170,21 @@ const ChallengeExplain: React.FC<ChallengeExplainProps> = ({ challenge }) => {
             <p className="border-b-2 p-1 text-xl font-bold">
               인증 총 {challenge.challenge_total}번
             </p>
-            <p>
+            <p className="m-[5px] mt-[10px]">
               기간 : {new Date(challenge.challenge_start).toLocaleString()} ~{" "}
               {new Date(challenge.challenge_end).toLocaleString()}
             </p>
           </div>
-          <div className="flex flex-row justify-around">
+          <div className="flex flex-row justify-around max-[360px]:gap-[5px]">
             <button
-              className="mt-4 rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+              className="mt-4 rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 max-[390px]:text-[14px]"
               onClick={handleModalOpen}
             >
               인증글 작성하기
             </button>
             {!showJoinState && (
               <button
-                className="mt-4 rounded-lg bg-red-400 px-4 py-2 text-white hover:bg-red-600"
+                className="mt-4 rounded-lg bg-red-400 px-4 py-2 text-white hover:bg-red-600 max-[390px]:text-[14px]"
                 onClick={handleJoinChallenge}
               >
                 챌린지 참여하기
@@ -224,13 +218,19 @@ const ChallengeExplain: React.FC<ChallengeExplainProps> = ({ challenge }) => {
         </div>
         <div
           className="scroll-box flex flex-col space-y-4 rounded-lg bg-white p-5 shadow-lg"
-          style={{ height: "75vh", maxHeight: "75vh" }}
+          style={{ maxHeight: secondCardMaxHeight }}
         >
           {renderTabContent()}
         </div>
       </div>
 
-      {isModalOpen && <ChallengePostModal onClose={handleModalClose} />}
+      {isModalOpen && (
+        <ChallengePostModal
+          onClose={handleModalClose}
+          challengeId={challenge.challenge_id}
+          email={email}
+        />
+      )}
     </div>
   );
 };

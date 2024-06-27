@@ -32,7 +32,10 @@ const ChallengeForm: React.FC<ChallengeFormProps> = ({
       className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
       style={{ fontFamily: "TTLaundryGothicB" }}
     >
-      <div className="w-full max-w-lg rounded-lg bg-white p-8 shadow-lg">
+      <div
+        className="scroll-box w-full max-w-lg rounded-lg bg-white p-8 shadow-lg"
+        style={{ maxHeight: "90vh" }}
+      >
         <h2 className="mb-4 text-2xl font-bold text-gray-800">챌린지 등록</h2>
         <form onSubmit={onSubmit}>
           <div className="mb-4">
