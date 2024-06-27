@@ -194,7 +194,7 @@ const MarketIssues: React.FC = () => {
                   </div>
                 </div>
                 <hr className="mb-4 mt-4" />
-                <p className="text-xl">
+                <p className="text-xl max-[570px]:text-lg">
                   자세히 확인하고 싶으시면{" "}
                   <a
                     href={selectedItem.attachment_url}
