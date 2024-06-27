@@ -68,7 +68,7 @@ const MarketIssues: React.FC = () => {
       ref={tableRef}
       className="relative overflow-x-auto shadow-md sm:rounded-lg"
     >
-      <div className="scroll-box max-h-60 overflow-y-auto">
+      <div className="scroll-box max-h-60" style={{ maxHeight: "14rem" }}>
         <table className="w-full text-left text-sm text-gray-500 rtl:text-right dark:text-gray-400">
           <thead className="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
             <tr>
@@ -194,7 +194,7 @@ const MarketIssues: React.FC = () => {
                   </div>
                 </div>
                 <hr className="mb-4 mt-4" />
-                <p className="text-xl">
+                <p className="text-xl max-[570px]:text-lg">
                   자세히 확인하고 싶으시면{" "}
                   <a
                     href={selectedItem.attachment_url}

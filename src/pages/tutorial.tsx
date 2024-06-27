@@ -529,7 +529,7 @@ const UnitSection = ({ unit }: { unit: Unit }): JSX.Element => {
         backgroundColor={unit.backgroundColor}
         borderColor={unit.borderColor}
       />
-      <div className="relative mb-16 mt-[67px] flex max-w-[65rem] flex-col items-center gap-4">
+      <div className="relative mb-16 mt-[67px] flex max-w-[65rem] flex-col items-center gap-4 max-[768px]:pb-[90px]">
         {unit.tiles.map((tile, i): JSX.Element => {
           console.log(lessonsCompleted);
           const status = tileStatus(tile, lessonsCompleted);
@@ -743,8 +743,6 @@ const Tutorial: NextPage = () => {
           </div>
         </div>
       </div>
-
-      <div className="pt-[90px]"></div>
 
       <BottomBar selectedTab="튜토리얼" />
       <LoginScreen

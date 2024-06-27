@@ -63,6 +63,7 @@ const Challenge: NextPage = () => {
     fetchData().catch((err) => {
       console.log(err);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTab]);
 
   const handleChallengeDetailClick = (challengeId: number) => {
@@ -146,31 +147,31 @@ const Challenge: NextPage = () => {
         <LeftBar selectedTab="챌린지" />
 
         <BottomBar selectedTab="챌린지" />
-        <div className="flex justify-center gap-3 pt-14 sm:p-6 sm:pt-10 md:ml-24 lg:ml-64 lg:gap-12">
-          <div className="flex max-w-[65rem] grow flex-col">
+        <div className="mb-[88px] flex justify-center gap-3 pt-5 sm:p-6 md:mb-0 md:ml-24 lg:ml-64 lg:gap-12">
+          <div className="ml-[10px] mr-[10px] flex max-w-[65rem] grow flex-col">
             <div className="flex flex-row items-center justify-center rounded-lg bg-shinhan-rino-blue p-5 text-white shadow-lg">
-              <div className="flex items-center rounded-lg bg-gray-100 p-8 shadow-lg">
+              <div className="flex flex-col items-center rounded-lg bg-gray-100 p-[1.3rem] shadow-lg sm:pb-8 sm:pt-8 md:flex-row">
                 <Image
                   src="/Challenge/챌린지캐릭.png"
                   alt="Challenge Character"
                   width="500"
                   height="500"
                   sizes="100vw"
-                  className="h-24 w-24 rounded-full border-4 border-white shadow-md sm:h-40 sm:w-40"
+                  className="h-32 w-32 rounded-full border-4 border-white object-contain shadow-md sm:h-36 sm:w-36 xl:h-40 xl:w-40"
                 />
 
-                <div className="ml-8 flex flex-col sm:ml-2 md:ml-4">
-                  <div className="pb-4 text-2xl font-bold text-gray-800 sm:text-4xl">
+                <div className="flex flex-col sm:ml-2 md:ml-4 ">
+                  <div className="mt-[20px] pb-4 text-[4.55vw] font-bold text-gray-800 min-[500px]:text-2xl md:mt-0 md:text-[2.7vw] lg:text-[2.5vw]">
                     🔥챌린지를 통해 주린이를 탈출해요🔥
                   </div>
-                  <div className="text-xl font-bold text-gray-600 sm:text-2xl">
+                  <div className="ml-[2vw] text-center text-[2.7vw] font-bold text-gray-600 min-[500px]:text-xl md:text-left lg:text-[2vw]">
                     지식을 나누고 궁금증을 해결해요
                   </div>
                 </div>
               </div>
             </div>
             <div className="flex flex-wrap justify-between">
-              <div className="mt-5">
+              <div className="mt-5 max-[400px]:text-[14px]">
                 <Tabs
                   tabs={TABS}
                   activeTab={activeTab}
@@ -178,7 +179,7 @@ const Challenge: NextPage = () => {
                 />
               </div>
               <button
-                className="mt-5 flex h-[40px] items-center justify-center rounded bg-blue-500 px-4 py-2 text-center text-white"
+                className="mt-5 flex h-[40px] items-center justify-center rounded bg-blue-500 px-4 py-2 text-center text-white max-[400px]:text-[12px]"
                 onClick={() => setIsModalOpen(true)}
               >
                 챌린지 등록
