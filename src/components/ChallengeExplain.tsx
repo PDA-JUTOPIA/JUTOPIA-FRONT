@@ -96,6 +96,7 @@ const ChallengeExplain: React.FC<ChallengeExplainProps> = ({ challenge }) => {
     fetchData().catch((err) => {
       console.log(err);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTab]);
 
   // [] 안에 의존성 배열을 빈 배열로 설정하여 한 번만 데이터를 로드하도록 설정
