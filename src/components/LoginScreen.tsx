@@ -45,12 +45,16 @@ export const LoginScreen = ({
   }, [loginScreenState, loggedIn, setLoginScreenState]);
 
   const handleSignUp = async () => {
+    const nameInput = nameInputRef.current?.value.trim();
+    const emailInput = emailInputRef.current?.value.trim();
+    const passwordInput = passwordInputRef.current?.value.trim();
+
+    if (!nameInput || !emailInput || !passwordInput) {
+      alert("공백은 입력될 수 없습니다.");
+      return;
+    }
     try {
-      const response = await signup(
-        nameInputRef.current?.value.trim() || "",
-        emailInputRef.current?.value.trim() || "",
-        passwordInputRef.current?.value.trim() || "",
-      );
+      const response = await signup(nameInput, emailInput, passwordInput);
 
       const username = response.username; // 서버에서 반환된 데이터에서 이름 가져오기
       const email = response.email;
@@ -68,11 +72,14 @@ export const LoginScreen = ({
   };
 
   const handleLogin = async () => {
+    const emailInput = emailInputRef.current?.value.trim();
+    const passwordInput = passwordInputRef.current?.value.trim();
+    if (!emailInput || !passwordInput) {
+      alert("공백은 입력될 수 없습니다.");
+      return;
+    }
     try {
-      const response = await login(
-        emailInputRef.current?.value.trim() || "",
-        passwordInputRef.current?.value.trim() || "",
-      );
+      const response = await login(emailInput, passwordInput);
       const token = response.token;
       localStorage.setItem("token", token);
 
@@ -87,6 +94,7 @@ export const LoginScreen = ({
         console.error("Unhandled error login:", error);
       });
     } catch (error) {
+      alert("아이디 또는 비밀번호가 틀렸습니다.");
       console.error("Failed to login:", error);
     }
   };
