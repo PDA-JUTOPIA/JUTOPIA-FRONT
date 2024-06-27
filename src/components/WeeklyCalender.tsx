@@ -1,7 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useBoundStore } from "~/hooks/useBoundStore";
+import { readUserPostCheck } from "~/apis/user";
+
+interface Stickers {
+  Sun: boolean;
+  Mon: boolean;
+  Tue: boolean;
+  Wed: boolean;
+  Thu: boolean;
+  Fri: boolean;
+  Sat: boolean;
+}
 
 const WeeklyCalendar: React.FC = () => {
-  const [stickers, setStickers] = useState<{ [key: string]: boolean }>({
+  const email = useBoundStore((x) => x.email);
+  const [stickers, setStickers] = useState<Stickers>({
     Sun: false,
     Mon: false,
     Tue: false,
@@ -11,7 +24,32 @@ const WeeklyCalendar: React.FC = () => {
     Sat: false,
   });
 
-  const toggleSticker = (day: string) => {
+  useEffect(() => {
+    async function fetchPostCheck() {
+      try {
+        const postCheck = await readUserPostCheck(email);
+        if (postCheck) {
+          setStickers({
+            Sun: postCheck[0],
+            Mon: postCheck[1],
+            Tue: postCheck[2],
+            Wed: postCheck[3],
+            Thu: postCheck[4],
+            Fri: postCheck[5],
+            Sat: postCheck[6],
+          });
+        }
+      } catch (error) {
+        console.error("Error fetching post check:", error);
+      }
+    }
+
+    fetchPostCheck().catch((error) => {
+      console.error("Unhandled error:", error);
+    });
+  }, [email]);
+
+  const toggleSticker = (day: keyof Stickers) => {
     setStickers((prevStickers) => ({
       ...prevStickers,
       [day]: !prevStickers[day],
@@ -24,21 +62,32 @@ const WeeklyCalendar: React.FC = () => {
         This Week
       </h2>
       <div className="grid w-full grid-cols-4 gap-3 min-[850px]:flex min-[850px]:justify-between">
-        {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
+        {(
+          ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"] as Array<
+            keyof Stickers
+          >
+        ).map((day) => (
           <div
             key={day}
             className="flex transform flex-col items-center transition-transform duration-200 ease-in-out"
-            onClick={() => toggleSticker(day)}
           >
             <span
-              className={`mb-1 text-sm sm:text-base ${["Thu", "Fri", "Sat"].includes(day) ? "max-[850px]:ml-[20vw]" : ""}`}
+              className={`mb-1 text-sm sm:text-base ${
+                ["Thu", "Fri", "Sat"].includes(day)
+                  ? "max-[850px]:ml-[20vw]"
+                  : ""
+              }`}
             >
               {day}
             </span>
             <span
               className={`relative flex h-[7vw] max-h-20 min-h-16 w-[7vw] min-w-16 max-w-20 items-center justify-center rounded-full bg-gray-200 ${
                 stickers[day] ? "animate-bounce bg-yellow-300" : ""
-              } ${["Thu", "Fri", "Sat"].includes(day) ? "max-[850px]:ml-[20vw]" : ""}`}
+              } ${
+                ["Thu", "Fri", "Sat"].includes(day)
+                  ? "max-[850px]:ml-[20vw]"
+                  : ""
+              }`}
             >
               👍
               {stickers[day] && (

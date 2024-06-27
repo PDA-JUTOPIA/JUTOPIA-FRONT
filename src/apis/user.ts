@@ -197,3 +197,27 @@ export async function readUserParticipationCount(
     }
   }
 }
+
+export async function readUserPostCheck(
+  email: string,
+): Promise<boolean[] | undefined> {
+  try {
+    const resp: AxiosResponse<boolean[]> = await axios.post(
+      `${fullApiUrl}/api/users/get-post-check`,
+      { email },
+    );
+    return resp.data;
+  } catch (error) {
+    handleAxiosError(error, "Failed to read post check");
+    return undefined;
+  }
+}
+function handleAxiosError(error: unknown, message: string): void {
+  if (axios.isAxiosError(error)) {
+    console.error(`${message} (AxiosError):`, error.message);
+  } else if (error instanceof Error) {
+    console.error(`${message}:`, error.message);
+  } else {
+    console.error(`${message}: An unknown error occurred.`);
+  }
+}
