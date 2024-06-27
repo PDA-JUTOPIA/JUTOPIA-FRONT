@@ -39,6 +39,8 @@ const ProblemUnitDescription = ({
   const [titleIndex, setTitleIndex] = useState(0);
   const [imageIndex, setImageIndex] = useState(0);
   const transformWrapperRef = useRef<any>(null);
+  const touchStartRef = useRef({ x: 0, y: 0 });
+  const isDraggingRef = useRef(false);
 
   const onNext = (): void => {
     if (currentStep < totalCorrectAnswersNeeded) {
@@ -74,6 +76,29 @@ const ProblemUnitDescription = ({
       }
     }
   }, [lessonComplete, increaseLessonsCompleted, status]);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    const touch = e.touches[0];
+    touchStartRef.current = { x: touch.clientX, y: touch.clientY };
+    isDraggingRef.current = false;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    isDraggingRef.current = true;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    const touch = e.changedTouches[0];
+    const deltaX = touch.clientX - touchStartRef.current.x;
+    const deltaY = touch.clientY - touchStartRef.current.y;
+
+    if (
+      isDraggingRef.current &&
+      (Math.abs(deltaX) > 10 || Math.abs(deltaY) > 10)
+    ) {
+      onNext();
+    }
+  };
 
   return (
     <div className="flex min-h-screen flex-col gap-5 px-4 py-5 font-['TTLaundryGothicB'] sm:px-0 sm:py-0">
