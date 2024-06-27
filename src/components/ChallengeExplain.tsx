@@ -224,7 +224,7 @@ const ChallengeExplain: React.FC<ChallengeExplainProps> = ({ challenge }) => {
         </div>
         <div
           className="scroll-box flex flex-col space-y-4 rounded-lg bg-white p-5 shadow-lg"
-          style={{ height: "75vh" }}
+          style={{ height: "75vh", maxHeight: "75vh" }}
         >
           {renderTabContent()}
         </div>
