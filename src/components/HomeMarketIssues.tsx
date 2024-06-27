@@ -3,6 +3,7 @@ import { fetchMarketIssuesApi } from "../apis/marketIssuesApi";
 import { Modal, ModalBackdrop } from "./styled";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
+import { PiDownloadSimpleBold } from "react-icons/pi";
 
 interface ListItem {
   id: number;
@@ -142,7 +143,7 @@ const MarketIssues: React.FC = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    Download
+                    <PiDownloadSimpleBold size={20} />
                   </a>
                 </td>
               </tr>

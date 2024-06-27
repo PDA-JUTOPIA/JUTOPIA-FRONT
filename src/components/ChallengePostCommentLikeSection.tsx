@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import Image from "next/image";
 import PostLike from "./ChallengePostLikeButton";
 import { readComment, createComment } from "~/apis/challengePostComment";
 import type { IResComment } from "~/apis/challengePostComment";
 import { getUserIdByEmail } from "~/apis/user";
 import { useBoundStore } from "~/hooks/useBoundStore";
+import { BsChatText } from "react-icons/bs";
+import { GrUploadOption } from "react-icons/gr";
 
 interface CommentLikeSectionProps {
   challengePostId: number;
@@ -82,13 +83,7 @@ const CommentLikeSection: React.FC<CommentLikeSectionProps> = ({
           className="flex cursor-pointer items-center"
           onClick={toggleComments}
         >
-          <Image
-            className="mr-2"
-            src="/challenge/comment.png"
-            alt="Comments"
-            width={24}
-            height={24}
-          />
+          <BsChatText size={25} className="mr-2" />
           <span>{commentsCount} Comments</span>
         </div>
         <PostLike initialLikes={initialLikes} />
@@ -114,12 +109,7 @@ const CommentLikeSection: React.FC<CommentLikeSectionProps> = ({
           onKeyPress={handleKeyPress}
         />
         <div className="ml-2 cursor-pointer" onClick={handleCommentUpload}>
-          <Image
-            src="/challenge/comment-upload.png"
-            alt="Upload Comment"
-            width={24}
-            height={24}
-          />
+          <GrUploadOption size={22} color="gray" />
         </div>
       </div>
     </div>
