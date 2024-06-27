@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import PostCard from "./ChallengePostCard";
 import ChallengePostModal from "./ChallegePostModal";
@@ -34,6 +34,8 @@ const ChallengeExplain: React.FC<ChallengeExplainProps> = ({ challenge }) => {
   const [showJoinState, setShowJoinState] = useState(false);
   const email = useBoundStore((x) => x.email);
   const [userId, setUserId] = useState(0);
+  const anchorRef = useRef<HTMLDivElement>(null);
+  const secondCardMaxHeight = anchorRef.current?.offsetHeight - 58;
 
   useEffect(() => {
     //이미 참여중인지 상태 확인.
@@ -160,8 +162,11 @@ const ChallengeExplain: React.FC<ChallengeExplainProps> = ({ challenge }) => {
   };
 
   return (
-    <div className="flex flex-col space-y-6 bg-gray-100 p-6 lg:flex-row lg:space-x-6 lg:space-y-0">
-      <div className="flex flex-col space-y-6 rounded-lg bg-white p-6 shadow-lg lg:w-1/2">
+    <div className="flex flex-col space-y-12 bg-gray-100 p-6 lg:flex-row lg:space-x-6 lg:space-y-0">
+      <div
+        className="flex flex-col space-y-6 rounded-lg bg-white p-6 shadow-lg lg:w-1/2"
+        ref={anchorRef}
+      >
         <div className="flex flex-col items-center justify-between space-y-4">
           <h1 className="text-5xl font-medium text-slate-900">
             {challenge.challenge_name}
@@ -182,21 +187,21 @@ const ChallengeExplain: React.FC<ChallengeExplainProps> = ({ challenge }) => {
             <p className="border-b-2 p-1 text-xl font-bold">
               인증 총 {challenge.challenge_total}번
             </p>
-            <p>
+            <p className="m-[5px] mt-[10px]">
               기간 : {new Date(challenge.challenge_start).toLocaleString()} ~{" "}
               {new Date(challenge.challenge_end).toLocaleString()}
             </p>
           </div>
-          <div className="flex flex-row justify-around">
+          <div className="flex flex-row justify-around max-[360px]:gap-[5px]">
             <button
-              className="mt-4 rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+              className="mt-4 rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 max-[390px]:text-[14px]"
               onClick={handleModalOpen}
             >
               인증글 작성하기
             </button>
             {!showJoinState && (
               <button
-                className="mt-4 rounded-lg bg-red-400 px-4 py-2 text-white hover:bg-red-600"
+                className="mt-4 rounded-lg bg-red-400 px-4 py-2 text-white hover:bg-red-600 max-[390px]:text-[14px]"
                 onClick={handleJoinChallenge}
               >
                 챌린지 참여하기
@@ -230,7 +235,7 @@ const ChallengeExplain: React.FC<ChallengeExplainProps> = ({ challenge }) => {
         </div>
         <div
           className="scroll-box flex flex-col space-y-4 rounded-lg bg-white p-5 shadow-lg"
-          style={{ height: "75vh", maxHeight: "75vh" }}
+          style={{ maxHeight: secondCardMaxHeight }}
         >
           {renderTabContent()}
         </div>
