@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { type NextPage } from "next";
 import Link from "next/link";
 import { Fragment, useCallback, useEffect, useRef, useState } from "react";
