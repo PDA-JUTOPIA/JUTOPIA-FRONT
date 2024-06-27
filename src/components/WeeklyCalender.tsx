@@ -49,13 +49,6 @@ const WeeklyCalendar: React.FC = () => {
     });
   }, [email]);
 
-  const toggleSticker = (day: keyof Stickers) => {
-    setStickers((prevStickers) => ({
-      ...prevStickers,
-      [day]: !prevStickers[day],
-    }));
-  };
-
   return (
     <div className="m-5 flex flex-col items-center rounded-lg bg-gradient-to-r from-blue-500 to-blue-500 p-5 text-white shadow-lg sm:p-8">
       <h2 className="mb-3 border-b-2 border-white pb-2 text-xl font-semibold sm:text-2xl">
