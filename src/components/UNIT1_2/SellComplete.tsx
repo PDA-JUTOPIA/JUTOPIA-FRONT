@@ -10,11 +10,17 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 import Tooltip from "../Tooltip";
 import dynamic from "next/dynamic";
 const Joyride = dynamic(() => import("react-joyride"), { ssr: false });
-interface SellProps {
-  onFinish: () => void;
-  onPrev: () => void;
+// interface SellProps {
+//   onFinish: () => void;
+//   onPrev: () => void;
+// }
+
+export interface StepComponentProps {
+  onNext: () => void;
+  onFinish?: () => void;
+  onPrev?: () => void;
 }
-const SellComplete: React.FC<SellProps> = ({ onFinish, onPrev }) => {
+const SellComplete: React.FC<StepComponentProps> = ({ onFinish, onPrev }) => {
   const steps = [
     {
       target: "#explainMessage1",
