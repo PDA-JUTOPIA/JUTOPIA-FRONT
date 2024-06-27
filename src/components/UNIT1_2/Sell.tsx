@@ -118,7 +118,7 @@ const Sell: React.FC<SellProps> = ({ onNext }) => {
   return (
     <div
       ref={containerRef}
-      className="relative  ml-3 mt-8 h-screen max-h-[510px] w-screen max-w-[300px] bg-white !pr-0"
+      className="relative ml-3 mt-8 h-screen max-h-[510px] w-screen max-w-[300px] bg-white !pr-0"
     >
       <div className="relative">
         <Joyride
