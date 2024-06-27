@@ -35,7 +35,6 @@ const CharacterExplain = ({
 
   const [dragStartX, setDragStartX] = useState<number | null>(null);
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
-
   const [isTypingComplete, setIsTypingComplete] = useState(false);
 
   const handleNext = () => {
@@ -55,7 +54,7 @@ const CharacterExplain = ({
   };
 
   const handleDragEnd = (e: React.DragEvent<HTMLDivElement>) => {
-    if (dragStartX && e.clientX < dragStartX) {
+    if (dragStartX && e.clientX + 50 < dragStartX) {
       handleNext();
     }
     setDragStartX(null);
@@ -66,7 +65,7 @@ const CharacterExplain = ({
   };
 
   const handleTouchEnd = (e: React.TouchEvent<HTMLDivElement>) => {
-    if (touchStartX && e.changedTouches[0].clientX < touchStartX) {
+    if (touchStartX && e.changedTouches[0].clientX + 50 < touchStartX) {
       handleNext();
     }
     setTouchStartX(null);
