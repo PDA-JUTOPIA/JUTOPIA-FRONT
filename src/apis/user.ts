@@ -27,6 +27,10 @@ export interface IResUserId {
   userId: number;
 }
 
+export interface IResLearningStatus {
+  learningStatus: string;
+}
+
 export async function getUserIdByEmail(email: string) {
   try {
     const resp: AxiosResponse<IResUserId> = await axios.post(
@@ -135,6 +139,33 @@ export async function updateName(
       console.error("Failed to update:", error);
     } else {
       console.error("Failed to update: An unknown error occurred.");
+    }
+  }
+}
+
+export async function readUserLearningStatus(
+  email: string,
+): Promise<IResLearningStatus> {
+  try {
+    const resp: AxiosResponse<IResLearningStatus> = await axios.post(
+      `${fullApiUrl}/api/users/get-user-learning-status`,
+      {
+        email: email,
+      },
+    );
+    return resp.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.error(
+        "Failed to read learning status (AxiosError):",
+        error.message,
+      );
+    } else if (error instanceof Error) {
+      console.error("Failed to read learning status:", error);
+    } else {
+      console.error(
+        "Failed to read learning status: An unknown error occurred.",
+      );
     }
   }
 }
