@@ -138,6 +138,10 @@ const ChallengeExplain: React.FC<ChallengeExplainProps> = ({ challenge }) => {
               postImages={post.imageURL}
               challengePostId={post.challenge_post_id}
               likesCount={3}
+              setPostData={setPostData}
+              postData={postData}
+              activeTab={activeTab}
+              challengeId={challenge.challenge_id}
             />
           ))}
       </div>
@@ -229,6 +233,9 @@ const ChallengeExplain: React.FC<ChallengeExplainProps> = ({ challenge }) => {
           onClose={handleModalClose}
           challengeId={challenge.challenge_id}
           email={email}
+          setPostData={setPostData}
+          postData={postData}
+          activeTab={activeTab}
         />
       )}
     </div>

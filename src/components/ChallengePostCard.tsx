@@ -2,6 +2,10 @@ import React from "react";
 import Image from "next/image";
 import CommentLikeSection from "./ChallengePostCommentLikeSection";
 import OverflowMenu from "./ChallengeOverflowMenu";
+import { deletePost } from "~/apis/challengePost";
+import { useBoundStore } from "~/hooks/useBoundStore";
+import type { IResReadPost } from "~/apis/challengePost";
+import { readUserPost, readAllPost } from "~/apis/challengePost";
 
 interface PostCardProps {
   userName: string;
@@ -11,6 +15,10 @@ interface PostCardProps {
   postImages: string[];
   challengePostId: number;
   likesCount: number;
+  setPostData: React.Dispatch<React.SetStateAction<IResReadPost[] | null>>;
+  postData: IResReadPost[];
+  activeTab: string;
+  challengeId: number;
 }
 
 const PostCard: React.FC<PostCardProps> = ({
@@ -21,13 +29,47 @@ const PostCard: React.FC<PostCardProps> = ({
   postImages,
   challengePostId,
   likesCount,
+  setPostData,
+  postData,
+  activeTab,
+  challengeId,
 }) => {
+  const email = useBoundStore((x) => x.email);
+
   const handleEdit = () => {
     console.log("Edit clicked");
   };
 
   const handleDelete = () => {
-    console.log("Delete clicked");
+    //삭제 api 합체
+    deletePostDo().catch((err) => {
+      console.log(err);
+    });
+
+    setTimeout(() => {
+      updatePosts().catch((err) => {
+        console.log(err);
+      });
+      console.log(postData);
+    }, 1300);
+  };
+  const deletePostDo = async () => {
+    const resp = await deletePost(challengePostId, email);
+    console.log(resp);
+  };
+
+  const updatePosts = async () => {
+    try {
+      if (activeTab === "내 인증 현황") {
+        const resp = await readUserPost(challengeId, email);
+        setPostData(resp.posts);
+      } else if (activeTab === "참가자 인증 현황") {
+        const resp = await readAllPost(challengeId);
+        setPostData(resp.posts);
+      }
+    } catch (error) {
+      console.error("Error fetching posts:", error);
+    }
   };
 
   return (

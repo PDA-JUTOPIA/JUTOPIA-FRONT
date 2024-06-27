@@ -1,16 +1,25 @@
 import React, { useState } from "react";
+import { setTimeout } from "timers";
 import { createPost } from "~/apis/challengePost";
+import type { IResReadPost } from "~/apis/challengePost";
+import { readUserPost, readAllPost } from "~/apis/challengePost";
 
 interface ChallengePostModalProps {
   onClose: () => void;
   challengeId: number;
   email: string;
+  setPostData: React.Dispatch<React.SetStateAction<IResReadPost[] | null>>;
+  postData: IResReadPost[];
+  activeTab: string;
 }
 
 const ChallengePostModal: React.FC<ChallengePostModalProps> = ({
   onClose,
   challengeId,
   email,
+  setPostData,
+  postData,
+  activeTab,
 }) => {
   const [content, setContent] = useState("");
   const [images, setImages] = useState<File[]>([]);
@@ -23,10 +32,16 @@ const ChallengePostModal: React.FC<ChallengePostModalProps> = ({
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
+    console.log(postData);
     submitFormData().catch((err) => {
       console.log(err);
     });
     onClose();
+    setTimeout(() => {
+      updatePosts().catch((err) => {
+        console.log(err);
+      });
+    }, 1300);
   };
 
   const submitFormData = async () => {
@@ -40,11 +55,23 @@ const ChallengePostModal: React.FC<ChallengePostModalProps> = ({
         formData.append(`photos`, image);
         console.log(index);
       });
-
       const response = await createPost(formData);
       console.log("Post created:", response);
     } catch (error) {
       console.error("Failed to create post:", error);
+    }
+  };
+  const updatePosts = async () => {
+    try {
+      if (activeTab === "내 인증 현황") {
+        const resp = await readUserPost(challengeId, email);
+        setPostData(resp.posts);
+      } else if (activeTab === "참가자 인증 현황") {
+        const resp = await readAllPost(challengeId);
+        setPostData(resp.posts);
+      }
+    } catch (error) {
+      console.error("Error fetching posts:", error);
     }
   };
 
