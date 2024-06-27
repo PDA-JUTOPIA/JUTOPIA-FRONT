@@ -37,7 +37,7 @@ export default function HeroHome() {
             variants={headerVariants}
           ></motion.div>
           <motion.h1
-            className="mb-4 bg-gradient-to-r from-blue-500 via-indigo-500 to-blue-500 bg-clip-text text-4xl font-extrabold text-transparent sm:text-5xl md:text-6xl"
+            className="mb-4 cursor-default select-none bg-gradient-to-r from-blue-500 via-indigo-500 to-blue-500 bg-clip-text text-4xl font-extrabold text-transparent sm:text-5xl md:text-6xl"
             variants={titleVariants}
           >
             주식이 어려운 당신을 위해, <br className="hidden lg:inline" />
@@ -50,7 +50,7 @@ export default function HeroHome() {
             variants={paragraphVariants}
           >
             <motion.p
-              className="mb-8 text-base text-gray-600 sm:text-lg md:text-xl"
+              className="mb-8 cursor-default select-none text-base text-gray-600 sm:text-lg md:text-xl"
               variants={paragraphVariants}
             >
               주식을 처음 시작하시는 분들을 위한 교육 플랫폼

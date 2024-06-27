@@ -185,10 +185,11 @@ const MarketIssues: React.FC = () => {
                       <strong>내용:</strong>
                       {/* {he.decode(selectedItem.content)} */}
                       <div
+                        className="scroll-box"
                         dangerouslySetInnerHTML={{
                           __html: selectedItem.content,
                         }}
-                      ></div>
+                      />
                     </p>
                   </div>
                 </div>
