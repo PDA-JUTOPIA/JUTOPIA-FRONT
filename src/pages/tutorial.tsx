@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { type NextPage } from "next";
 import Link from "next/link";
 import { Fragment, useCallback, useEffect, useRef, useState } from "react";
@@ -549,7 +552,6 @@ const UnitSection = ({ unit }: { unit: Unit }): JSX.Element => {
                   case "3.4":
                   case "3.5":
                   case "3.6":
-
                   case "4.0":
                   case "4.1":
                   case "4.2":
@@ -655,7 +657,6 @@ const UnitSection = ({ unit }: { unit: Unit }): JSX.Element => {
                     case "3.4":
                     case "3.5":
                     case "3.6":
-
                     case "4.0":
                     case "4.1":
                     case "4.2":
@@ -690,7 +691,7 @@ const getTopBarColors = (
     return defaultColors;
   } else if (scrollY < 1490) {
     return units[1] ?? defaultColors;
-  } else if (scrollY < 2660) {
+  } else if (scrollY < 2560) {
     return units[2] ?? defaultColors;
   } else {
     return units[3] ?? defaultColors;
