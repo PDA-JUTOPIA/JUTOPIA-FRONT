@@ -49,6 +49,10 @@ jobs:
             git fetch origin main
             git reset --hard origin/main
 
+            # Ensure old build artifacts are removed
+            echo "Removing old build artifacts..."
+            rm -rf .next
+
             # Install dependencies and build the project
             echo "Installing dependencies..."
             npm ci --force
