@@ -15,7 +15,8 @@ import BuyComplete from "./UNIT1_1/BuyComplete";
 import Sell from "./UNIT1_2/Sell";
 import SellComplete from "./UNIT1_2/SellComplete";
 import Stepper from "./LessonStepper";
-
+import BuyModal from "./UNIT1_1/BuyModal";
+import SellModal from "./UNIT1_2/SellModal";
 interface StepComponentProps {
   onNext: () => void;
   onFinish?: () => void;
@@ -57,10 +58,12 @@ const stepsMap: { [key: number]: Step[] } = {
   ],
   1: [
     { name: "Buy", component: Buy },
+    { name: "BuyModal", component: BuyModal },
     { name: "BuyComplete", component: BuyComplete, isFinal: true },
   ],
   2: [
     { name: "Sell", component: Sell },
+    { name: "SellModal", component: SellModal },
     { name: "SellComplete", component: SellComplete, isFinal: true },
   ],
 };
