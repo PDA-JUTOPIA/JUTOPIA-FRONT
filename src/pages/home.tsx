@@ -26,7 +26,7 @@ const Home: NextPage = () => {
       <TopBar menuName="Home" />
 
       <LeftBar selectedTab="홈" />
-      <div className="max-w-[65rem] grow max-[768px]:pb-[90px] sm:p-6 md:ml-24 lg:absolute lg:left-[50%] lg:ml-32 lg:translate-x-[-50%]">
+      <div className="max-w-[65rem] grow max-[768px]:pb-[90px] sm:px-6 sm:pt-6 md:ml-24 lg:absolute lg:left-[50%] lg:ml-32 lg:translate-x-[-50%]">
         <Profile />
         <WeeklyCalendar />
         <div className="m-5 flex flex-col gap-6 md:justify-between min-[1200px]:flex-row">
