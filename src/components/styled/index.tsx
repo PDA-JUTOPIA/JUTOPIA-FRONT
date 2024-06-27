@@ -47,10 +47,10 @@ export const Modal = ({
       aria-hidden="true"
       className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden"
     >
-      <div className="relative z-50 max-h-full w-full max-w-2xl p-4">
+      <div className="relative z-50 max-h-[75vh] w-full max-w-2xl p-4 md:max-h-[90vh]">
         <div className="relative rounded-lg bg-white shadow dark:bg-gray-700">
           <div className="flex items-center justify-between rounded-t border-b p-4 md:p-5 dark:border-gray-600">
-            <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
               {title}
             </h3>
             <button
