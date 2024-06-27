@@ -11,6 +11,8 @@ import { joinRecurit, isInChallenge } from "~/apis/challenge";
 import { useBoundStore } from "~/hooks/useBoundStore";
 // import { readAllRecurit, IResChallengeRecruit } from "~/apis/challenge";
 import { getUserIdByEmail } from "~/apis/user";
+import type { IResReadPost } from "~/apis/challengePost";
+import { readUserPost, readAllPost } from "~/apis/challengePost";
 
 interface ChallengeExplainProps {
   challenge: {
@@ -33,9 +35,11 @@ const ChallengeExplain: React.FC<ChallengeExplainProps> = ({ challenge }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showJoinState, setShowJoinState] = useState(false);
   const email = useBoundStore((x) => x.email);
+  // const name = useBoundStore((x) => x.name);
   const [userId, setUserId] = useState(0);
   const anchorRef = useRef<HTMLDivElement>(null);
   const secondCardMaxHeight = anchorRef.current?.offsetHeight - 58;
+  const [postData, setPostData] = useState<IResReadPost[] | null>(null);
 
   useEffect(() => {
     //이미 참여중인지 상태 확인.
@@ -73,6 +77,27 @@ const ChallengeExplain: React.FC<ChallengeExplainProps> = ({ challenge }) => {
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [email]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (activeTab === "내 인증 현황") {
+          const resp = await readUserPost(challenge.challenge_id, email);
+          setPostData(resp.posts);
+        } else if (activeTab === "참가자 인증 현황") {
+          const resp = await readAllPost(challenge.challenge_id);
+          setPostData(resp.posts);
+        }
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+      }
+    };
+
+    fetchData().catch((err) => {
+      console.log(err);
+    });
+  }, [activeTab]);
+
   // [] 안에 의존성 배열을 빈 배열로 설정하여 한 번만 데이터를 로드하도록 설정
   const handleJoinChallenge = () => {
     joinChallenge().catch((err) => {
@@ -100,65 +125,23 @@ const ChallengeExplain: React.FC<ChallengeExplainProps> = ({ challenge }) => {
   };
 
   const renderTabContent = () => {
-    switch (activeTab) {
-      case "내 인증 현황":
-        return (
-          <div className="flex flex-col space-y-4">
+    return (
+      <div className="flex flex-col space-y-4">
+        {Array.isArray(postData) &&
+          postData.map((post) => (
             <PostCard
-              userName="윤경"
-              userAvatar="/Reward/chart.svg"
-              postTime="2024-06-23"
-              postContent="챌린지 인증용 UI"
-              postImages={["/Reward/coin1.svg"]}
-              challengePostId={1}
+              key={post.challenge_post_id}
+              userName={post.userName}
+              userAvatar={"/Reward/chart.svg"}
+              postTime={post.challenge_post_date}
+              postContent={post.challenge_post_text}
+              postImages={post.imageURL}
+              challengePostId={post.challenge_post_id}
               likesCount={3}
             />
-          </div>
-        );
-      case "참가자 인증 현황":
-        return (
-          <div className="flex flex-col space-y-4">
-            <PostCard
-              userName="윤경"
-              userAvatar="/Reward/chart.svg"
-              postTime="2024-06-23"
-              postContent="챌린지 인증용 UI"
-              postImages={["/Reward/coin1.svg"]}
-              challengePostId={1}
-              likesCount={3}
-            />
-            <PostCard
-              userName="윤경"
-              userAvatar="/Reward/chart.svg"
-              postTime="2024-06-23"
-              postContent="챌린지 인증용 UI"
-              postImages={["/Reward/coin1.svg"]}
-              challengePostId={1}
-              likesCount={3}
-            />
-            <PostCard
-              userName="윤경"
-              userAvatar="/Reward/chart.svg"
-              postTime="2024-06-23"
-              postContent="챌린지 인증용 UI"
-              postImages={["/Reward/coin1.svg"]}
-              challengePostId={1}
-              likesCount={3}
-            />
-            <PostCard
-              userName="윤경"
-              userAvatar="/Reward/chart.svg"
-              postTime="2024-06-23"
-              postContent="챌린지 인증용 UI"
-              postImages={["/Reward/coin1.svg"]}
-              challengePostId={1}
-              likesCount={3}
-            />
-          </div>
-        );
-      default:
-        return null;
-    }
+          ))}
+      </div>
+    );
   };
 
   return (
@@ -241,7 +224,13 @@ const ChallengeExplain: React.FC<ChallengeExplainProps> = ({ challenge }) => {
         </div>
       </div>
 
-      {isModalOpen && <ChallengePostModal onClose={handleModalClose} />}
+      {isModalOpen && (
+        <ChallengePostModal
+          onClose={handleModalClose}
+          challengeId={challenge.challenge_id}
+          email={email}
+        />
+      )}
     </div>
   );
 };

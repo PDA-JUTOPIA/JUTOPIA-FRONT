@@ -1,10 +1,17 @@
 import React, { useState } from "react";
+import { createPost } from "~/apis/challengePost";
 
 interface ChallengePostModalProps {
   onClose: () => void;
+  challengeId: number;
+  email: string;
 }
 
-const ChallengePostModal: React.FC<ChallengePostModalProps> = ({ onClose }) => {
+const ChallengePostModal: React.FC<ChallengePostModalProps> = ({
+  onClose,
+  challengeId,
+  email,
+}) => {
   const [content, setContent] = useState("");
   const [images, setImages] = useState<File[]>([]);
 
@@ -16,12 +23,29 @@ const ChallengePostModal: React.FC<ChallengePostModalProps> = ({ onClose }) => {
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    // Handle form submission
-    console.log({
-      content,
-      images,
+    submitFormData().catch((err) => {
+      console.log(err);
     });
-    onClose(); // Close the modal after submission
+    onClose();
+  };
+
+  const submitFormData = async () => {
+    try {
+      const formData = new FormData();
+      formData.append("challenge_post_text", content);
+      formData.append("challenge_id", challengeId.toString());
+      formData.append("email", email);
+
+      images.forEach((image, index) => {
+        formData.append(`photos`, image);
+        console.log(index);
+      });
+
+      const response = await createPost(formData);
+      console.log("Post created:", response);
+    } catch (error) {
+      console.error("Failed to create post:", error);
+    }
   };
 
   return (

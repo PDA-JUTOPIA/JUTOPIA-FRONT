@@ -5,8 +5,9 @@ import dynamic from "next/dynamic";
 
 const Joyride = dynamic(() => import("react-joyride"), { ssr: false });
 interface MakeAccountProps {
-  onFinish: () => void;
+  onNext?: () => void;
   onPrev: () => void;
+  onFinish?: () => void;
 }
 const MakeAccount8: React.FC<MakeAccountProps> = ({ onFinish, onPrev }) => {
   const steps = [

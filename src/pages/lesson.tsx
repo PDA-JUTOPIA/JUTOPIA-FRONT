@@ -36,7 +36,7 @@ const Lesson: NextPage = () => {
           backgroundColor="blue"
           increaseLessonsCompleted={handleIncreaseLessonsCompleted}
           status={status as string}
-          totalCorrectAnswersNeeded={2}
+          totalCorrectAnswersNeeded={3}
           practiceTitle="삼성전자 매수하기"
           practiceNum={1}
         />
@@ -45,7 +45,7 @@ const Lesson: NextPage = () => {
           backgroundColor="blue"
           increaseLessonsCompleted={handleIncreaseLessonsCompleted}
           status={status as string}
-          totalCorrectAnswersNeeded={2}
+          totalCorrectAnswersNeeded={3}
           practiceTitle="삼성전자 매도하기"
           practiceNum={2}
         />

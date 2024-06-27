@@ -4,8 +4,9 @@ import dynamic from "next/dynamic";
 
 const Joyride = dynamic(() => import("react-joyride"), { ssr: false });
 interface MakeAccountProps {
-  onNext: () => void;
+  onNext?: () => void;
   onPrev: () => void;
+  onFinish?: () => void;
 }
 const MakeAccount3: React.FC<MakeAccountProps> = ({ onNext, onPrev }) => {
   // const [run, setRun] = useState(true);
