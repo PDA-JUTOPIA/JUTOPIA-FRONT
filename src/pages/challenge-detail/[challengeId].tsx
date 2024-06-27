@@ -45,13 +45,11 @@ const ChallengeDetail: NextPage<ChallengeDetailProps> = ({ challenge }) => {
       <TopBar menuName="챌린지" />
       <LeftBar selectedTab="챌린지" />
 
-      <div className="flex justify-evenly pt-10 md:ml-[8rem] lg:ml-64 lg:gap-6">
-        <div className="flex w-full flex-col justify-around gap-5 p-2">
+      <div className="flex justify-evenly max-[768px]:pb-[90px] md:ml-[6rem] lg:ml-64 lg:gap-6">
+        <div className="flex w-full flex-col justify-around gap-5">
           <ChallengeExplain challenge={challenge} />
         </div>
       </div>
-
-      <div className="pt-[90px]"></div>
 
       <BottomBar selectedTab="챌린지" />
     </div>
