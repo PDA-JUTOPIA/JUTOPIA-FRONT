@@ -70,7 +70,6 @@ const WeeklyCalendar: React.FC = () => {
           <div
             key={day}
             className="flex transform flex-col items-center transition-transform duration-200 ease-in-out"
-            onClick={() => toggleSticker(day)}
           >
             <span
               className={`mb-1 text-sm sm:text-base ${
