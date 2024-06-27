@@ -84,7 +84,7 @@ const CharacterExplain = ({
         onTouchEnd={handleTouchEnd}
       >
         <MdOutlineSwipeLeft
-          className={`${isTypingComplete && currentIndex < descriptionArr.length - 1 ? "blink-on-small" : "hidden"} absolute left-2/4 mt-[2vh] size-[150px] translate-x-[-50%] opacity-0`}
+          className={`${isTypingComplete && currentIndex < descriptionArr.length - 1 ? "blink-on-small" : "hidden"} float mt-[2vh] size-[150px]  opacity-0`}
         />
         <div className="container mx-auto block max-w-[70vw] items-center justify-around sm:flex">
           <div className="block sm:flex">
