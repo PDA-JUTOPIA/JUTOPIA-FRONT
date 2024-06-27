@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useBoundStore } from "~/hooks/useBoundStore";
-import { readSinceJoinDate, readUserLearningStatus } from "~/apis/user";
+import {
+  readSinceJoinDate,
+  readUserLearningStatus,
+  readUserParticipationCount,
+} from "~/apis/user";
 import Image from "next/image";
 
 const Profile: React.FC = () => {
@@ -8,6 +12,9 @@ const Profile: React.FC = () => {
   const email = useBoundStore((x) => x.email);
   const [daysSinceJoined, setDaysSinceJoined] = useState<number | null>(null);
   const [tutorialStatus, setTutorialStatus] = useState<string | null>(null);
+  const [participationCount, setParticipationCount] = useState<number | null>(
+    null,
+  );
 
   useEffect(() => {
     async function fetchDaysSinceJoined() {
@@ -30,11 +37,25 @@ const Profile: React.FC = () => {
       }
     }
 
+    async function fetchParticipationCount() {
+      try {
+        const response = await readUserParticipationCount(email);
+        setParticipationCount(response.totalParticipationCount);
+      } catch (error) {
+        console.error("Error fetching participation count:", error);
+        // 에러 처리 로직을 추가할 수 있습니다.
+      }
+    }
+
     fetchDaysSinceJoined().catch((error) => {
       console.error("Unhandled error:", error);
     });
 
     fetchTutorialStatus().catch((error) => {
+      console.error("Unhandled error:", error);
+    });
+
+    fetchParticipationCount().catch((error) => {
       console.error("Unhandled error:", error);
     });
   }, [email]);
@@ -57,7 +78,7 @@ const Profile: React.FC = () => {
           튜토리얼 {tutorialStatus} 완🔥
         </h2>
         <h2 className="mt-2 text-sm font-semibold sm:text-lg">
-          이번 주 총 N일 챌린지 인증 완🔥
+          총 {participationCount}번 챌린지 인증 완🔥
         </h2>
       </div>
     </div>
