@@ -57,7 +57,7 @@ export const TutorialTopBar = ({
   };
 
   return (
-    <header className="fixed z-20 h-[58px] w-full">
+    <header className="fixed z-20 h-[58px] w-full sm:hidden">
       <div
         className={`fixed relative left-0 right-0 top-0 z-50 flex flex h-16 items-center justify-between border-b-2 border-gray-200 px-5 transition duration-500 sm:hidden ${borderColor} ${backgroundColor}`}
       >
