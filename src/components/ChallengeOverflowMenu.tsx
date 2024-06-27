@@ -13,6 +13,12 @@ const OverflowMenu: React.FC<OverflowMenuProps> = ({ onEdit, onDelete }) => {
     setShowMenu(!showMenu);
   };
 
+  const handleDelete = () => {
+    onDelete();
+
+    setShowMenu(false); // 메뉴를 닫습니다.
+  };
+
   return (
     <div className="relative ml-4">
       <button
@@ -42,7 +48,7 @@ const OverflowMenu: React.FC<OverflowMenuProps> = ({ onEdit, onDelete }) => {
             </li>
             <li>
               <button
-                onClick={onDelete}
+                onClick={handleDelete}
                 className="block w-full px-4 py-2 text-left hover:bg-gray-100"
               >
                 삭제
