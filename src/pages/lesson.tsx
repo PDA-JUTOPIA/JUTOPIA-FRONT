@@ -108,6 +108,7 @@ const Lesson: NextPage = () => {
           increaseLessonsCompleted={handleIncreaseLessonsCompleted}
           status={status as string}
           isFirstSkip={true}
+          isPlusOne={true}
         />
       ) : type === "3.1" ? (
         <ProblemUnitDescription
@@ -130,6 +131,8 @@ const Lesson: NextPage = () => {
           backgroundColor="#00cd9c"
           increaseLessonsCompleted={handleIncreaseLessonsCompleted}
           status={status as string}
+          isFirstSkip={true}
+          isPlusOne={true}
         />
       ) : type === "3.3" ? (
         <ProblemUnitDescription
@@ -142,6 +145,7 @@ const Lesson: NextPage = () => {
           increaseLessonsCompleted={handleIncreaseLessonsCompleted}
           status={status as string}
           isFirstSkip={true}
+          isPlusOne={true}
         />
       ) : type === "3.4" ? (
         <ProblemUnitDescription
@@ -154,6 +158,7 @@ const Lesson: NextPage = () => {
           increaseLessonsCompleted={handleIncreaseLessonsCompleted}
           status={status as string}
           isFirstSkip={true}
+          isPlusOne={true}
         />
       ) : type === "3.5" ? (
         <ProblemUnitDescription
@@ -166,6 +171,7 @@ const Lesson: NextPage = () => {
           increaseLessonsCompleted={handleIncreaseLessonsCompleted}
           status={status as string}
           isFirstSkip={true}
+          isPlusOne={true}
         />
       ) : type === "3.6" ? (
         <ProblemUnitDescription
@@ -178,6 +184,7 @@ const Lesson: NextPage = () => {
           increaseLessonsCompleted={handleIncreaseLessonsCompleted}
           status={status as string}
           isFirstSkip={true}
+          isPlusOne={true}
         />
       ) : type === "4.0" ? (
         <ProblemUnitDescription

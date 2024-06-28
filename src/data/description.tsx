@@ -482,7 +482,7 @@ export const descriptionArr3_2: DescriptionItem[] = [
 ];
 
 export const nextIndexes3_2 = Array.from(
-  { length: descriptionArr3_2.length - 1 },
+  { length: descriptionArr3_2.length },
   (_, i) => i,
 );
 export const titles3_2 = [
