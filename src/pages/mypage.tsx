@@ -247,7 +247,7 @@ const MypageTopSection = (props: MypageTopSectionProps) => {
           style={{ cursor: "pointer" }}
         >
           <EditPencilSvg iconColor="white" />
-          Edit profile
+          닉네임 수정하기
         </div>
       ) : (
         <div
@@ -255,7 +255,7 @@ const MypageTopSection = (props: MypageTopSectionProps) => {
           onClick={props.updateProfile}
           style={{ cursor: "pointer" }}
         >
-          Save changes
+          수정완료
         </div>
       )}
     </section>
