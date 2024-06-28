@@ -14,12 +14,12 @@ export const problem3_0: ProblemItem = data;
 
 export const problem2_4: ProblemItem = {
   lessonProblem1: {
-    problem: "동종 업종 중 삼성전자의 기업 개요로 옳은것은 무엇인가요?",
+    problem: "동종 업종 중 삼성전자의 기업 개요로 옳은 것은 무엇인가요?",
     problemImage: "/UNIT2_4/기업개요.png",
     problemSelect: [
       "삼성전자의 주요 제품으로는 스마트폰, 노트북, 태블릿 등이 있으며, 클라우드 컴퓨팅 서비스도 제공한다.",
       "삼성전자는 국내와 중국에 4개의 생산기지와 연구개발법인, 미국, 중국, 홍콩, 대만 등에 판매법인을 운영 중이다.",
-      "삼성전자는 국내 최초로 반도체 패키지 절단 모듈인 'micro SAW'를 국산화 하는데 성공하였다.",
+      "삼성전자는 국내 최초로 반도체 패키지 절단 모듈인 'micro SAW'를 국산화하는 데에 성공하였다.",
     ],
     answer: "0",
   },
@@ -38,13 +38,13 @@ export const problem2_4: ProblemItem = {
     problemImage: "/UNIT2_4/영업이익.png",
     problemSelect: [
       "영업 이익은 매출액에서 매출원가, 판관비 등을 뺀 금액이다.",
-      "당기 순이익은 영업이익에서 여러가지 비용 및 세금을 제외하고 남은 순이익이다.",
+      "당기 순이익은 영업이익에서 여러 가지 비용 및 세금을 제외하고 남은 순이익이다.",
       "매출액이 크면 무조건 흑자이다.",
     ],
     answer: "2",
   },
   lessonProblem4: {
-    problem: "삼성전자의 2024년 3월 순이익율을 고르세요.",
+    problem: "삼성전자의 2024년 3월 순이익률을 고르세요.",
     problemImage: "/UNIT2_4/순이익률.png",
     problemSelect: ["18.47", "9.39", "9.19"],
     answer: "1",
@@ -108,7 +108,8 @@ export const problem2_2: ProblemItem = {
     answer: "1",
   },
   lessonProblem6: {
-    problem: "회사가 사업을 위해 주주들로부터 투자받은 돈을 무엇이라고 하나요?",
+    problem:
+      "회사가 사업을 위해 주주들로부터 투자 받은 돈을 무엇이라고 하나요?",
     problemSelect: ["배당금", "시세 차익", "자본금"],
     answer: "2",
   },
