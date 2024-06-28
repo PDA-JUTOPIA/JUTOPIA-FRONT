@@ -57,7 +57,7 @@ const ChallengeForm: React.FC<ChallengeFormProps> = ({
             />
           </div>
           <div className="mb-4">
-            <label className="mb-1 block text-gray-700">Challenge Total</label>
+            <label className="mb-1 block text-gray-700">목표 인증 수</label>
             <input
               id="challenge_total"
               name="challenge_total"

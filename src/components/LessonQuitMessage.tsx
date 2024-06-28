@@ -38,11 +38,9 @@ const QuitMessage = ({
         aria-hidden={!quitMessageShown}
       >
         <div className="flex grow flex-col gap-4 font-['TTLaundryGothicB']">
-          <h2 className="text-lg font-bold sm:text-2xl">
-            Are you sure you want to quit?
-          </h2>
+          <h2 className="text-lg font-bold sm:text-2xl">정말 나가시겠어요?</h2>
           <p className="text-gray-500 sm:text-lg">
-            All progress for this lesson will be lost.
+            진행사항은 저장되지 않습니다.
           </p>
         </div>
         <div className="flex grow flex-col items-center justify-center gap-4 font-['TTLaundryGothicB'] sm:flex-row-reverse">
@@ -50,13 +48,13 @@ const QuitMessage = ({
             className={`flex w-full items-center justify-center rounded-2xl border-b-4 ${buttonColor[color]} py-3 font-bold uppercase text-white transition hover:brightness-105 sm:w-48`}
             href="/tutorial"
           >
-            Quit
+            나가기
           </Link>
           <button
             className="w-full rounded-2xl py-3 font-bold uppercase text-blue-400 transition hover:brightness-90 sm:w-48 sm:border-2 sm:border-b-4 sm:border-gray-300 sm:text-gray-400 sm:hover:bg-gray-100"
             onClick={() => setQuitMessageShown(false)}
           >
-            Stay
+            머무르기
           </button>
         </div>
       </article>

@@ -67,6 +67,7 @@ export const LoginScreen = ({
         console.error("Unhandled error signup:", error);
       });
     } catch (error) {
+      alert("회원가입오류!: 이미 등록된 이메일이 있을 수 있습니다.");
       console.error("Failed to sign up:", error);
     }
   };
