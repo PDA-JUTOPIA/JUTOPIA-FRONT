@@ -672,9 +672,18 @@ export const titles3_4 = [
 export const imageIndexes3_4 = [1, 10, 11, 12];
 export const images3_4 = [
   "UNIT3_4/3-4-1_재무상태표읽는순서.png",
-  "UNIT3_4/3-4-2_부분자본잠식.png",
-  "UNIT3_4/3-4-3_완전자본잠식.png",
-  "UNIT3_4/3-4-4_포괄손익계산서.png",
+  "UNIT3_4/3-4-1_자본자산부채.png",
+  "UNIT3_4/3-4-2_자본.png",
+  "UNIT3_4/3-4-3_자산.png",
+  "UNIT3_4/3-4-4_부채.png",
+  "UNIT3_4/유동비유동.png",
+  "UNIT3_4/유동성배열법.png",
+  "UNIT3_4/3-4-7_부채.png",
+  "UNIT3_4/자본잠식.png",
+  "UNIT3_4/부분자본잠식.png",
+  "UNIT3_4/완전자본잠식.png",
+  "UNIT3_4/3-4-8_유동비유동부채.png",
+  "UNIT3_4/이자부무이자부채.png",
 ];
 
 // UNIT 3-5
