@@ -580,18 +580,16 @@ export const titles3_3 = [
   "2-2) 성장성을 분석하는 툴: 영업이익 증가율", //14,15
   "2-3) 성장성을 분석하는 툴: 순이익 증가율", //16
 ];
-export const imageIndexes3_3 = [
-  2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
-];
+export const imageIndexes3_3 = [1, 2, 3, 4, 6, 8, 10, 12, 13, 14, 16];
 export const images3_3 = [
   "UNIT3_2/재무비율지표.png",
-  "UNIT3_3/수익성",
+  "UNIT3_3/수익성.png",
   "UNIT3_3/3-3-1_매출총이익률.png",
   "UNIT3_3/3-3-3_매출액영업이익률.png",
   "UNIT3_3/3-3-5_매출액순이익률.png",
   "UNIT3_3/3-3-8_ROA.png",
   "UNIT3_3/3-3-10_ROE.png",
-  "UNIT3_3/성장성",
+  "UNIT3_3/성장성.png",
   "UNIT3_3/3-3-12_매출증가율.png",
   "UNIT3_3/3-3-13_영업이익증가율.png",
   "UNIT3_3/3-3-15_순이익증가율.png",
@@ -669,7 +667,7 @@ export const titles3_4 = [
   "5-2) 유동과 비유동 항목의 구분",
   "5-3) 이자를 내는 부채와 안 내는 부채를 구분하기",
 ];
-export const imageIndexes3_4 = [1, 10, 11, 12];
+export const imageIndexes3_4 = [1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14, 16];
 export const images3_4 = [
   "UNIT3_4/3-4-1_재무상태표읽는순서.png",
   "UNIT3_4/3-4-1_자본자산부채.png",
@@ -735,10 +733,7 @@ export const titles3_5 = [
   "3) 성장성을 분석하는 툴",
   "3-1) 성장성을 분석하는 툴: 총자산증가율",
 ];
-export const imageIndexes3_5 = Array.from(
-  { length: descriptionArr2_0.length - 1 },
-  (_, i) => i + 1,
-);
+export const imageIndexes3_5 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 export const images3_5 = [
   "UNIT3_2/3-2-1_재무제표분석프로세스.png",
   "UNIT3_2/재무비율지표.png",
@@ -792,11 +787,9 @@ export const titles3_6 = [
   "2-4) 활동성을 분석하는 툴: 영업순환주기",
   "2-5) 활동성을 분석하는 툴: 현금창출주기",
 ];
-export const imageIndexes3_6 = Array.from(
-  { length: descriptionArr3_6.length - 1 },
-  (_, i) => i + 1,
-);
+export const imageIndexes3_6 = [1, 2, 3, 4, 5, 6, 7];
 export const images3_6 = [
+  "UNIT3_2/3-2-1_재무제표분석프로세스.png",
   "UNIT3_2/재무비율지표.png",
   "UNIT3_6/활동성.png",
   "UNIT3_6/3-6-1_매출채권회전율.png",
