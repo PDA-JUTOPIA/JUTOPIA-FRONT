@@ -35,11 +35,9 @@ const DomesticStock = () => {
       try {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-argument
         const parsedData: ListItem = JSON.parse(event.data);
-        console.log(parsedData);
         setData(parsedData);
         setLoading(false);
       } catch (error) {
-        console.error("Error parsing SSE data:", error);
         setError("Error parsing data");
         setLoading(false);
       }

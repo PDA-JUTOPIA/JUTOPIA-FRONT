@@ -726,7 +726,10 @@ export const titles3_5 = [
   "3) 성장성을 분석하는 툴",
   "3-1) 성장성을 분석하는 툴: 총자산증가율",
 ];
-export const imageIndexes3_5 = [1, 3, 4, 5];
+export const imageIndexes3_5 = Array.from(
+  { length: descriptionArr2_0.length - 1 },
+  (_, i) => i + 1,
+);
 export const images3_5 = [
   "UNIT3_2/3-2-1_재무제표분석프로세스.png",
   "UNIT3_2/재무비율지표.png",
