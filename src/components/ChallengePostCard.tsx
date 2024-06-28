@@ -43,6 +43,7 @@ const PostCard: React.FC<PostCardProps> = ({
   const handleDelete = () => {
     //삭제 api 합체
     deletePostDo().catch((err) => {
+      alert("잘못된 삭제");
       console.log(err);
     });
 
