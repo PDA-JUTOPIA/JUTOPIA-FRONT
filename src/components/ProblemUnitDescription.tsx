@@ -18,7 +18,6 @@ const ProblemUnitDescription = ({
   increaseLessonsCompleted,
   status,
   isFirstSkip,
-  isPlusOne,
 }: {
   descriptionArr: DescriptionItem[];
   titles: string[];
@@ -29,7 +28,6 @@ const ProblemUnitDescription = ({
   increaseLessonsCompleted: (count: number) => void;
   status: string;
   isFirstSkip?: boolean;
-  isPlusOne?: boolean;
 }) => {
   const totalCorrectAnswersNeeded = nextIndexes.length;
   const [quitMessageShown, setQuitMessageShown] = useState(false);
