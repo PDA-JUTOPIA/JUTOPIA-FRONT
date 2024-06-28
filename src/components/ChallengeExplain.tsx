@@ -83,7 +83,8 @@ const ChallengeExplain: React.FC<ChallengeExplainProps> = ({ challenge }) => {
       try {
         if (activeTab === "내 인증 현황") {
           const resp = await readUserPost(challenge.challenge_id, email);
-          setPostData(resp.posts);
+          if (resp === undefined) setPostData(null);
+          else setPostData(resp.posts);
         } else if (activeTab === "참가자 인증 현황") {
           const resp = await readAllPost(challenge.challenge_id);
           setPostData(resp.posts);
