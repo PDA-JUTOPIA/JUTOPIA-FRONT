@@ -14,7 +14,9 @@ import { useRouter } from "next/router";
 import dayjs from "dayjs";
 import ChallengeGrid from "~/components/ChallengeGrid";
 import { updateName } from "~/apis/user";
-
+interface MypageRewardSectionProps {
+  email: string;
+}
 const MyPage: NextPage = () => {
   const [updateState, setUpdateState] = useState<"update" | "view">("view");
   const name = useBoundStore((x) => x.name);
@@ -83,7 +85,7 @@ const MyPage: NextPage = () => {
             setLocalEmail={setLocalEmail}
             updateProfile={updateProfile}
           />
-          <MypageRewardSection />
+          <MypageRewardSection email={email} />
         </div>
       </div>
       <div className="pt-[90px]"></div>
@@ -262,8 +264,8 @@ const MypageTopSection = (props: MypageTopSectionProps) => {
   );
 };
 
-const MypageRewardSection = () => {
-  const email = useBoundStore((x) => x.email);
+const MypageRewardSection = ({ email }: MypageRewardSectionProps) => {
+  // const email = useBoundStore((x) => x.email);
   return (
     <div className="flex max-w-[65rem] grow flex-col">
       <br />
