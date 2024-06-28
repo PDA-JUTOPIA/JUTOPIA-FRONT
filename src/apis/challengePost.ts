@@ -35,6 +35,7 @@ export async function deletePost(postId: number, email: string) {
     return resp.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
+      alert("본인의 글만 삭제가능합니다.");
       console.error("Failed to delete post (AxiosError):", error.message);
     } else if (error instanceof Error) {
       console.error("Failed to delete post:", error);
@@ -65,7 +66,7 @@ export async function readAllPost(challengeId: number) {
     const resp: AxiosResponse<IResRead> = await axios.get(
       `${fullApiUrl}/api/challenge-detail/get-all-post/${challengeId}`,
     );
-    console.log(resp.data);
+
     return resp.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -92,6 +93,7 @@ export async function createPost(formData: FormData): Promise<IResCreatePost> {
     return resp.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
+      alert("생성 불가 합니다.");
       console.error("Failed to create data (AxiosError):", error.message);
     } else if (error instanceof Error) {
       console.error("Failed to create data:", error);
